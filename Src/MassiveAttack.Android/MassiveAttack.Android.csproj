@@ -89,6 +89,10 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MassiveAttack.CommonLibrary\MassiveAttack.CommonLibrary.csproj">
+      <Project>{33c8be9d-7f8c-47c6-889d-852cda26f647}</Project>
+      <Name>MassiveAttack.CommonLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MassiveAttack.GameLibrary\MassiveAttack.GameLibrary.csproj">
       <Project>{fb285953-5bbe-4537-b11e-5a1226d13363}</Project>
       <Name>MassiveAttack.GameLibrary</Name>

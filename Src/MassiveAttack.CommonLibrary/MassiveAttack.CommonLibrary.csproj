@@ -5,11 +5,11 @@
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FB285953-5BBE-4537-B11E-5A1226D13363}</ProjectGuid>
+    <ProjectGuid>{33C8BE9D-7F8C-47C6-889D-852CDA26F647}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MassiveAttack.GameLibrary</RootNamespace>
-    <AssemblyName>MassiveAttack.GameLibrary</AssemblyName>
+    <RootNamespace>MassiveAttack.CommonLibrary</RootNamespace>
+    <AssemblyName>MassiveAttack.CommonLibrary</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -40,12 +40,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MassiveAttack.CommonLibrary\MassiveAttack.CommonLibrary.csproj">
-      <Project>{33c8be9d-7f8c-47c6-889d-852cda26f647}</Project>
-      <Name>MassiveAttack.CommonLibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
