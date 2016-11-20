@@ -20,4 +20,3 @@ namespace MassiveAttack.Android {
         }
     }
 }
-
