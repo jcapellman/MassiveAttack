@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassiveAttack.CommonLibrary
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MassiveAttack.WebAPI.BusinessLibrary", "MassiveAttack.WebAPI.BusinessLibrary\MassiveAttack.WebAPI.BusinessLibrary.xproj", "{707338F1-9F0A-4389-9B96-73C174DE8223}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MassiveAttack.WebAPI.DataLibrary", "MassiveAttack.WebAPI.DataLayer\MassiveAttack.WebAPI.DataLibrary.xproj", "{90EF1631-E4FC-4D68-907A-8EE3102BA80B}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MassiveAttack.WebAPI.DataLibrary", "MassiveAttack.WebAPI.DataLibrary\MassiveAttack.WebAPI.DataLibrary.xproj", "{90EF1631-E4FC-4D68-907A-8EE3102BA80B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

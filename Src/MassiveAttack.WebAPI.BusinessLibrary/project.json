@@ -2,7 +2,7 @@
   "version": "1.0.0-*",
 
   "dependencies": {
-    "MassiveAttack.WebAPI.DataLayer": "1.0.0-*",
+    "MassiveAttack.WebAPI.DataLibrary": "1.0.0-*",
     "NETStandard.Library": "1.6.0"
   },
 
