@@ -14,6 +14,14 @@ namespace MassiveAttack.WebAPI.BusinessLibrary.Managers {
     public class HighScoreManager : BaseManager {
         public HighScoreManager(ControllerHandlerItem controllerHandlerItem) : base(controllerHandlerItem) { }
 
+        private async void updateHighScore(Guid levelGUID) {
+            using (var hsModel = new HighScoreModel(SQLServerConnectionString)) {
+                using (var rModel = new RedisModel(RedisConnectionString)) {
+                    // TODO Pull in top 10 scores for a given level, create list collection, write to Redis
+                }
+            }
+        }
+
         public async Task<ReturnSet<bool>> AddHighScore(HighScoreRequestItem requestItem) {
             using (var hsModel = new HighScoreModel(SQLServerConnectionString)) {
                 var newHighScore = new HighScores {
@@ -21,9 +29,11 @@ namespace MassiveAttack.WebAPI.BusinessLibrary.Managers {
                     PlayerGUID = requestItem.PlayerGUID,
                     Score = requestItem.Score
                 };
-                
+
                 hsModel.HighScore.Add(newHighScore);
                 var response = await hsModel.SaveChangesAsync();
+
+                updateHighScore(requestItem.LevelGUID);
 
                 return new ReturnSet<bool>(response > 0);
             }
