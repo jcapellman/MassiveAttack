@@ -4,8 +4,10 @@ namespace MassiveAttack.WebAPI.BusinessLibrary.Managers {
     public class BaseManager {
         private readonly ControllerHandlerItem _controllerHandlerItem;
 
-        protected string ConnectionString => _controllerHandlerItem.ConnectionString;
+        protected string SQLServerConnectionString => _controllerHandlerItem.SQLServerConnectionString;
 
+        protected string RedisConnectionString => _controllerHandlerItem.RedisConnectionString;
+        
         public BaseManager(ControllerHandlerItem controllerHandlerItem) {
             _controllerHandlerItem = controllerHandlerItem;
         }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace MassiveAttack.WebAPI.DataLibrary.EFModel {
+namespace MassiveAttack.WebAPI.DataLibrary.Objects {
     public class BaseObject {
         [Key]
         public int ID { get; set; }

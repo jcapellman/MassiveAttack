@@ -1,5 +1,4 @@
-﻿using MassiveAttack.WebAPI.DataLibrary.EFModel.Objects;
-
+﻿using MassiveAttack.WebAPI.DataLibrary.Objects.HighScores;
 using Microsoft.EntityFrameworkCore;
 
 namespace MassiveAttack.WebAPI.DataLibrary.EFModel {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace MassiveAttack.WebAPI.DataLibrary.EFModel.Objects {
+namespace MassiveAttack.WebAPI.DataLibrary.Objects.HighScores {
     public class HighScores : BaseObject {
         [Required]
         public Guid PlayerGUID { get; set; }

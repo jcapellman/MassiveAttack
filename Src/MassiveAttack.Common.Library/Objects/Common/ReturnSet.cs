@@ -1,10 +1,18 @@
-﻿namespace MassiveAttack.Common.Library.Objects.Common {
+﻿using System;
+
+namespace MassiveAttack.Common.Library.Objects.Common {
     public class ReturnSet<T> {
         public T ObjectValue { get; set; }
 
-        public string ErrorMessage { get; set; }
+        public Exception ExceptionThrown { get; set; }
 
-        public ReturnSet() { } 
+        public bool HasError => ExceptionThrown != null;
+
+        public ReturnSet() { }
+
+        public ReturnSet(Exception ex) {
+            ExceptionThrown = ex;
+        } 
 
         public ReturnSet(T objectValue) {
             ObjectValue = objectValue;
