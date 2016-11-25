@@ -2,8 +2,11 @@
   "version": "1.0.0-*",
 
   "dependencies": {
+    "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
+    "Microsoft.EntityFrameworkCore": "1.1.0",
+    "MassiveAttack.CommonLibrary": "1.0.0-*",
     "MassiveAttack.WebAPI.DataLibrary": "1.0.0-*",
-    "NETStandard.Library": "1.6.0"
+    "NETStandard.Library": "1.6.1"
   },
 
   "frameworks": {

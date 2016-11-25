@@ -40,6 +40,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Statuses.cs" />
+    <Compile Include="Objects\Common\ReturnSet.cs" />
+    <Compile Include="Objects\WebAPI\HighScore\HighScoreListingResponseItem.cs" />
+    <Compile Include="Objects\WebAPI\Internal\ControllerHandlerItem.cs" />
+    <Compile Include="Objects\WebAPI\BaseListingResponseItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

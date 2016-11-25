@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace MassiveAttack.WebAPI.DataLibrary.EFModel {
     public class EntityModel : DbContext {
         private readonly string _connectionString;
-
+        
         public EntityModel(string connectionString) {
             _connectionString = connectionString;
         }
