@@ -1,4 +1,4 @@
-﻿using MassiveAttack.CommonLibrary.Objects.WebAPI.Internal;
+﻿using MassiveAttack.Common.Library.Objects.WebAPI.Internal;
 
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-using MassiveAttack.CommonLibrary.Enums;
+using MassiveAttack.Common.Library.Enums;
 
 using Microsoft.EntityFrameworkCore;
 

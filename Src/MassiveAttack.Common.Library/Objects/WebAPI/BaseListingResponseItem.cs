@@ -1,4 +1,4 @@
-﻿namespace MassiveAttack.CommonLibrary.Objects.WebAPI {
+﻿namespace MassiveAttack.Common.Library.Objects.WebAPI {
     public class BaseListingResponseItem {
         public BaseListingResponseItem() { }
     }

@@ -1,4 +1,4 @@
-﻿namespace MassiveAttack.CommonLibrary.Objects.WebAPI.HighScore {
+﻿namespace MassiveAttack.Common.Library.Objects.WebAPI.HighScore {
 
     public class HighScoreListingResponseItem : BaseListingResponseItem {
         public string PlayerName { get; set; }

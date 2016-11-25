@@ -1,4 +1,4 @@
-﻿namespace MassiveAttack.CommonLibrary.Enums {
+﻿namespace MassiveAttack.Common.Library.Enums {
     public enum Statuses {
         Active = 1,
         Deleted = 2,

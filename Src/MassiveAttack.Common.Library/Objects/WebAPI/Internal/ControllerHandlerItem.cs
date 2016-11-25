@@ -1,4 +1,4 @@
-﻿namespace MassiveAttack.CommonLibrary.Objects.WebAPI.Internal {
+﻿namespace MassiveAttack.Common.Library.Objects.WebAPI.Internal {
     public class ControllerHandlerItem {
         public string ConnectionString { get; set; }
 

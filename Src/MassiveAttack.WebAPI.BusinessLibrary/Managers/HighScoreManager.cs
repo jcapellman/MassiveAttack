@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using MassiveAttack.CommonLibrary.Objects.Common;
-using MassiveAttack.CommonLibrary.Objects.WebAPI.HighScore;
-using MassiveAttack.CommonLibrary.Objects.WebAPI.Internal;
+using MassiveAttack.Common.Library.Objects.Common;
+using MassiveAttack.Common.Library.Objects.WebAPI.HighScore;
+using MassiveAttack.Common.Library.Objects.WebAPI.Internal;
 
 using MassiveAttack.WebAPI.DataLibrary.EFModel;
 

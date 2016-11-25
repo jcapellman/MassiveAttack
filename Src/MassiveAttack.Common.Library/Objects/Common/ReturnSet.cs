@@ -1,4 +1,4 @@
-﻿namespace MassiveAttack.CommonLibrary.Objects.Common {
+﻿namespace MassiveAttack.Common.Library.Objects.Common {
     public class ReturnSet<T> {
         public T ObjectValue { get; set; }
 

@@ -1,4 +1,4 @@
-﻿using MassiveAttack.CommonLibrary.Objects.WebAPI.Internal;
+﻿using MassiveAttack.Common.Library.Objects.WebAPI.Internal;
 
 namespace MassiveAttack.WebAPI.BusinessLibrary.Managers {
     public class BaseManager {
