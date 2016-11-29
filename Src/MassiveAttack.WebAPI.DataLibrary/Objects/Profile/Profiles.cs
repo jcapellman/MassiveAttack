@@ -5,5 +5,7 @@ namespace MassiveAttack.WebAPI.DataLibrary.Objects.Profile {
         public string Alias { get; set; }
 
         public Guid PlayerGUID { get; set; }
+
+        public int Level { get; set; }
     }
 }

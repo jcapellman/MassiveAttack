@@ -9,6 +9,6 @@ using MassiveAttack.WebAPI.BusinessLibrary.Managers;
 namespace MassiveAttack.WebAPI.Controllers {
     public class ProfileController : BaseController {
         public async Task<ReturnSet<ProfileResponseItem>> GET(Guid PlayerGUID)
-            => await ProfileManager(ControllerHandlerItem).GetProfile(PlayerGUID);
+            => await new ProfileManager(ControllerHandlerItem).GetProfile(PlayerGUID);
     }
 }
