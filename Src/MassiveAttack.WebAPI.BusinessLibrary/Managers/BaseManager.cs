@@ -30,6 +30,12 @@ namespace MassiveAttack.WebAPI.BusinessLibrary.Managers {
             }
         }
 
+        protected void DeleteRedisObject(Guid objectGUID) {
+            using (var rModel = new RedisModel(RedisConnectionString)) {
+                rModel.Delete(GetRedisKey(objectGUID));
+            }
+        }
+
         protected BaseManager(ControllerHandlerItem controllerHandlerItem) {
             _controllerHandlerItem = controllerHandlerItem;
         }
