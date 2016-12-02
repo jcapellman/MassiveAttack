@@ -40,11 +40,11 @@ namespace MassiveAttack.WebAPI.BusinessLibrary.Managers {
         }
 
         public async Task<ReturnSet<List<HighScoreListingResponseItem>>> GetHighScores(Guid LevelGUID) {
-            using (var rModel = new RedisModel(RedisConnectionString)) {
-                var result = await rModel.Get<List<HighScoreListingResponseItem>>($"HighScores_{LevelGUID}");
-
-                return result.HasError ? new ReturnSet<List<HighScoreListingResponseItem>>(result.ExceptionThrown) : new ReturnSet<List<HighScoreListingResponseItem>>(result.ObjectValue);
-            }
+            var result = await GetRedisObject<List<HighScoreListingResponseItem>>(LevelGUID);
+            
+            return result.HasError ? new ReturnSet<List<HighScoreListingResponseItem>>(result.ExceptionThrown) : new ReturnSet<List<HighScoreListingResponseItem>>(result.ObjectValue);
         }
+
+        public override string GetRedisPrefix() => "HighScores";
     }
 }
