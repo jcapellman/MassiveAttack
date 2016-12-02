@@ -30,9 +30,9 @@ namespace MassiveAttack.WebAPI.BusinessLibrary.Managers {
             }
         }
 
-        protected void DeleteRedisObject(Guid objectGUID) {
+        protected async Task<bool> DeleteRedisObject(Guid objectGUID) {
             using (var rModel = new RedisModel(RedisConnectionString)) {
-                rModel.Delete(GetRedisKey(objectGUID));
+                return await rModel.Delete(GetRedisKey(objectGUID));
             }
         }
 
