@@ -46,7 +46,17 @@ namespace MassiveAttack.WebAPI.BusinessLibrary.Managers {
                     if (existingModel == null) {
                         throw new Exception($"An existing Profile for {CurrentPlayerGUID} was not found");
                     }
-                    
+
+                    existingModel.Alias = requestItem.Alias;
+
+                    await profileModel.SaveChangesAsync();
+
+                    var currentItem = await GetProfile(CurrentPlayerGUID);
+
+                    currentItem.ObjectValue.Alias = requestItem.Alias;
+
+                    await WriteRedisObject(CurrentPlayerGUID, currentItem);
+
                     return new ReturnSet<bool>(true);
                 }
             } catch (Exception ex) {
