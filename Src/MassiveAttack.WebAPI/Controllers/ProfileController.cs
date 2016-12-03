@@ -10,5 +10,8 @@ namespace MassiveAttack.WebAPI.Controllers {
     public class ProfileController : BaseController {
         public async Task<ReturnSet<ProfileResponseItem>> GET(Guid PlayerGUID)
             => await new ProfileManager(ControllerHandlerItem).GetProfile(PlayerGUID);
+
+        public async Task<ReturnSet<bool>> POST(ProfileUpdateRequestItem requestItem)
+            => await new ProfileManager(ControllerHandlerItem).UpdateProfile(requestItem);
     }
 }

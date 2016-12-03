@@ -31,6 +31,7 @@ namespace MassiveAttack.WebAPI.BusinessLibrary.Managers {
                 };
 
                 hsModel.HighScore.Add(newHighScore);
+
                 var response = await hsModel.SaveChangesAsync();
 
                 updateHighScore(requestItem.LevelGUID);
@@ -42,7 +43,9 @@ namespace MassiveAttack.WebAPI.BusinessLibrary.Managers {
         public async Task<ReturnSet<List<HighScoreListingResponseItem>>> GetHighScores(Guid LevelGUID) {
             var result = await GetRedisObject<List<HighScoreListingResponseItem>>(LevelGUID);
             
-            return result.HasError ? new ReturnSet<List<HighScoreListingResponseItem>>(result.ExceptionThrown) : new ReturnSet<List<HighScoreListingResponseItem>>(result.ObjectValue);
+            return result.HasError ? 
+                new ReturnSet<List<HighScoreListingResponseItem>>(result.ExceptionThrown) : 
+                new ReturnSet<List<HighScoreListingResponseItem>>(result.ObjectValue);
         }
 
         public override string GetRedisPrefix() => "HighScores";

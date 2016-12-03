@@ -10,6 +10,8 @@ namespace MassiveAttack.WebAPI.BusinessLibrary.Managers {
     public abstract class BaseManager {
         private readonly ControllerHandlerItem _controllerHandlerItem;
 
+        public Guid CurrentPlayerGUID => _controllerHandlerItem.PlayerGUID;
+
         public abstract string GetRedisPrefix();
 
         public string GetRedisKey(Guid objectGuid) => $"{GetRedisPrefix()}_{objectGuid}";
