@@ -10,6 +10,8 @@ namespace MassiveAttack.Common.Library.Objects.WebAPI.GameMetrics {
 
         public int DamageInflicted { get; set; }
 
+        public int DamageTaken { get; set; }
+
         public double DurationInSeconds { get; set; }
 
         public bool Victorious { get; set; }
