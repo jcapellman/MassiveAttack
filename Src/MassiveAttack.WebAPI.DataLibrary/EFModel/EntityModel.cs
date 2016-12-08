@@ -1,7 +1,7 @@
 ﻿using System;
 
 using MassiveAttack.Common.Library.Enums;
-using MassiveAttack.WebAPI.DataLibrary.RModel;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace MassiveAttack.WebAPI.DataLibrary.EFModel {
@@ -26,13 +26,20 @@ namespace MassiveAttack.WebAPI.DataLibrary.EFModel {
                         item.Property("CreatedDate").CurrentValue = DateTimeOffset.Now;
                         item.Property("StatusID").CurrentValue = (int)Statuses.Active;
                         break;
+                    case EntityState.Detached:
+                    case EntityState.Unchanged:
+                    case EntityState.Modified:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
-            
+
             return base.SaveChanges();
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
             optionsBuilder.UseSqlServer(_connectionString);
         }
     }
