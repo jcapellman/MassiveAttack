@@ -46,5 +46,7 @@ namespace MassiveAttack.WebAPI.BusinessLibrary.Managers {
                 return result.HasError ? new ReturnSet<List<HighScoreListingResponseItem>>(result.ExceptionThrown) : new ReturnSet<List<HighScoreListingResponseItem>>(result.ObjectValue);
             }
         }
+
+        public override string GetRedisPrefix() => "HighScore";
     }
 }
