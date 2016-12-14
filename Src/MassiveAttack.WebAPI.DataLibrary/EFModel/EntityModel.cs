@@ -11,7 +11,7 @@ namespace MassiveAttack.WebAPI.DataLibrary.EFModel {
         public EntityModel(string connectionString) {
             _connectionString = connectionString;
         }
-
+        
         public override int SaveChanges() {
             foreach (var item in ChangeTracker.Entries()) {
                 if (item.State == EntityState.Deleted || item.State == EntityState.Modified || item.State == EntityState.Added) { 
@@ -26,13 +26,20 @@ namespace MassiveAttack.WebAPI.DataLibrary.EFModel {
                         item.Property("CreatedDate").CurrentValue = DateTimeOffset.Now;
                         item.Property("StatusID").CurrentValue = (int)Statuses.Active;
                         break;
+                    case EntityState.Detached:
+                    case EntityState.Unchanged:
+                    case EntityState.Modified:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
-            
+
             return base.SaveChanges();
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
             optionsBuilder.UseSqlServer(_connectionString);
         }
     }

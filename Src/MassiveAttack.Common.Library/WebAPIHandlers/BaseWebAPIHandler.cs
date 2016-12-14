@@ -15,7 +15,7 @@ namespace MassiveAttack.Common.Library.WebAPIHandlers {
             _token = token;
         }
 
-        private HttpClient getHttpClient() {
+        private HttpClient GetHttpClient() {
             _httpClient = new HttpClient();
 
             if (!string.IsNullOrEmpty(_token)) {
@@ -28,9 +28,15 @@ namespace MassiveAttack.Common.Library.WebAPIHandlers {
         private string BuildUrl(string relativeURL) => $"{_webapiAddress}{relativeURL}";
 
         public async Task<T> GetAsync<T>(string relativeURL) {
-            var result = await getHttpClient().GetStringAsync(BuildUrl(relativeURL));
+            var result = await GetHttpClient().GetStringAsync(BuildUrl(relativeURL));
 
             return (T)JsonConvert.DeserializeObject(result);
+        }
+
+        public async Task<TK> PutAsync<T, TK>(string relativeURL, T objectValue) {
+            var result = await GetHttpClient().PutAsync(BuildUrl(relativeURL), new MultipartContent());
+
+            return (TK)JsonConvert.DeserializeObject(await result.Content.ReadAsStringAsync());
         }
     }
 }

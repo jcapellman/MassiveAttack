@@ -60,6 +60,12 @@ namespace MassiveAttack.WebAPI.DataLibrary.RModel {
             }
         }
 
+        public async Task<bool> Delete(string key) {
+            connect();
+
+            return await _db.KeyDeleteAsync(key, CommandFlags.FireAndForget);
+        }
+
         public void Dispose() {
             _redis.Close(true);
         }
