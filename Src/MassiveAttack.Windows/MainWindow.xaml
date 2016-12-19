@@ -5,10 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MassiveAttack.Windows"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="0" TextWrapping="NoWrap" VerticalAlignment="Top" BorderThickness="0" VerticalScrollBarVisibility="Auto"/>
+        Title="Massive Attack" Height="350" Width="525">
+    <Grid Style="{StaticResource MainGrid}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" Style="{StaticResource Header}" Text="Massive Attack" />
+        
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
+            <Button Grid.Row="0" Style="{StaticResource MainButton}" Content="Play" />
+        </Grid>
 
+        <Button Grid.Row="2" Style="{StaticResource MainButton}" Content="Exit" />
+
+        <TextBlock Grid.Row="3" Style="{StaticResource VersionBlock}" Text="Version 0.01 (BUILD 1) - December 18, 2016" />
     </Grid>
 </Window>
+

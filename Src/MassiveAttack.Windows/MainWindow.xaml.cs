@@ -23,11 +23,11 @@ namespace MassiveAttack.Windows {
 
 
 
-            var inspector = new Inspector { AppendText = (string s) => { textBox.Text += s; }, Surface = surface };
+//            var inspector = new Inspector { AppendText = (string s) => { textBox.Text += s; }, Surface = surface };
 
 
 
-            inspector.Inspect();
+            //inspector.Inspect();
         }
     }
 }
