@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MassiveAttack.Windows"
+        xmlns:viewModels="clr-namespace:MassiveAttack.Windows.ViewModels"
         mc:Ignorable="d"
-        Title="Massive Attack" Height="350" Width="525">
+        Title="Massive Attack" Height="350" Width="525" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Window.DataContext>
+        <viewModels:MainWindowViewModel/>
+    </Window.DataContext>
+    
     <Grid Style="{StaticResource MainGrid}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -24,9 +29,9 @@
             <Button Grid.Row="0" Style="{StaticResource MainButton}" Content="Play" />
         </Grid>
 
-        <Button Grid.Row="2" Style="{StaticResource MainButton}" Content="Exit" />
+        <Button Grid.Row="2" Style="{StaticResource MainButton}" x:Name="btnExit" Click="BtnExit_OnClick" Content="Exit" />
 
-        <TextBlock Grid.Row="3" Style="{StaticResource VersionBlock}" Text="Version 0.01 (BUILD 1) - December 18, 2016" />
+        <TextBlock Grid.Row="3" Style="{StaticResource VersionBlock}" Text="{Binding VersionText}" />
     </Grid>
 </Window>
 

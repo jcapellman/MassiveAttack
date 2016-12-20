@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:MassiveAttack.Windows.Styles">
-    <Style x:Key="VersionBlock" TargetType="TextBlock">
+    <Style x:Key="VersionBlock" TargetType="TextBlock" BasedOn="{StaticResource HoverOver}">
         <Setter Property="Foreground" Value="White" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="HorizontalAlignment" Value="Center" />

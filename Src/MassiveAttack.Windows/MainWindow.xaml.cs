@@ -29,5 +29,10 @@ namespace MassiveAttack.Windows {
 
             //inspector.Inspect();
         }
+
+        private void BtnExit_OnClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }
