@@ -63,9 +63,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GameWindow.xaml.cs">
+      <DependentUpon>GameWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Objects\MenuSelectionItem.cs" />
+    <Compile Include="PlatformImplementations\NetworkCheck.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Page Include="GameWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -117,6 +126,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MassiveAttack.Common.Library\MassiveAttack.Common.Library.csproj">
+      <Project>{47572f6c-1b6c-403f-a5e4-1d50591fc432}</Project>
+      <Name>MassiveAttack.Common.Library</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MassiveAttack.GameLibrary\MassiveAttack.GameLibrary.csproj">
       <Project>{fb285953-5bbe-4537-b11e-5a1226d13363}</Project>
       <Name>MassiveAttack.GameLibrary</Name>

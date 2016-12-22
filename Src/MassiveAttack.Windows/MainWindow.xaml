@@ -6,32 +6,43 @@
         xmlns:local="clr-namespace:MassiveAttack.Windows"
         xmlns:viewModels="clr-namespace:MassiveAttack.Windows.ViewModels"
         mc:Ignorable="d"
-        Title="Massive Attack" Height="350" Width="525" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="Massive Attack" Height="350" Width="525" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
     <Window.DataContext>
         <viewModels:MainWindowViewModel/>
     </Window.DataContext>
     
     <Grid Style="{StaticResource MainGrid}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        
-        <TextBlock Grid.Row="0" Style="{StaticResource Header}" Text="Massive Attack" />
-        
-        <Grid Grid.Row="1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ListView Grid.Column="0" BorderBrush="Transparent" BorderThickness="0" Grid.RowSpan="4" Width="150" Margin="0,0,0,0" Background="#0e0e0e" ItemsSource="{Binding MenuItems}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Style="{StaticResource MenuButton}">
+                        <TextBlock Text="{Binding MenuText}" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Grid Grid.Column="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Button Grid.Row="0" Style="{StaticResource MainButton}" Content="Play" />
+            <TextBlock Grid.Row="0" Style="{StaticResource Header}" Text="Massive Attack" />
+            <TextBlock Grid.Row="1" Text="{Binding VersionText}" Style="{StaticResource VersionBlock}" />
         </Grid>
-
-        <Button Grid.Row="2" Style="{StaticResource MainButton}" x:Name="btnExit" Click="BtnExit_OnClick" Content="Exit" />
-
-        <TextBlock Grid.Row="3" Style="{StaticResource VersionBlock}" Text="{Binding VersionText}" />
+        
     </Grid>
 </Window>
 
