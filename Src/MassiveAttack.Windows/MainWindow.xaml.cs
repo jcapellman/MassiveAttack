@@ -1,14 +1,11 @@
-﻿
-using System.Windows;
-using MassiveAttack.Windows.Common;
+﻿using System.Windows;
+using System.Windows.Controls;
+
+using MassiveAttack.Windows.Objects;
+
 using Vulkan;
 
-using Vulkan.Windows;
-
 namespace MassiveAttack.Windows {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
@@ -18,21 +15,37 @@ namespace MassiveAttack.Windows {
             var hInstance = System.Runtime.InteropServices.Marshal.GetHINSTANCE(typeof(App).Module);
 
             App.instance = new Instance(new InstanceCreateInfo { EnabledExtensionNames = new string[] { "VK_KHR_surface", "VK_KHR_win32_surface" } });
-
-
-
-      //      var surface = instance.CreateWin32SurfaceKHR(new Win32SurfaceCreateInfoKhr { Hwnd = hWnd, Hinstance = hInstance });
-
-//            var inspector = new Inspector { AppendText = (string s) => { textBox.Text += s; }, Surface = surface };
-
-
-
-            //inspector.Inspect();
         }
 
-        private void BtnExit_OnClick(object sender, RoutedEventArgs e)
+        private void lvMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Application.Current.Shutdown();
+            var selectedItem = ((sender as ListView).SelectedItem);
+
+            if (selectedItem == null)
+            {
+                return;
+            }
+
+            var item = (MenuSelectionItem)selectedItem;
+
+            if (item.WindowInstance == null)
+            {
+                Application.Current.Shutdown();
+
+                return;
+            }
+            
+            Visibility = Visibility.Hidden;
+
+            item.WindowInstance.IsVisibleChanged += WindowInstance_IsVisibleChanged;
+            item.WindowInstance.Show();
+
+            (sender as ListView).SelectedItem = null;
+        }
+
+        private void WindowInstance_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            this.Visibility = ((bool)e.NewValue ? Visibility.Hidden : Visibility.Visible);
         }
     }
 }

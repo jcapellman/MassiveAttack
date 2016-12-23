@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Windows;
 
 namespace MassiveAttack.Windows.Objects
 {
@@ -6,6 +6,6 @@ namespace MassiveAttack.Windows.Objects
     {
         public string MenuText { get; set; }
 
-        public Type PageType { get; set; }
+        public Window WindowInstance { get; set; }
     }
 }

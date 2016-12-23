@@ -30,17 +30,17 @@ namespace MassiveAttack.Windows.ViewModels {
                 new MenuSelectionItem
                 {
                     MenuText = "PLAY",
-                    PageType = typeof (GameWindow)
+                    WindowInstance = new GameWindow()
                 },
                 new MenuSelectionItem
                 {
                     MenuText = "SETTINGS",
-                    PageType = typeof (GameWindow)
+                    WindowInstance = new SettingsWindow()
                 },
                 new MenuSelectionItem
                 {
                     MenuText = "QUIT",
-                    PageType = typeof (GameWindow)
+                    WindowInstance = null
                 }
             };
             

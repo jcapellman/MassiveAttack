@@ -4,12 +4,12 @@
              xmlns:local="clr-namespace:MassiveAttack.Windows"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        
         <ResourceDictionary>
             <FontFamily x:Key="MainFont">pack://application:,,,/Fonts/#Gamefont</FontFamily>
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/GlobalStyles.xaml" />
+                <ResourceDictionary Source="Styles/SettingsWindowStyles.xaml" />
                 <ResourceDictionary Source="Styles/MainWindowStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
