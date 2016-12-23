@@ -25,26 +25,25 @@ namespace MassiveAttack.Windows.ViewModels {
 
         public MainWindowViewModel()
         {
-            MenuItems = new ObservableCollection<MenuSelectionItem>();
-
-            MenuItems.Add(new MenuSelectionItem
+            MenuItems = new ObservableCollection<MenuSelectionItem>
             {
-                MenuText = "Play",
-                PageType = typeof (GameWindow)
-            });
-
-            MenuItems.Add(new MenuSelectionItem
-            {
-                MenuText = "Settings",
-                PageType = typeof(GameWindow)
-            });
-
-            MenuItems.Add(new MenuSelectionItem
-            {
-                MenuText = "Quit",
-                PageType = typeof(GameWindow)
-            });
-
+                new MenuSelectionItem
+                {
+                    MenuText = "PLAY",
+                    PageType = typeof (GameWindow)
+                },
+                new MenuSelectionItem
+                {
+                    MenuText = "SETTINGS",
+                    PageType = typeof (GameWindow)
+                },
+                new MenuSelectionItem
+                {
+                    MenuText = "QUIT",
+                    PageType = typeof (GameWindow)
+                }
+            };
+            
             var assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 

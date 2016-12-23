@@ -2,6 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:MassiveAttack.Windows.Styles">
 
+    <Style TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="pack://application:,,,/Fonts/#Gamefont" />
+    </Style>
+    
     <Style TargetType="{x:Type TextBlock}" x:Key="HoverOver">
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
@@ -15,12 +19,12 @@
     </Style>
 
     <Style TargetType="{x:Type Grid}" x:Key="MenuButton">
-        <Setter Property="Background" Value="#2e2e2e" />
+        <Setter Property="Background" Value="#042d5d" />
         <Setter Property="Height" Value="30" />
-        
+
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#4e4e4e" />
+                <Setter Property="Background" Value="#013e75" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -28,14 +32,14 @@
     <Style TargetType="TextBlock" x:Key="Header" BasedOn="{StaticResource HoverOver}">
         <Setter Property="Foreground" Value="Red" />
         <Setter Property="FontSize" Value="34" />
+        <Setter Property="FontFamily" Value="{StaticResource MainFont}" />
         <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Margin" Value="0,10,0,10" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Margin" Value="5,10,0,10" />
     </Style>
 
     <Style TargetType="Grid" x:Key="MainGrid">
-        <Setter Property="Background" Value="#1e1e1e" />
+       
     </Style>
 
     <Style TargetType="Button" x:Key="MainButton">

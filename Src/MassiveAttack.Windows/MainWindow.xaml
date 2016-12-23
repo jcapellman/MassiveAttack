@@ -10,39 +10,72 @@
     <Window.DataContext>
         <viewModels:MainWindowViewModel/>
     </Window.DataContext>
-    
-    <Grid Style="{StaticResource MainGrid}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
 
-        <ListView Grid.Column="0" BorderBrush="Transparent" BorderThickness="0" Grid.RowSpan="4" Width="150" Margin="0,0,0,0" Background="#0e0e0e" ItemsSource="{Binding MenuItems}">
+    <Grid Style="{StaticResource MainGrid}">
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/MenuFrame.png" />
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Name="Header" Style="{StaticResource Header}" FontFamily="{StaticResource MainFont}" Text="MASSIVE ATTACK">
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="Window.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard RepeatBehavior="Forever">
+                            <DoubleAnimation Storyboard.TargetName="Header" 
+                       Storyboard.TargetProperty="Opacity" From=".5" To="1" 
+                       Duration="0:0:1" BeginTime="0:0:0"/>
+                            <DoubleAnimation Storyboard.TargetName="Header" 
+                       Storyboard.TargetProperty="Opacity" From="1" To=".5" 
+                       Duration="0:0:1" BeginTime="0:0:3"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+        
+        <ListView Grid.Row="1" HorizontalAlignment="Left" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Width="150" Margin="0,0,0,0" ItemsSource="{Binding MenuItems}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 </Style>
             </ListView.ItemContainerStyle>
-            
+
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Style="{StaticResource MenuButton}">
-                        <TextBlock Text="{Binding MenuText}" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" />
+                        <Grid.Triggers>
+                            <EventTrigger RoutedEvent="Grid.MouseEnter">
+                                <BeginStoryboard  Name="sbMenuItem">
+                                    <Storyboard RepeatBehavior="Forever">
+                                        <DoubleAnimation Storyboard.TargetName="MenuItem" 
+                       Storyboard.TargetProperty="Opacity" From="1" To=".3" 
+                       Duration="0:0:1" BeginTime="0:0:0"/>
+                                        <DoubleAnimation Storyboard.TargetName="MenuItem" 
+                       Storyboard.TargetProperty="Opacity" From=".3" To="1" 
+                       Duration="0:0:1" BeginTime="0:0:1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="TextBlock.MouseLeave">
+                                <PauseStoryboard BeginStoryboardName="sbMenuItem" />
+                            </EventTrigger>
+                        </Grid.Triggers>
+                        <TextBlock Text="{Binding MenuText}" Name="MenuItem" FontFamily="{StaticResource MainFont}" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center">
+                            
+                        </TextBlock>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <TextBlock Grid.Row="0" Style="{StaticResource Header}" Text="Massive Attack" />
-            <TextBlock Grid.Row="1" Text="{Binding VersionText}" Style="{StaticResource VersionBlock}" />
-        </Grid>
-        
+        <TextBlock Grid.Row="2" Name="VersionBlock" Text="{Binding VersionText}" FontFamily="{StaticResource MainFont}" Style="{StaticResource VersionBlock}">
+            
+        </TextBlock>
     </Grid>
 </Window>
-
