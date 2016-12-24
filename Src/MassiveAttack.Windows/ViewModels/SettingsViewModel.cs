@@ -30,15 +30,21 @@ namespace MassiveAttack.Windows.ViewModels
                 BPP = 16,
                 ResolutionX = 1024,
                 ResolutionY = 768
-            };
+            };            
+        }
 
+        public void InitializeSettings()
+        {
+            Devices = new ObservableCollection<PhysicalDeviceProperties>();
 
             var devices = new ObservableCollection<PhysicalDevice>(App.instance.EnumeratePhysicalDevices());
 
             foreach (var device in devices)
             {
-                Devices.Add(device.GetProperties());
-            }
+                var props = device.GetProperties();
+
+                Devices.Add(props);
+            }            
         }
     }
 }
