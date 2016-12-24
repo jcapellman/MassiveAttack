@@ -7,7 +7,7 @@ using MassiveAttack.Common.Library.Objects.WebAPI.GameMetrics;
 
 namespace MassiveAttack.Common.Library.WebAPIHandlers {
     public class GameMetricHandler : BaseWebAPIHandler {
-        public GameMetricHandler(string webapiAddress, string token = null) : base(webapiAddress, token) { }
+        public GameMetricHandler(HandlerConstructorItem constructorItem) : base(constructorItem) { }
 
         public async Task<ReturnSet<bool>> AddGameMetric(GameMetricRequestItem requestItem)
             => await PutAsync<GameMetricRequestItem, ReturnSet<bool>>("GameMetrics", requestItem);

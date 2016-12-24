@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
-
+using MassiveAttack.Common.Library.Objects.Common;
 using Newtonsoft.Json;
 
 namespace MassiveAttack.Common.Library.WebAPIHandlers {
@@ -10,10 +10,13 @@ namespace MassiveAttack.Common.Library.WebAPIHandlers {
         private readonly string _token;
         private readonly string _webapiAddress;
 
-        public BaseWebAPIHandler(string webapiAddress, string token = null) {
-            _webapiAddress = webapiAddress;
-            _token = token;
+        public BaseWebAPIHandler(HandlerConstructorItem constructorItem) {
+            _webapiAddress = constructorItem.WebAPIService;
+            _token = constructorItem.Token;
+            IsOnline = true;
         }
+
+        public bool IsOnline { get; private set; }
 
         private HttpClient GetHttpClient() {
             _httpClient = new HttpClient();

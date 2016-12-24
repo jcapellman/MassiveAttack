@@ -39,8 +39,10 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\PLATFORMS.cs" />
     <Compile Include="Enums\Statuses.cs" />
     <Compile Include="Enums\TEXTURE_DETAIL.cs" />
+    <Compile Include="Objects\Common\HandlerConstructorItem.cs" />
     <Compile Include="Objects\Common\ReturnSet.cs" />
     <Compile Include="Objects\WebAPI\BaseListingResponseItem.cs" />
     <Compile Include="Objects\WebAPI\GameMetrics\GameMetricListingResponseItem.cs" />
@@ -57,6 +59,7 @@
     <Compile Include="WebAPIHandlers\GameMetricHandler.cs" />
     <Compile Include="WebAPIHandlers\HighScoreHandler.cs" />
     <Compile Include="WebAPIHandlers\PlayerProfileHandler.cs" />
+    <Compile Include="WebAPIHandlers\SettingsHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
