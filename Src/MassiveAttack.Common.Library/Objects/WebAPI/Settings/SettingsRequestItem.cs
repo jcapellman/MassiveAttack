@@ -1,6 +1,6 @@
 ﻿namespace MassiveAttack.Common.Library.Objects.WebAPI.Settings
 {
-    public class SettingsResponseItem
+    public class SettingsRequestItem
     {
         public SettingsItem SettingItem { get; set; }
     }

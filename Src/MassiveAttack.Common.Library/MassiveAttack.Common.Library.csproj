@@ -52,6 +52,8 @@
     <Compile Include="Objects\WebAPI\Internal\ControllerHandlerItem.cs" />
     <Compile Include="Objects\WebAPI\Profiles\ProfileResponseItem.cs" />
     <Compile Include="Objects\WebAPI\Profiles\ProfileUpdateRequestItem.cs" />
+    <Compile Include="Objects\WebAPI\Settings\SettingsItem.cs" />
+    <Compile Include="Objects\WebAPI\Settings\SettingsRequestItem.cs" />
     <Compile Include="Objects\WebAPI\Settings\SettingsResponseItem.cs" />
     <Compile Include="PlatformAbstractions\INetworkCheck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

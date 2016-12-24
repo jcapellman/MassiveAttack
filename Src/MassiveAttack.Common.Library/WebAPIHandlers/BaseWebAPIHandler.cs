@@ -36,6 +36,13 @@ namespace MassiveAttack.Common.Library.WebAPIHandlers {
             return (T)JsonConvert.DeserializeObject(result);
         }
 
+        public async Task<TK> PostAsync<T, TK>(string relativeURL, T objectValue)
+        {
+            var result = await GetHttpClient().PostAsync(BuildUrl(relativeURL), new MultipartContent());
+
+            return (TK)JsonConvert.DeserializeObject(await result.Content.ReadAsStringAsync());
+        }
+
         public async Task<TK> PutAsync<T, TK>(string relativeURL, T objectValue) {
             var result = await GetHttpClient().PutAsync(BuildUrl(relativeURL), new MultipartContent());
 

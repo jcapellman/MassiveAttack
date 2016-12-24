@@ -27,6 +27,11 @@ namespace MassiveAttack.Common.Library.WebAPIHandlers
             {
                 return new ReturnSet<SettingsResponseItem>(ex);
             }
-        } 
+        }
+
+        public async Task<ReturnSet<bool>> UpdateSettings(SettingsRequestItem requestItem)
+        {
+            return await PostAsync<SettingsRequestItem, ReturnSet<bool>>("Settings", requestItem);
+        }
     }
 }
