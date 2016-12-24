@@ -21,7 +21,7 @@
     <Style TargetType="{x:Type Grid}" x:Key="MenuButton">
         <Setter Property="Background" Value="#042d5d" />
         <Setter Property="Height" Value="30" />
-
+        <Setter Property="Width" Value="150" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#013e75" />
@@ -136,7 +136,7 @@
         <Setter Property="Background" Value="#042d5d" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="Margin" Value="0,10,0,0" />
-        <Setter Property="Width" Value="150" />
+        <Setter Property="Width" Value="250" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="OverridesDefaultStyle" Value="true"/>
 

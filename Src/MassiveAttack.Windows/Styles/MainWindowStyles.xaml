@@ -7,6 +7,6 @@
         <Setter Property="FontFamily" Value="{StaticResource MainFont}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Bottom" />
-        <Setter Property="Margin" Value="5,0,0,15" />
+        <Setter Property="Margin" Value="15,0,0,15" />
     </Style>
 </ResourceDictionary>

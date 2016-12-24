@@ -39,7 +39,7 @@
             </TextBlock.Triggers>
         </TextBlock>
         
-        <ListView Grid.Row="1" HorizontalAlignment="Left" SelectionChanged="lvMain_SelectionChanged" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Width="150" Margin="0,0,0,0" ItemsSource="{Binding MenuItems}">
+        <ListView Grid.Row="1" HorizontalAlignment="Left" SelectionChanged="lvMain_SelectionChanged" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Width="175" Margin="0,0,0,0" ItemsSource="{Binding MenuItems}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -76,7 +76,7 @@
                             </EventTrigger>
                         </Grid.Triggers>
                         
-                        <TextBlock Text="{Binding MenuText}" Name="MenuItem" FontFamily="{StaticResource MainFont}" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" />
+                        <TextBlock Text="{Binding MenuText}" FontSize="16" Name="MenuItem" FontFamily="{StaticResource MainFont}" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" />
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
