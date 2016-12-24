@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MassiveAttack.Windows"
+        xmlns:viewModels="clr-namespace:MassiveAttack.Windows.ViewModels"
         mc:Ignorable="d"
         Title="SettingsWindow" Height="359" Width="525" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Window.DataContext>
+        <viewModels:SettingsViewModel />
+    </Window.DataContext>
+    
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="Images/MenuFrame.png" />
@@ -20,13 +25,24 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             
             <TextBlock Grid.Row="0" Text="SELECTED DEVICE" Foreground="White" />
-            <ComboBox Grid.Row="1" ItemsSource="{Binding Devices}" Style="{StaticResource VulkanDevices}">
+            <ComboBox Grid.Row="1" ItemsSource="{Binding Devices}" SelectedItem="{Binding SelectedDevice}" Style="{StaticResource VulkanDevices}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding DeviceName}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <TextBlock Grid.Row="2" Margin="0,20,0,0" Text="TEXTURE DETAIL" Foreground="White" />
+            <ComboBox Grid.Row="3" ItemsSource="{Binding TextureDetails}" SelectedItem="{Binding SelectedTextureDetail}" Style="{StaticResource VulkanDevices}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" />
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>

@@ -11,5 +11,7 @@ namespace MassiveAttack.Common.Library.Objects.WebAPI.Settings
         public int BPP { get; set; }
 
         public TEXTURE_DETAIL TextureDetail { get; set; }
+
+        public uint DeviceID { get; set; }
     }
 }
