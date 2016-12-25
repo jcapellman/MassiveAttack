@@ -9,5 +9,7 @@ namespace MassiveAttack.Common.Library.Objects.Common
         public string WebAPIService { get; set; }
 
         public string Token { get; set; }
+
+        public bool IsConnected { get; set; }
     }
 }

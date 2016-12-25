@@ -14,7 +14,8 @@ namespace MassiveAttack.Windows.ViewModels {
         {
             Token = _token,
             WebAPIService = _webapiService,
-            CurrentPlatfrom = PLATFORMS.WINDOWS
+            CurrentPlatfrom = PLATFORMS.WINDOWS,
+            IsConnected = App.NetworkCheck.IsConnected()
         };
 
         public event PropertyChangedEventHandler PropertyChanged;
