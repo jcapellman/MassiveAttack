@@ -27,22 +27,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Name="Header" Style="{StaticResource Header}" FontFamily="{StaticResource MainFont}" Text="MASSIVE ATTACK">
-            <TextBlock.Triggers>
-                <EventTrigger RoutedEvent="Window.Loaded">
-                    <BeginStoryboard>
-                        <Storyboard RepeatBehavior="Forever">
-                            <DoubleAnimation Storyboard.TargetName="Header" 
-                       Storyboard.TargetProperty="Opacity" From=".5" To="1" 
-                       Duration="0:0:1" BeginTime="0:0:0"/>
-                            <DoubleAnimation Storyboard.TargetName="Header" 
-                       Storyboard.TargetProperty="Opacity" From="1" To=".5" 
-                       Duration="0:0:1" BeginTime="0:0:3"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-            </TextBlock.Triggers>
-        </TextBlock>
+        <TextBlock Grid.Row="0" Name="Header" Style="{StaticResource Header}" FontFamily="{StaticResource MainFont}" Text="MASSIVE ATTACK" />
         
         <ListView Grid.Row="1" HorizontalAlignment="Left" SelectionChanged="lvMain_SelectionChanged" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Width="175" Margin="0,0,0,0" ItemsSource="{Binding MenuItems}">
             <ListView.ItemContainerStyle>
@@ -62,7 +47,7 @@
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Style="{StaticResource MenuButton}">
+                    <Grid Style="{StaticResource MenuButton}" IsEnabled="{Binding IsEnabled}">
                         <Grid.Triggers>
                             <EventTrigger RoutedEvent="Grid.MouseEnter">
                                 <BeginStoryboard  Name="sbMenuItem">
@@ -94,8 +79,22 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" Name="VersionBlock" Text="{Binding VersionText}" FontFamily="{StaticResource MainFont}" Style="{StaticResource VersionBlock}" />
-            <TextBlock Grid.Column="1" Text="{Binding NetworkStatus}" Foreground="{Binding IsConnected, Converter={StaticResource NetworkStatusConverter}}" Style="{StaticResource NetworkStatus}" />
+            <TextBlock Grid.Column="1" Name="NetworkStatus" Text="{Binding NetworkStatus}" FontFamily="{StaticResource MainFont}" Foreground="{Binding IsConnected, Converter={StaticResource NetworkStatusConverter}}" Style="{StaticResource NetworkStatus}">
+                <TextBlock.Triggers>
+                    <EventTrigger RoutedEvent="Window.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard RepeatBehavior="Forever">
+                                <DoubleAnimation Storyboard.TargetName="NetworkStatus" 
+                       Storyboard.TargetProperty="Opacity" From=".25" To="1" 
+                       Duration="0:0:1" BeginTime="0:0:0"/>
+                                <DoubleAnimation Storyboard.TargetName="NetworkStatus" 
+                       Storyboard.TargetProperty="Opacity" From="1" To=".25" 
+                       Duration="0:0:1" BeginTime="0:0:3"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </TextBlock.Triggers>
+            </TextBlock>
         </Grid>
-        
     </Grid>
 </Window>

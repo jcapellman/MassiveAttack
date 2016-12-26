@@ -16,6 +16,9 @@ namespace MassiveAttack.Windows
 
         public static HandlerConstructorItem HandlerWrapper { get; set; }
 
+        public delegate void NetworkCheckEventHandler(bool isConnected);
+        public static event NetworkCheckEventHandler NetworkChanged;
+
         public App()
         {
             InitWrapper();
@@ -31,29 +34,18 @@ namespace MassiveAttack.Windows
                 IsConnected = false,
                 FileIO = new FileIO()
             };
-
-            NetworkChanged += OnNetworkChanged;
-
+            
             NetworkCheck = new NetworkCheck(HandlerWrapper);
 
-            NetworkCheck.NetworkCheckEvent += NetworkCheckEvent;
+            NetworkCheck.NetworkCheckEvent += NetworkCheck_NetworkCheckEvent; ;
             NetworkCheck.StartCheck();
         }
-
-        private static void OnNetworkChanged(object sender, NetworkCheckEventArgs networkCheckEventArgs)
+        
+        private static void NetworkCheck_NetworkCheckEvent(bool isConnected)
         {
-            var handler = NetworkChanged;
+            HandlerWrapper.IsConnected = isConnected;
 
-            handler?.Invoke(null, networkCheckEventArgs);
-        }
-
-        public static event EventHandler<NetworkCheckEventArgs> NetworkChanged;
-
-        private static void NetworkCheckEvent(object sender, NetworkCheckEventArgs networkCheckEventArgs)
-        {
-            HandlerWrapper.IsConnected = networkCheckEventArgs.HasConnection;
-
-            OnNetworkChanged(sender, networkCheckEventArgs);
+            NetworkChanged?.Invoke(isConnected);
         }
     }
 }

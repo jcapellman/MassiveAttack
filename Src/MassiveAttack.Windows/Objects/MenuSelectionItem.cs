@@ -7,5 +7,7 @@ namespace MassiveAttack.Windows.Objects
         public string MenuText { get; set; }
 
         public Window WindowInstance { get; set; }
+
+        public bool IsEnabled { get; set; }
     }
 }

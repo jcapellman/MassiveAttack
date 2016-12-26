@@ -28,6 +28,11 @@ namespace MassiveAttack.Windows {
 
             var item = (MenuSelectionItem)selectedItem;
 
+            if (!item.IsEnabled)
+            {
+                return;
+            }
+
             if (item.WindowInstance == null)
             {
                 Application.Current.Shutdown();

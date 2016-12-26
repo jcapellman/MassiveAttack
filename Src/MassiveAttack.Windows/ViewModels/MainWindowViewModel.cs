@@ -7,6 +7,13 @@ using MassiveAttack.Windows.Objects;
 namespace MassiveAttack.Windows.ViewModels {
     public class MainWindowViewModel : BaseViewModel
     {
+        public enum MENU_OPTIONS
+        {
+            PLAY,
+            SETTINGS,
+            QUIT
+        };
+
         private ObservableCollection<MenuSelectionItem> _menuItems;
 
         public ObservableCollection<MenuSelectionItem> MenuItems
@@ -48,17 +55,20 @@ namespace MassiveAttack.Windows.ViewModels {
                 new MenuSelectionItem
                 {
                     MenuText = "PLAY",
-                    WindowInstance = new GameWindow()
+                    WindowInstance = new GameWindow(),
+                    IsEnabled = false
                 },
                 new MenuSelectionItem
                 {
                     MenuText = "SETTINGS",
-                    WindowInstance = new SettingsWindow()
+                    WindowInstance = new SettingsWindow(),
+                    IsEnabled = true
                 },
                 new MenuSelectionItem
                 {
                     MenuText = "QUIT",
-                    WindowInstance = null
+                    WindowInstance = null,
+                    IsEnabled = true
                 }
             };
             
@@ -71,13 +81,23 @@ namespace MassiveAttack.Windows.ViewModels {
 
             VersionText =
                 $"Version {assemblyVersion.Major}.{assemblyVersion.MinorRevision} (BUILD {assemblyVersion.Build}) - {fileCreateDate.Month}/{fileCreateDate.Day}/{fileCreateDate.Year}";
+
+            App_NetworkChanged(App.NetworkCheck.IsConnected());
         }
 
-        private void App_NetworkChanged(object sender, MassiveAttack.Common.Library.PlatformAbstractions.Objects.NetworkCheckEventArgs e)
+        private void updateMenuOption(MENU_OPTIONS menuOption, bool isConnected)
         {
-            NetworkStatus = e.HasConnection ? "Service connected" : "Network or Service Unavailable";
+            MenuItems[(int) menuOption].IsEnabled = isConnected;
+            MenuItems = MenuItems;
+        }
 
-            IsConnected = e.HasConnection;
+        private void App_NetworkChanged(bool isConnected)
+        {
+            NetworkStatus = isConnected ? "Service connected" : "Network or Service Unavailable";
+
+            IsConnected = isConnected;
+
+            updateMenuOption(MENU_OPTIONS.PLAY, isConnected);
         }
     }
 }
