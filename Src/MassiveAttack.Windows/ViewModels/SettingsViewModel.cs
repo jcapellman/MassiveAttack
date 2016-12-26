@@ -113,6 +113,11 @@ namespace MassiveAttack.Windows.ViewModels
                 Devices.Add(props);
             }
 
+            if (SelectedDevice == null)
+            {
+                SelectedDevice = Devices.FirstOrDefault();
+            }
+
             TextureDetails = Enum.GetNames(typeof (TEXTURE_DETAIL)).ToList();
 
             SelectedTextureDetail = Settings.TextureDetail.ToString();

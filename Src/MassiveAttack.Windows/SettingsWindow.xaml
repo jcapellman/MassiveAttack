@@ -1,4 +1,4 @@
-﻿<Window x:Class="MassiveAttack.Windows.SettingsWindow"
+﻿<local:BaseWindow x:Class="MassiveAttack.Windows.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -56,7 +56,7 @@
             
             <Button Grid.Column="0" Content="Cancel" Click="btnCancel_OnClick" HorizontalAlignment="Left" Style="{StaticResource MainButton}" />
 
-            <Button Grid.Column="1" Content="Save" HorizontalAlignment="Right" Style="{StaticResource MainButton}" />
+            <Button Grid.Column="1" Content="Save" Click="btnSave_OnClick" HorizontalAlignment="Right" Style="{StaticResource MainButton}" />
         </Grid>
     </Grid>
-</Window>
+</local:BaseWindow>

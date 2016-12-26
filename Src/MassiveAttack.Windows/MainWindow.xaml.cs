@@ -6,7 +6,7 @@ using MassiveAttack.Windows.Objects;
 using Vulkan;
 
 namespace MassiveAttack.Windows {
-    public partial class MainWindow : Window {
+    public partial class MainWindow : BaseWindow {
         public MainWindow() {
             InitializeComponent();
 
