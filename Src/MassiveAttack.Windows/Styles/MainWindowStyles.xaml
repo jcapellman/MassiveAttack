@@ -9,4 +9,14 @@
         <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="Margin" Value="15,0,0,15" />
     </Style>
+
+    <Style x:Key="NetworkStatus" TargetType="TextBlock" BasedOn="{StaticResource HoverOver}">
+        <Setter Property="Foreground" Value="Red" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontFamily" Value="{StaticResource MainFont}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
+        <Setter Property="Margin" Value="15,0,0,15" />
+    </Style>
 </ResourceDictionary>

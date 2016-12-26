@@ -86,7 +86,7 @@ namespace MassiveAttack.Windows.ViewModels
 
         public async void InitializeSettings()
         {
-            var settingsHandler = new SettingsHandler(handlerWrapper);
+            var settingsHandler = new SettingsHandler(App.HandlerWrapper);
 
             var result = await settingsHandler.GetSettings();
 
@@ -123,7 +123,7 @@ namespace MassiveAttack.Windows.ViewModels
                 SettingItem = Settings
             };
 
-            var settingsHandler = new SettingsHandler(handlerWrapper);
+            var settingsHandler = new SettingsHandler(App.HandlerWrapper);
 
             return await settingsHandler.UpdateSettings(requestItem);
         }

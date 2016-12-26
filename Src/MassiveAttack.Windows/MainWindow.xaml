@@ -5,12 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MassiveAttack.Windows"
         xmlns:viewModels="clr-namespace:MassiveAttack.Windows.ViewModels"
+        xmlns:converters="clr-namespace:MassiveAttack.Windows.Converters"
         mc:Ignorable="d"
         Title="Massive Attack" Height="350" Width="525" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
     <Window.DataContext>
         <viewModels:MainWindowViewModel/>
     </Window.DataContext>
 
+    <Window.Resources>
+        <converters:NetworkStatusConverter x:Key="NetworkStatusConverter" />
+    </Window.Resources>
+    
     <Grid Style="{StaticResource MainGrid}">
         <Grid.Background>
             <ImageBrush ImageSource="Images/MenuFrame.png" />
@@ -82,8 +87,15 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <TextBlock Grid.Row="2" Name="VersionBlock" Text="{Binding VersionText}" FontFamily="{StaticResource MainFont}" Style="{StaticResource VersionBlock}">
-            
-        </TextBlock>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Name="VersionBlock" Text="{Binding VersionText}" FontFamily="{StaticResource MainFont}" Style="{StaticResource VersionBlock}" />
+            <TextBlock Grid.Column="1" Text="{Binding NetworkStatus}" Foreground="{Binding IsConnected, Converter={StaticResource NetworkStatusConverter}}" Style="{StaticResource NetworkStatus}" />
+        </Grid>
+        
     </Grid>
 </Window>

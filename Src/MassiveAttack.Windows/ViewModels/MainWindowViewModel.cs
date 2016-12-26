@@ -23,8 +23,26 @@ namespace MassiveAttack.Windows.ViewModels {
             set { _versionText = value; OnPropertyChanged(); }
         }
 
+        private bool _isConnected;
+
+        public bool IsConnected
+        {
+            get { return _isConnected; }
+            set { _isConnected = value; OnPropertyChanged(); }
+        }
+
+        private string _networkStatus;
+
+        public string NetworkStatus
+        {
+            get { return _networkStatus; }
+            set { _networkStatus = value; OnPropertyChanged(); }
+        }
+
         public MainWindowViewModel()
         {
+            App.NetworkChanged += App_NetworkChanged;
+
             MenuItems = new ObservableCollection<MenuSelectionItem>
             {
                 new MenuSelectionItem
@@ -53,6 +71,20 @@ namespace MassiveAttack.Windows.ViewModels {
 
             VersionText =
                 $"Version {assemblyVersion.Major}.{assemblyVersion.MinorRevision} (BUILD {assemblyVersion.Build}) - {fileCreateDate.Month}/{fileCreateDate.Day}/{fileCreateDate.Year}";
+        }
+
+        private void App_NetworkChanged(object sender, MassiveAttack.Common.Library.PlatformAbstractions.Objects.NetworkCheckEventArgs e)
+        {
+            if (e.HasConnection)
+            {
+                NetworkStatus = "Service connected";
+            }
+            else
+            {
+                NetworkStatus = "Network or Service Unavailable";
+            }
+
+            IsConnected = e.HasConnection;
         }
     }
 }

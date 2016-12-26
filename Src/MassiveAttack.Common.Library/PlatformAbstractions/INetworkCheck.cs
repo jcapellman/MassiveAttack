@@ -7,8 +7,6 @@ namespace MassiveAttack.Common.Library.PlatformAbstractions
 {
     public interface INetworkCheck
     {
-        EventHandler<NetworkCheckEventArgs> NetworkCheckEvent { get; set; }
-
         bool IsConnected();
 
         void StartCheck();
