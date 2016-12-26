@@ -56,6 +56,7 @@
     <Compile Include="Objects\WebAPI\Settings\SettingsItem.cs" />
     <Compile Include="Objects\WebAPI\Settings\SettingsRequestItem.cs" />
     <Compile Include="Objects\WebAPI\Settings\SettingsResponseItem.cs" />
+    <Compile Include="PlatformAbstractions\BaseFileIO.cs" />
     <Compile Include="PlatformAbstractions\INetworkCheck.cs" />
     <Compile Include="PlatformAbstractions\Objects\NetworkCheckEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

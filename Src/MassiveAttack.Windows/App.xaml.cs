@@ -28,7 +28,8 @@ namespace MassiveAttack.Windows
                 Token = string.Empty,
                 WebAPIService = MassiveAttack.Common.Library.Common.Constants.WEBSERVICE_URL,
                 CurrentPlatfrom = PLATFORMS.WINDOWS,
-                IsConnected = false
+                IsConnected = false,
+                FileIO = new FileIO()
             };
 
             NetworkChanged += OnNetworkChanged;
@@ -52,7 +53,7 @@ namespace MassiveAttack.Windows
         {
             HandlerWrapper.IsConnected = networkCheckEventArgs.HasConnection;
 
-        //    OnNetworkChanged(sender, networkCheckEventArgs);
+            OnNetworkChanged(sender, networkCheckEventArgs);
         }
     }
 }

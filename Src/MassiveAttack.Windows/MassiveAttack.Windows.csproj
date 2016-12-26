@@ -68,6 +68,7 @@
       <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Objects\MenuSelectionItem.cs" />
+    <Compile Include="PlatformImplementations\FileIO.cs" />
     <Compile Include="PlatformImplementations\NetworkCheck.cs" />
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>

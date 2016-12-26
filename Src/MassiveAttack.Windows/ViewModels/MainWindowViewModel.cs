@@ -75,14 +75,7 @@ namespace MassiveAttack.Windows.ViewModels {
 
         private void App_NetworkChanged(object sender, MassiveAttack.Common.Library.PlatformAbstractions.Objects.NetworkCheckEventArgs e)
         {
-            if (e.HasConnection)
-            {
-                NetworkStatus = "Service connected";
-            }
-            else
-            {
-                NetworkStatus = "Network or Service Unavailable";
-            }
+            NetworkStatus = e.HasConnection ? "Service connected" : "Network or Service Unavailable";
 
             IsConnected = e.HasConnection;
         }

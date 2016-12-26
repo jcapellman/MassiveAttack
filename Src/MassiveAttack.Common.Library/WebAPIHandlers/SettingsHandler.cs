@@ -8,6 +8,8 @@ namespace MassiveAttack.Common.Library.WebAPIHandlers
 {
     public class SettingsHandler : BaseWebAPIHandler
     {
+        private const string JSONFILE = "settings.json";
+
         public SettingsHandler(HandlerConstructorItem constructorItem) : base(constructorItem)
         {
         }
@@ -21,7 +23,14 @@ namespace MassiveAttack.Common.Library.WebAPIHandlers
                     return await GetAsync<ReturnSet<SettingsResponseItem>>("Settings");
                 }
 
-                throw new Exception("No internet connection");
+                var localFile = Wrapper.FileIO.ReadJOSNFile<SettingsResponseItem>(JSONFILE);
+
+                if (localFile.HasError)
+                {
+                    throw new Exception("No connectivity and no local copy of Settings");
+                }
+
+                return new ReturnSet<SettingsResponseItem>(localFile.ObjectValue);
             }
             catch (Exception ex)
             {

@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Net;
-using System.Net.Http;
+
 using MassiveAttack.Common.Library.Objects.Common;
 using MassiveAttack.Common.Library.PlatformAbstractions;
 using MassiveAttack.Common.Library.PlatformAbstractions.Objects;
@@ -17,14 +16,7 @@ namespace MassiveAttack.Windows.PlatformImplementations
             _wrapper = wrapper;
         }
 
-        public void OnNetworkChanged(NetworkCheckEventArgs e)
-        {
-            var handler = NetworkCheckEvent;
-
-            handler?.Invoke(this, e);
-        }
-        
-        public EventHandler<NetworkCheckEventArgs> NetworkCheckEvent { get; set; }
+        public event EventHandler<NetworkCheckEventArgs> NetworkCheckEvent;
         
         private bool _isConnected;
 
@@ -32,9 +24,15 @@ namespace MassiveAttack.Windows.PlatformImplementations
     
         public void StartCheck()
         {
+            NetworkCheckEvent += NetworkCheck_NetworkCheckEvent;
             System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged += NetworkChange_NetworkAvailabilityChanged;
 
             NetworkChange_NetworkAvailabilityChanged(null, null);
+        }
+
+        private void NetworkCheck_NetworkCheckEvent(object sender, NetworkCheckEventArgs e)
+        {
+            
         }
 
         private async void NetworkChange_NetworkAvailabilityChanged(object sender, System.Net.NetworkInformation.NetworkAvailabilityEventArgs e)
@@ -53,7 +51,7 @@ namespace MassiveAttack.Windows.PlatformImplementations
                 hasConnection = false;
             }
 
-            OnNetworkChanged(new NetworkCheckEventArgs
+            NetworkCheck_NetworkCheckEvent(this, new NetworkCheckEventArgs
             {
                 HasConnection = hasConnection
             });

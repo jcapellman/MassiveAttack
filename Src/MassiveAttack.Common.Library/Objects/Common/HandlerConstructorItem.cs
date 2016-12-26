@@ -1,4 +1,5 @@
 ﻿using MassiveAttack.Common.Library.Enums;
+using MassiveAttack.Common.Library.PlatformAbstractions;
 
 namespace MassiveAttack.Common.Library.Objects.Common
 {
@@ -11,5 +12,7 @@ namespace MassiveAttack.Common.Library.Objects.Common
         public string Token { get; set; }
 
         public bool IsConnected { get; set; }
+
+        public BaseFileIO FileIO { get; set; }
     }
 }

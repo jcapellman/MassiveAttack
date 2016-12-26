@@ -1,6 +1,8 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
+
 using MassiveAttack.Common.Library.Objects.Common;
+
 using Newtonsoft.Json;
 
 namespace MassiveAttack.Common.Library.WebAPIHandlers {
@@ -10,7 +12,12 @@ namespace MassiveAttack.Common.Library.WebAPIHandlers {
         private readonly string _token;
         private readonly string _webapiAddress;
 
-        public BaseWebAPIHandler(HandlerConstructorItem constructorItem) {
+        protected HandlerConstructorItem Wrapper;
+
+        public BaseWebAPIHandler(HandlerConstructorItem constructorItem)
+        {
+            Wrapper = constructorItem;
+
             _webapiAddress = constructorItem.WebAPIService;
             _token = constructorItem.Token;
             IsOnline = true;

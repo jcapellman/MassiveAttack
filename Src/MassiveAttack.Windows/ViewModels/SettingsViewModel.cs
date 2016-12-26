@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+
 using MassiveAttack.Common.Library.Enums;
 using MassiveAttack.Common.Library.Objects.Common;
 using MassiveAttack.Common.Library.Objects.WebAPI.Settings;
 using MassiveAttack.Common.Library.WebAPIHandlers;
+
 using Vulkan;
 
 namespace MassiveAttack.Windows.ViewModels
