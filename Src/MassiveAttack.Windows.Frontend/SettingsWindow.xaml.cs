@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 
-using MassiveAttack.Windows.ViewModels;
+using MassiveAttack.Windows.Frontend.ViewModels;
 
-namespace MassiveAttack.Windows
+namespace MassiveAttack.Windows.Frontend
 {
     public partial class SettingsWindow : BaseWindow
     {

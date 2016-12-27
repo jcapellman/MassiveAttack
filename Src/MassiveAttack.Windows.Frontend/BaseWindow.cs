@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace MassiveAttack.Windows
+namespace MassiveAttack.Windows.Frontend
 {
     public class BaseWindow : Window
     {

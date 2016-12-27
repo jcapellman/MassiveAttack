@@ -11,7 +11,7 @@ using MassiveAttack.Common.Library.WebAPIHandlers;
 
 using Vulkan;
 
-namespace MassiveAttack.Windows.ViewModels
+namespace MassiveAttack.Windows.Frontend.ViewModels
 {
     public class SettingsViewModel : BaseViewModel
     {

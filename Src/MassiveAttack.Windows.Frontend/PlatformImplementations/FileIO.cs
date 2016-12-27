@@ -2,7 +2,7 @@
 
 using MassiveAttack.Common.Library.PlatformAbstractions;
 
-namespace MassiveAttack.Windows.PlatformImplementations
+namespace MassiveAttack.Windows.Frontend.PlatformImplementations
 {
     public class FileIO : BaseFileIO
     {

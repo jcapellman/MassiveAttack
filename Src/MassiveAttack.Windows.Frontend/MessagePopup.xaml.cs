@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-using MassiveAttack.Windows.Annotations;
+using MassiveAttack.Windows.Frontend.Properties;
 
-namespace MassiveAttack.Windows
+namespace MassiveAttack.Windows.Frontend
 {
     public partial class MessagePopup : INotifyPropertyChanged
     {

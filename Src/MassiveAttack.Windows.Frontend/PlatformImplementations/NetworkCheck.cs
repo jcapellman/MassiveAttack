@@ -4,7 +4,7 @@ using MassiveAttack.Common.Library.Objects.Common;
 using MassiveAttack.Common.Library.PlatformAbstractions;
 using MassiveAttack.Common.Library.WebAPIHandlers;
 
-namespace MassiveAttack.Windows.PlatformImplementations
+namespace MassiveAttack.Windows.Frontend.PlatformImplementations
 {
     public class NetworkCheck : INetworkCheck
     {

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace MassiveAttack.Windows.Objects
+namespace MassiveAttack.Windows.Frontend.Objects
 {
     public class MenuSelectionItem
     {

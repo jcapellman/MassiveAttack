@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace MassiveAttack.Windows
+namespace MassiveAttack.Windows.Frontend
 {
     /// <summary>
     /// Interaction logic for GameWindow.xaml

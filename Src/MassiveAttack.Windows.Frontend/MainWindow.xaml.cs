@@ -1,11 +1,11 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-using MassiveAttack.Windows.Objects;
+using MassiveAttack.Windows.Frontend.Objects;
 
 using Vulkan;
 
-namespace MassiveAttack.Windows {
+namespace MassiveAttack.Windows.Frontend {
     public partial class MainWindow : BaseWindow {
         public MainWindow() {
             InitializeComponent();

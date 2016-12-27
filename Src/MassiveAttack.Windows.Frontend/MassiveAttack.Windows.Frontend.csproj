@@ -7,7 +7,7 @@
     <ProjectGuid>{D8FCBDFF-ABA2-4340-930D-92BA3F9483A7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MassiveAttack.Windows</RootNamespace>
+    <RootNamespace>MassiveAttack.Windows.Frontend</RootNamespace>
     <AssemblyName>MassiveAttack.Windows</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

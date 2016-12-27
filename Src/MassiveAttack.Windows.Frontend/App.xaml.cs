@@ -2,11 +2,11 @@
 using MassiveAttack.Common.Library.Enums;
 using MassiveAttack.Common.Library.Objects.Common;
 using MassiveAttack.Common.Library.PlatformAbstractions.Objects;
-using MassiveAttack.Windows.PlatformImplementations;
+using MassiveAttack.Windows.Frontend.PlatformImplementations;
 
 using Vulkan;
 
-namespace MassiveAttack.Windows
+namespace MassiveAttack.Windows.Frontend
 {
     public partial class App
     {

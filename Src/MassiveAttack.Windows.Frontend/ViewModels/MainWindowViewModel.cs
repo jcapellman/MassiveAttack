@@ -2,9 +2,9 @@
 using System.IO;
 using System.Reflection;
 
-using MassiveAttack.Windows.Objects;
+using MassiveAttack.Windows.Frontend.Objects;
 
-namespace MassiveAttack.Windows.ViewModels {
+namespace MassiveAttack.Windows.Frontend.ViewModels {
     public class MainWindowViewModel : BaseViewModel
     {
         public enum MENU_OPTIONS

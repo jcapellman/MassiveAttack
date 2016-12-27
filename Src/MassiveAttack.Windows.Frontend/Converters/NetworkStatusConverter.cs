@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace MassiveAttack.Windows.Converters
+namespace MassiveAttack.Windows.Frontend.Converters
 {
     public class NetworkStatusConverter : IValueConverter
     {
