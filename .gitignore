@@ -5,3 +5,7 @@ obj/
 *.user
 *.lock.json
 *.bak
+Debug/
+*.sdf
+*.VC.opendb
+*.filters
