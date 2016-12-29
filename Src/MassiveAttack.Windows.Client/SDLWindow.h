@@ -19,6 +19,7 @@ public:
 
 		this->xpos = 1.5f;
 		this->zpos = 6.0f;
+		this->yrot = 0.0f;
 	}
 private:
 	void handle_key_down(SDL_keysym* keysym);
