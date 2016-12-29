@@ -16,6 +16,9 @@ public:
 	{
 		this->width = 1024;
 		this->height = 768;
+
+		this->xpos = 1.5f;
+		this->zpos = 6.0f;
 	}
 private:
 	void handle_key_down(SDL_keysym* keysym);

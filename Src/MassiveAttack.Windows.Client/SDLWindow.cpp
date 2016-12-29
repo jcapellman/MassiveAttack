@@ -7,11 +7,34 @@ GLuint SDLWindow::LoadLevel(char * level)
 	glNewList(dlID, GL_COMPILE);
 		glColor3f(1.0f, 1.0f, 1.0f);
 
-		glBegin(GL_QUADS);
-			glVertex3f(10.0f, 10.0f, 0.0f);
-			glVertex3f(-10.0f, 10.0f, 0.0f);
-			glVertex3f(-10.0f, -10.0f, 0.0f);
-			glVertex3f(10.0f, -10.0f, 0.0f);
+		glBegin(GL_TRIANGLES);
+			glColor3f(1.0f, 0.0f, 0.0f);
+			glVertex3f(0.0f, 1.0f, 0.0f);
+			glColor3f(0.0f, 1.0f, 0.0f);
+			glVertex3f(-1.0f, -1.0f, 1.0f);
+			glColor3f(0.0f, 0.0f, 1.0f);
+			glVertex3f(1.0f, -1.0f, 1.0f);
+
+			glColor3f(1.0f, 0.0f, 0.0f);
+			glVertex3f(0.0f, 1.0f, 0.0f);
+			glColor3f(0.0f, 0.0f, 1.0f); 
+			glVertex3f(1.0f, -1.0f, 1.0f);
+			glColor3f(0.0f, 1.0f, 0.0f); 
+			glVertex3f(1.0f, -1.0f, -1.0f);
+
+			glColor3f(1.0f, 0.0f, 0.0f);
+			glVertex3f(0.0f, 1.0f, 0.0f);
+			glColor3f(0.0f, 1.0f, 0.0f);
+			glVertex3f(1.0f, -1.0f, -1.0f);
+			glColor3f(0.0f, 0.0f, 1.0f);
+			glVertex3f(-1.0f, -1.0f, -1.0f);
+
+			glColor3f(1.0f, 0.0f, 0.0f);
+			glVertex3f(0.0f, 1.0f, 0.0f);
+			glColor3f(0.0f, 0.0f, 1.0f);
+			glVertex3f(-1.0f, -1.0f, -1.0f);
+			glColor3f(0.0f, 1.0f, 0.0f); 
+			glVertex3f(-1.0f, -1.0f, 1.0f);
 		glEnd();
 
 	glEndList();
@@ -55,8 +78,8 @@ void SDLWindow::handle_key_down(SDL_keysym* keysym)
 			yrot += 1.5f;
 			break;
 		case SDLK_UP:
-			xpos -= (float)sin(yrot * piover180) * 0.05f;
-			zpos -= (float)cos(yrot * piover180) * 0.05f;
+			xpos += (float)sin(yrot * piover180) * 0.5f;
+			zpos += (float)cos(yrot * piover180) * 0.5f;
 
 			if (walkbiasangle >= 359.0f)
 				walkbiasangle = 0.0f;
@@ -66,9 +89,9 @@ void SDLWindow::handle_key_down(SDL_keysym* keysym)
 			walkbias = (float)sin(walkbiasangle * piover180) / 20.0f;
 			break;
 		case SDLK_DOWN:
-			xpos += (float)sin(yrot * piover180) * 0.05f;
+			xpos -= (float)sin(yrot * piover180) * 0.5f;
 
-			zpos += (float)cos(yrot * piover180) * 0.05f;
+			zpos -= (float)cos(yrot * piover180) * 0.5f;
 			if (walkbiasangle <= 1.0f)
 				walkbiasangle = 359.0f;
 			else
@@ -109,27 +132,27 @@ void SDLWindow::MainLoop()
 
 void SDLWindow::Render()
 {
+	static GLfloat rtri;
 	static GLint T0 = 0;
 	static GLint Frames = 0;
-
-	GLfloat x_m, y_m, z_m, u_m, v_m;
-	GLfloat xtrans = -xpos;
-	GLfloat ztrans = -zpos;
-	GLfloat ytrans = -walkbias - 0.25f;
-	GLfloat sceneroty = 360.0f - yrot;
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glLoadIdentity();
 
-	glRotatef(lookupdown, 1.0f, 0.0f, 0.0f);
-	glRotatef(sceneroty, 0.0f, 1.0f, 0.0f);
+	GLfloat x_m, y_m, z_m, u_m, v_m;                // Floating Point For Temp X, Y, Z, U And V Vertices
+	GLfloat xtrans = -xpos;                     // Used For Player Translation On The X Axis
+	GLfloat ztrans = -zpos;                     // Used For Player Translation On The Z Axis
+	GLfloat ytrans = -walkbias - 0.25f;               // Used For Bouncing Motion Up And Down
+	GLfloat sceneroty = 360.0f - yrot;              // 360 Degree Angle For Player Direction
 
-	glTranslatef(xtrans, ytrans, ztrans);
-	
-	glTranslatef(-1.5f, 0.0f, -6.0f);
+//	glRotatef(lookupdown, 1.0f, 0, 0);                 // Rotate Up And Down To Look Up And Down
+//	glRotatef(sceneroty, 0, 1.0f, 0);                  // Rotate Depending On Direction Player Is Facing
 
-	glColor3f(1.0f, 0.0f, 0.0f);
+	glTranslatef(xtrans, 0.0f, ztrans);
+
+	glRotatef(rtri, 0.0f, 1.0f, 0.0f);
+
 	glCallList(dlID);
 
 	SDL_GL_SwapBuffers();
@@ -161,6 +184,7 @@ void SDLWindow::Init()
 	int videoFlags;
 
 	SDL_Init(SDL_INIT_EVERYTHING);
+	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
 	SDL_WM_SetCaption("Massive Attack", "Massive Attack");
 
@@ -183,6 +207,5 @@ void SDLWindow::Init()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	
-
 	this->dlID = LoadLevel("E1M1.map");
 }
