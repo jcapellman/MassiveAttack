@@ -3,12 +3,12 @@
 
 #include "Main.h"
 #include "TextureManager.h"
+#include "Level.h"
 
 class SDLWindow
 {
 public:
 	void Init();
-	GLuint LoadLevel(char * level);
 
 	void MainLoop();
 

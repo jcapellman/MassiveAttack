@@ -1,47 +1,5 @@
 #include "SDLWindow.h"
 
-GLuint SDLWindow::LoadLevel(char * level)
-{
-	GLuint dlID = glGenLists(1);
-
-	glNewList(dlID, GL_COMPILE);
-		glColor3f(1.0f, 1.0f, 1.0f);
-
-		glBegin(GL_TRIANGLES);
-			glColor3f(1.0f, 0.0f, 0.0f);
-			glVertex3f(0.0f, 1.0f, 0.0f);
-			glColor3f(0.0f, 1.0f, 0.0f);
-			glVertex3f(-1.0f, -1.0f, 1.0f);
-			glColor3f(0.0f, 0.0f, 1.0f);
-			glVertex3f(1.0f, -1.0f, 1.0f);
-
-			glColor3f(1.0f, 0.0f, 0.0f);
-			glVertex3f(0.0f, 1.0f, 0.0f);
-			glColor3f(0.0f, 0.0f, 1.0f); 
-			glVertex3f(1.0f, -1.0f, 1.0f);
-			glColor3f(0.0f, 1.0f, 0.0f); 
-			glVertex3f(1.0f, -1.0f, -1.0f);
-
-			glColor3f(1.0f, 0.0f, 0.0f);
-			glVertex3f(0.0f, 1.0f, 0.0f);
-			glColor3f(0.0f, 1.0f, 0.0f);
-			glVertex3f(1.0f, -1.0f, -1.0f);
-			glColor3f(0.0f, 0.0f, 1.0f);
-			glVertex3f(-1.0f, -1.0f, -1.0f);
-
-			glColor3f(1.0f, 0.0f, 0.0f);
-			glVertex3f(0.0f, 1.0f, 0.0f);
-			glColor3f(0.0f, 0.0f, 1.0f);
-			glVertex3f(-1.0f, -1.0f, -1.0f);
-			glColor3f(0.0f, 1.0f, 0.0f); 
-			glVertex3f(-1.0f, -1.0f, 1.0f);
-		glEnd();
-
-	glEndList();
-
-	return dlID;
-}
-
 void SDLWindow::InitGL()
 {
 	glShadeModel(GL_SMOOTH);
@@ -205,5 +163,7 @@ void SDLWindow::Init()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	
-	this->dlID = LoadLevel("E1M1.map");
+	Level mainLevel;
+
+	this->dlID = mainLevel.LoadLevel("E1M1.map");
 }
