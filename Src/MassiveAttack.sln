@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassiveAttack.Windows.Front
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MassiveAttack.Windows.Client", "MassiveAttack.Windows.Client\MassiveAttack.Windows.Client.vcxproj", "{8BED1972-A5F4-4E76-9BC3-3E6CA32E6A8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassiveAttack.Windows.Editr", "MassiveAttack.Windows.Editr\MassiveAttack.Windows.Editr.csproj", "{0EC0AF5D-A723-480D-8544-F2864557EEA7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassiveAttack.Windows.Editor", "MassiveAttack.Windows.Editor\MassiveAttack.Windows.Editor.csproj", "{0EC0AF5D-A723-480D-8544-F2864557EEA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
