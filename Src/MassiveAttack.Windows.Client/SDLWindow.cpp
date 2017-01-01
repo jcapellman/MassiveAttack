@@ -1,22 +1,9 @@
 #include "SDLWindow.h"
-
-void SDLWindow::InitGL()
-{
-	glShadeModel(GL_SMOOTH);
-	glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
-	glClearDepth(1.0f);
-	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LEQUAL);
-	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-
-	lookupdown = 0.0f;
-	walkbias = 0.0f;
-	walkbiasangle = 0.0f;
-}
+#include "OGL11Renderer.h"
 
 void SDLWindow::Quit()
 {
-	glDeleteLists(this->dlID, 1);
+	_gfxRenderer->Shutdown();
 
 	SDL_Quit();
 
@@ -90,30 +77,16 @@ void SDLWindow::MainLoop()
 
 void SDLWindow::Render()
 {
-	static GLint T0 = 0;
-	static GLint Frames = 0;
+	static int T0 = 0;
+	static int Frames = 0;
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glLoadIdentity();
-
-	GLfloat xtrans = -xpos;
-	GLfloat ztrans = -zpos;
-	GLfloat ytrans = -walkbias - 0.25f;
-	GLfloat sceneroty = 0 - yrot;
-
-//	glRotatef(lookupdown, 1.0f, 0, 0);
-	glRotatef(sceneroty, 0, 1.0f, 0);
-
-	glTranslatef(xtrans, 0.0f, ztrans);
-
-	glCallList(dlID);
+	_gfxRenderer->Render(xpos, zpos, walkbias, yrot);
 
 	SDL_GL_SwapBuffers();
 
 	Frames++;
 	{
-		GLint t = SDL_GetTicks();
+		int t = SDL_GetTicks();
 
 		if (t - T0 >= 300) {
 			double seconds = (t - T0) / 1000.0;
@@ -151,23 +124,13 @@ void SDLWindow::Init()
 
 	SDL_WM_ToggleFullScreen(surface);
 
-	InitGL();
+	_gfxRenderer = new OGL11Renderer;
 
-	glViewport(0, 0, width, height);
+	_gfxRenderer->Init(width, height);
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
+	_gfxRenderer->LoadGeometry("E1M1.map");
 
-	gluPerspective(45.0f, (GLfloat)width / (GLfloat)height, 0.1f, 100.0f);
-
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	
-	Level mainLevel;
-
-	ReturnSet<GLuint> levelResult = mainLevel.LoadLevel("E1M1.map");
-
-	if (!levelResult.HasError()) {
-		this->dlID = levelResult.ReturnValue;
-	}
+	lookupdown = 0.0f;
+	walkbias = 0.0f;
+	walkbiasangle = 0.0f;
 }

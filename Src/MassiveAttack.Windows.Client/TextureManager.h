@@ -7,7 +7,7 @@
 class TextureManager
 {
 public:
-	ReturnSet<int> LoadTexture(char * fileName);
+	ReturnSet<SDL_Surface*> LoadTexture(char * fileName);
 };
 
 #endif

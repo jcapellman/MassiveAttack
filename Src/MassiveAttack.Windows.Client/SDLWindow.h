@@ -4,6 +4,7 @@
 #include "Main.h"
 #include "TextureManager.h"
 #include "Level.h"
+#include "IGfxRenderer.h"
 
 class SDLWindow
 {
@@ -22,16 +23,15 @@ public:
 		this->yrot = 0.0f;
 	}
 private:
+	IGfxRenderer * _gfxRenderer;
+
 	void handle_key_down(SDL_keysym* keysym);
 	void process_events(void);
 
-	void InitGL();
 	void Render();
 	void Quit();
 
 	SDL_Surface *surface;
-
-	GLuint dlID;
 
 	int width;
 	int height;
@@ -44,11 +44,11 @@ private:
 	float xpos;
 	float zpos;
 
-	GLfloat	yrot;
-	GLfloat walkbias = 0;
-	GLfloat walkbiasangle = 0;
-	GLfloat lookupdown = 0.0f;
-	GLfloat	z = 0.0f;
+	float	yrot;
+	float walkbias = 0;
+	float walkbiasangle = 0;
+	float lookupdown = 0.0f;
+	float	z = 0.0f;
 };
 
 #endif

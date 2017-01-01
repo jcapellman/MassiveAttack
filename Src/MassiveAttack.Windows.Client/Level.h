@@ -6,7 +6,7 @@
 
 class Level {
 	public:
-		ReturnSet<GLuint> LoadLevel(char * fileName);
+		ReturnSet<bool> LoadLevel(char * fileName);
 };
 
 #endif

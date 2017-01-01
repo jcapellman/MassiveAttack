@@ -1,24 +1,19 @@
 #include "TextureManager.h"
 
-ReturnSet<int> TextureManager::LoadTexture(char * fileName)
+ReturnSet<SDL_Surface*> TextureManager::LoadTexture(char * fileName)
 {
-	GLuint textureID;
+	try {
+		SDL_Surface * texture;
 
-	SDL_Surface * texture;
+		texture = SDL_LoadBMP(fileName);
 
-	texture = SDL_LoadBMP(fileName);
-	
-	if (texture == nullptr) {
-		return ReturnSet<int>(-1, strcat(fileName, " could not be opened"));
+		if (texture == nullptr) {
+			throw strcat(fileName, " could not be opened");
+		}
+
+		return ReturnSet<SDL_Surface*>(texture);
 	}
-
-	glGenTextures(1, &textureID);
-
-	glBindTexture(GL_TEXTURE_2D, textureID);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, texture->w, texture->h, 0, GL_RGB, GL_UNSIGNED_BYTE, texture->pixels);
-
-	SDL_FreeSurface(texture);
-
-	return textureID;
+	catch (exception ex) {
+		return ReturnSet<SDL_Surface*>(ex);
+	}
 }

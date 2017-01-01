@@ -6,14 +6,21 @@ class ReturnSet {
 public:
 	T ReturnValue;
 
-	string ExceptionString;
+	string ExceptionString() {
+		return _exception.what();
+	}
 
 	bool HasError() {
-		return !ExceptionString.empty();
+		return this->_exception.what() == NULL;
 	}
 
-	ReturnSet(T objectValue, string exceptionString = "") {
-		ReturnValue = objectValue;
-		ExceptionString = exceptionString;
+	ReturnSet(exception exception) {
+		_exception = exception;
 	}
+
+	ReturnSet(T objectValue) {
+		ReturnValue = objectValue;
+	}
+private:
+	exception _exception;
 };
