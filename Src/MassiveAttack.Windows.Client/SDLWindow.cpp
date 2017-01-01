@@ -116,8 +116,8 @@ void SDLWindow::Render()
 		GLint t = SDL_GetTicks();
 
 		if (t - T0 >= 300) {
-			GLfloat seconds = (t - T0) / 1000.0;
-			GLfloat fps = Frames / seconds;
+			double seconds = (t - T0) / 1000.0;
+			double fps = Frames / seconds;
 
 			string caption;
 

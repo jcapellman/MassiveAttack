@@ -1,5 +1,5 @@
-#include <SDL/SDL.h>
-#include <SDL/SDL_Image.h>
+#include "SDL/SDL.h"
+#include "SDL/SDL_Image.h"
 #include <windows.h>
 #include <gl\gl.h>
 #include <gl\glu.h>

@@ -126,6 +126,7 @@
   <ItemGroup>
     <ClInclude Include="Level.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="ReturnSet.h" />
     <ClInclude Include="SDLWindow.h" />
     <ClInclude Include="TextureManager.h" />
   </ItemGroup>

@@ -7,7 +7,11 @@ int TextureManager::LoadTexture(char * fileName)
 	SDL_Surface * texture;
 
 	texture = SDL_LoadBMP(fileName);
-		
+	
+	if (texture == nullptr) {
+		return -1;
+	}
+
 	glGenTextures(1, &textureID);
 
 	glBindTexture(GL_TEXTURE_2D, textureID);
