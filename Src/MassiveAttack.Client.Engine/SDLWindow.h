@@ -4,7 +4,7 @@
 #include "Main.h"
 #include "TextureManager.h"
 #include "Level.h"
-#include "IGfxRenderer.h"
+#include "GfxRenderers/IGfxRenderer.h"
 
 class SDLWindow
 {

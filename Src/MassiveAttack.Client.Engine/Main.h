@@ -13,5 +13,4 @@
 #pragma comment(lib, "legacy_stdio_definitions.lib")
 #pragma comment(lib, "SDL_image.lib")
 
-
 using namespace std;

@@ -19,9 +19,10 @@ public:
 	ReturnSet<bool> Init(int width, int height);
 	void Render(float xpos, float zpos, float walkbias, float yrot);
 	ReturnSet<bool> LoadGeometry(char * fileName);
+	ReturnSet<int> LoadTexture(SDL_Surface * surface);
 	ReturnSet<bool> Shutdown();
 private:
-	ReturnSet<int> LoadTexture(SDL_Surface * surface);
+	
 
 	GLuint dlID;
 };

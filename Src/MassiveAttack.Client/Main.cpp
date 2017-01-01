@@ -1,5 +1,5 @@
-#include "Main.h"
-#include "SDLWindow.h"
+#include "../MassiveAttack.Client.Engine/Main.h"
+#include "../MassiveAttack.Client.Engine/SDLWindow.h"
 
 int main(int argc, char *argv[])
 {

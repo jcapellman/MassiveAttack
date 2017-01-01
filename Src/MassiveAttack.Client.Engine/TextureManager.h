@@ -2,7 +2,7 @@
 #define __TEXTUREMANAGER__
 
 #include "Main.h"
-#include "ReturnSet.h"
+#include "Common/ReturnSet.h"
 
 class TextureManager
 {

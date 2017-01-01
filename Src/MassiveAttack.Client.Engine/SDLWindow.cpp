@@ -1,5 +1,5 @@
 #include "SDLWindow.h"
-#include "OGL11Renderer.h"
+#include "GfxRenderers/OGL11Renderer.h"
 
 void SDLWindow::Quit()
 {
@@ -127,6 +127,12 @@ void SDLWindow::Init()
 	_gfxRenderer = new OGL11Renderer;
 
 	_gfxRenderer->Init(width, height);
+
+	ReturnSet<SDL_Surface*> floor = textureManager.LoadTexture("floor.jpg");
+
+	if (!floor.HasError()) {
+		_gfxRenderer->LoadTexture(floor.ReturnValue);
+	}
 
 	_gfxRenderer->LoadGeometry("E1M1.map");
 

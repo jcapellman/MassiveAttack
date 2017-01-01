@@ -1,5 +1,5 @@
 #pragma once
-#include "Main.h"
+#include "../Main.h"
 
 template <class T> 
 class ReturnSet {

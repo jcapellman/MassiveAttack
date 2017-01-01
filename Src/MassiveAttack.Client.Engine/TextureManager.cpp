@@ -3,12 +3,10 @@
 ReturnSet<SDL_Surface*> TextureManager::LoadTexture(char * fileName)
 {
 	try {
-		SDL_Surface * texture;
+		SDL_Surface * texture = IMG_Load(fileName);
 
-		texture = SDL_LoadBMP(fileName);
-
-		if (texture == nullptr) {
-			throw strcat(fileName, " could not be opened");
+		if (!texture) {
+			throw SDL_GetError();
 		}
 
 		return ReturnSet<SDL_Surface*>(texture);
