@@ -1,6 +1,6 @@
 #include "Level.h"
 
-GLuint Level::LoadLevel(char* fileName)
+ReturnSet<GLuint> Level::LoadLevel(char* fileName)
 {
 	GLuint dlID = glGenLists(1);
 
@@ -75,5 +75,7 @@ GLuint Level::LoadLevel(char* fileName)
 
 	glEndList();
 
-	return dlID;
+	ReturnSet<GLuint> response(dlID);
+
+	return response;
 }

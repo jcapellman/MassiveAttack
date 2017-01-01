@@ -2,10 +2,11 @@
 #define __LEVEL__
 
 #include "Main.h"
+#include "ReturnSet.h"
 
 class Level {
 	public:
-		GLuint LoadLevel(char * fileName);
+		ReturnSet<GLuint> LoadLevel(char * fileName);
 };
 
 #endif

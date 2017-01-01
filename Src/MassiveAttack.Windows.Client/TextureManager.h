@@ -2,11 +2,12 @@
 #define __TEXTUREMANAGER__
 
 #include "Main.h"
+#include "ReturnSet.h"
 
 class TextureManager
 {
 public:
-	int LoadTexture(char * fileName);
+	ReturnSet<int> LoadTexture(char * fileName);
 };
 
 #endif

@@ -165,5 +165,9 @@ void SDLWindow::Init()
 	
 	Level mainLevel;
 
-	this->dlID = mainLevel.LoadLevel("E1M1.map");
+	ReturnSet<GLuint> levelResult = mainLevel.LoadLevel("E1M1.map");
+
+	if (!levelResult.HasError()) {
+		this->dlID = levelResult.ReturnValue;
+	}
 }

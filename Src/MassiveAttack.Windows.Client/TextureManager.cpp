@@ -1,6 +1,6 @@
 #include "TextureManager.h"
 
-int TextureManager::LoadTexture(char * fileName)
+ReturnSet<int> TextureManager::LoadTexture(char * fileName)
 {
 	GLuint textureID;
 
@@ -9,7 +9,7 @@ int TextureManager::LoadTexture(char * fileName)
 	texture = SDL_LoadBMP(fileName);
 	
 	if (texture == nullptr) {
-		return -1;
+		return ReturnSet<int>(-1, strcat(fileName, " could not be opened"));
 	}
 
 	glGenTextures(1, &textureID);
