@@ -1,3 +1,5 @@
+#pragma once
+
 #ifdef MASSIVEATTACKENGINE_EXPORTS  
 #define MASSIVEATTACKENGINE_API __declspec(dllexport)   
 #else  
@@ -10,5 +12,7 @@ namespace MassiveAttackClientEngine
 	{
 	public:
 		static MASSIVEATTACKENGINE_API void RunEngine();
+
+		static MASSIVEATTACKENGINE_API const char * GetAvailableGfxRenderers();
 	};
 }

@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading.Tasks;
 
 using MassiveAttack.Common.Library.Enums;
 using MassiveAttack.Common.Library.Objects.Common;
 using MassiveAttack.Common.Library.Objects.WebAPI.Settings;
 using MassiveAttack.Common.Library.WebAPIHandlers;
-
-using Vulkan;
 
 namespace MassiveAttack.Windows.Frontend.ViewModels
 {
@@ -27,26 +27,26 @@ namespace MassiveAttack.Windows.Frontend.ViewModels
             }
         }
 
-        private ObservableCollection<PhysicalDeviceProperties> _devices;
+        private ObservableCollection<string> _renderers;
 
-        public ObservableCollection<PhysicalDeviceProperties> Devices
+        public ObservableCollection<string> Renderers
         {
-            get { return _devices; }
+            get { return _renderers; }
             set
             {
-                _devices = value;
+                _renderers = value;
                 OnPropertyChanged();
             }
         }
 
-        private PhysicalDeviceProperties _selectedDevice;
+        private string _selectedRenderer;
 
-        public PhysicalDeviceProperties SelectedDevice
+        public string SelectedRenderer
         {
-            get { return _selectedDevice; }
+            get { return _selectedRenderer; }
             set
             {
-                _selectedDevice = value;
+                _selectedRenderer = value;
                 OnPropertyChanged();
             }
         }
@@ -86,6 +86,21 @@ namespace MassiveAttack.Windows.Frontend.ViewModels
             };
         }
 
+        [DllImport("MassiveAttack.Client.Engine.dll")]
+        public static extern IntPtr GetAvailableGfxRenderers();
+
+        public static List<string> intPtrToListString(IntPtr[] pointers)
+        {
+            var list = new List<string>();
+
+            foreach (var pointer in pointers)
+            {
+                list.Add(Marshal.PtrToStringAnsi(pointer));
+            }
+
+            return list;
+        }
+
         public async void InitializeSettings()
         {
             var settingsHandler = new SettingsHandler(App.HandlerWrapper);
@@ -97,25 +112,13 @@ namespace MassiveAttack.Windows.Frontend.ViewModels
                 Settings = result.ObjectValue.SettingItem;
             }
 
-            Devices = new ObservableCollection<PhysicalDeviceProperties>();
+                var temp = GetAvailableGfxRenderers();
 
-            var devices = new ObservableCollection<PhysicalDevice>(App.instance.EnumeratePhysicalDevices());
-
-            foreach (var device in devices)
+            Renderers = new ObservableCollection<string>();
+            
+            if (SelectedRenderer == null)
             {
-                var props = device.GetProperties();
-
-                if (props.DeviceId == Settings.DeviceID)
-                {
-                    SelectedDevice = props;
-                }
-
-                Devices.Add(props);
-            }
-
-            if (SelectedDevice == null)
-            {
-                SelectedDevice = Devices.FirstOrDefault();
+                SelectedRenderer = Renderers.FirstOrDefault();
             }
 
             TextureDetails = Enum.GetNames(typeof (TEXTURE_DETAIL)).ToList();

@@ -3,18 +3,10 @@ using System.Windows.Controls;
 
 using MassiveAttack.Windows.Frontend.Objects;
 
-using Vulkan;
-
 namespace MassiveAttack.Windows.Frontend {
     public partial class MainWindow : BaseWindow {
         public MainWindow() {
             InitializeComponent();
-
-            var hWnd = new System.Windows.Interop.WindowInteropHelper(this).EnsureHandle();
-
-            var hInstance = System.Runtime.InteropServices.Marshal.GetHINSTANCE(typeof(App).Module);
-
-            App.instance = new Instance(new InstanceCreateInfo { EnabledExtensionNames = new string[] { "VK_KHR_surface", "VK_KHR_win32_surface" } });
         }
 
         private void lvMain_SelectionChanged(object sender, SelectionChangedEventArgs e)

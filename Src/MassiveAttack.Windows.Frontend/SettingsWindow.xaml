@@ -29,11 +29,11 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             
-            <TextBlock Grid.Row="0" Text="SELECTED DEVICE" Foreground="White" />
-            <ComboBox Grid.Row="1" ItemsSource="{Binding Devices}" SelectedItem="{Binding SelectedDevice}" Style="{StaticResource VulkanDevices}">
+            <TextBlock Grid.Row="0" Text="SELECTED GFX RENDERER" Foreground="White" />
+            <ComboBox Grid.Row="1" ItemsSource="{Binding Renderers}" SelectedItem="{Binding SelectedRenderer}" Style="{StaticResource VulkanDevices}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding DeviceName}" />
+                        <TextBlock Text="{Binding}" />
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>

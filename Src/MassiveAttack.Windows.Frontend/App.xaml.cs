@@ -1,17 +1,12 @@
-﻿using System;
-using MassiveAttack.Common.Library.Enums;
+﻿using MassiveAttack.Common.Library.Enums;
 using MassiveAttack.Common.Library.Objects.Common;
-using MassiveAttack.Common.Library.PlatformAbstractions.Objects;
-using MassiveAttack.Windows.Frontend.PlatformImplementations;
 
-using Vulkan;
+using MassiveAttack.Windows.Frontend.PlatformImplementations;
 
 namespace MassiveAttack.Windows.Frontend
 {
     public partial class App
     {
-        public static Instance instance;
-
         public static NetworkCheck NetworkCheck { get; set; }
 
         public static HandlerConstructorItem HandlerWrapper { get; set; }
