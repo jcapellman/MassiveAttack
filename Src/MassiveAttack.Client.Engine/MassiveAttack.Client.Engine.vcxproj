@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\ReturnSet.h" />
+    <ClInclude Include="Config\ConfigParser.h" />
     <ClInclude Include="GfxRenderers\IGfxRenderer.h" />
     <ClInclude Include="GfxRenderers\OGL11Renderer.h" />
     <ClInclude Include="Level.h" />
@@ -30,12 +31,11 @@
   <ItemGroup>
     <ClCompile Include="GfxRenderers\OGL11Renderer.cpp" />
     <ClCompile Include="Level.cpp" />
-    <ClCompile Include="MainExport.cpp" />
-    <ClCompile Include="MainExport.h" />
     <ClCompile Include="SDLWindow.cpp" />
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Config\ConfigParser.cpp" />
     <None Include="Source.def" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

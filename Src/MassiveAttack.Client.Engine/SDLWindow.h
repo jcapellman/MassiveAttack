@@ -26,6 +26,7 @@ private:
 	IGfxRenderer * _gfxRenderer;
 
 	void handle_key_down(SDL_keysym* keysym);
+	void handle_mouse_motion(SDL_MouseMotionEvent* motion);
 	void process_events(void);
 
 	void Render();
@@ -47,8 +48,11 @@ private:
 	float	yrot;
 	float walkbias = 0;
 	float walkbiasangle = 0;
-	float lookupdown = 0.0f;
+	float xrot = 0.0f;
 	float	z = 0.0f;
+
+	float _mouseX;
+	float _mouseY;
 };
 
 #endif

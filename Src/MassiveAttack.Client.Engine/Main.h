@@ -1,5 +1,7 @@
 #pragma once
 
+#define _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
+
 #include "SDL/SDL.h"
 #include "SDL/SDL_Image.h"
 #include <windows.h>
@@ -9,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
+#include <hash_set>
 
 #pragma comment(lib, "SDL.lib")
 #pragma comment(lib, "SDLMain.lib")

@@ -13,7 +13,7 @@ public:
 	virtual ReturnSet<bool> Shutdown() = 0;
 	virtual ReturnSet<bool> LoadGeometry(char * fileName) = 0;
 	virtual ReturnSet<int> LoadTexture(SDL_Surface * surface) = 0;
-	virtual void Render(float xpos, float zpos, float walkbias, float yrot) = 0;
+	virtual void Render(float xpos, float zpos, float walkbias, float yrot, float xrot) = 0;
 private:
 	
 };

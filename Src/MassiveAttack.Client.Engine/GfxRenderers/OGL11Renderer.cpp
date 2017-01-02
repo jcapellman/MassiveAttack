@@ -41,7 +41,7 @@ ReturnSet<bool> OGL11Renderer::Init(int width, int height) {
 	return ReturnSet<bool>(true);
 }
 
-void OGL11Renderer::Render(float xpos, float zpos, float walkbias, float yrot) {
+void OGL11Renderer::Render(float xpos, float zpos, float walkbias, float yrot, float xrot) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glLoadIdentity();
@@ -51,7 +51,7 @@ void OGL11Renderer::Render(float xpos, float zpos, float walkbias, float yrot) {
 	GLfloat ytrans = -walkbias - 0.25f;
 	GLfloat sceneroty = 0 - yrot;
 
-	//	glRotatef(lookupdown, 1.0f, 0, 0);
+	glRotatef(xrot, 1.0f, 0, 0);
 	glRotatef(sceneroty, 0, 1.0f, 0);
 
 	glTranslatef(xtrans, 0.0f, ztrans);

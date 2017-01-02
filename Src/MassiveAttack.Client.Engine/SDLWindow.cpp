@@ -22,7 +22,29 @@ void SDLWindow::handle_key_down(SDL_keysym* keysym)
 		case SDLK_LEFT:
 			yrot += 1.5f;
 			break;
-		case SDLK_UP:
+		case SDLK_a:
+			xpos -= (float)sin(yrot * piover180) * 10.5f;
+			zpos += (float)cos(yrot * piover180) * 0.5f;
+
+			if (walkbiasangle >= 359.0f)
+				walkbiasangle = 0.0f;
+			else
+				walkbiasangle += 10;
+
+			walkbias = (float)sin(walkbiasangle * piover180) / 20.0f;
+			break;
+		case SDLK_d:
+			xpos += (float)sin(yrot * piover180) * 10.5f;
+			zpos -= (float)cos(yrot * piover180) * 0.5f;
+
+			if (walkbiasangle >= 359.0f)
+				walkbiasangle = 0.0f;
+			else
+				walkbiasangle += 10;
+
+			walkbias = (float)sin(walkbiasangle * piover180) / 20.0f;
+			break;
+		case SDLK_w:
 			xpos -= (float)sin(yrot * piover180) * 0.5f;
 			zpos -= (float)cos(yrot * piover180) * 0.5f;
 
@@ -33,7 +55,7 @@ void SDLWindow::handle_key_down(SDL_keysym* keysym)
 
 			walkbias = (float)sin(walkbiasangle * piover180) / 20.0f;
 			break;
-		case SDLK_DOWN:
+		case SDLK_s:
 			xpos += (float)sin(yrot * piover180) * 0.5f;
 			zpos += (float)cos(yrot * piover180) * 0.5f;
 
@@ -49,15 +71,47 @@ void SDLWindow::handle_key_down(SDL_keysym* keysym)
 	}
 }
 
+void SDLWindow::handle_mouse_motion(SDL_MouseMotionEvent* motion)
+{
+	if (motion->x != this->_mouseX)
+	{
+		if (this->_mouseX > motion->x)
+		{
+			yrot += 0.5f;
+		} else
+		{
+			yrot -= 0.5f;
+		}
+
+		this->_mouseX = motion->x;
+	}
+
+	if (motion->y != this->_mouseY)
+	{
+		if (this->_mouseY > motion->y && xrot > -100)
+		{
+			xrot -= 0.5f;
+		}
+		else if (this->_mouseY < motion->y && xrot < 100)
+		{
+			xrot += 0.5f;
+		}
+
+		this->_mouseY = motion->y;
+	}
+}
+
 void SDLWindow::process_events(void)
 {
 	SDL_Event event;
 
 	while (SDL_PollEvent(&event)) {
-
 		switch (event.type) {
 		case SDL_KEYDOWN:
 			handle_key_down(&event.key.keysym);
+			break;
+		case SDL_MOUSEMOTION:
+			handle_mouse_motion(&event.motion);
 			break;
 		case SDL_QUIT:
 			Quit();
@@ -80,7 +134,7 @@ void SDLWindow::Render()
 	static int T0 = 0;
 	static int Frames = 0;
 
-	_gfxRenderer->Render(xpos, zpos, walkbias, yrot);
+	_gfxRenderer->Render(xpos, zpos, walkbias, yrot, xrot);
 
 	SDL_GL_SwapBuffers();
 
@@ -112,7 +166,6 @@ void SDLWindow::Init()
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
-
 	SDL_WM_SetCaption("Massive Attack", "Massive Attack");
 
 	info = SDL_GetVideoInfo();
@@ -128,15 +181,15 @@ void SDLWindow::Init()
 
 	_gfxRenderer->Init(width, height);
 
-	ReturnSet<SDL_Surface*> floor = textureManager.LoadTexture("floor.jpg");
+	/*ReturnSet<SDL_Surface*> floor = textureManager.LoadTexture("floor.jpg");
 
 	if (!floor.HasError()) {
 		_gfxRenderer->LoadTexture(floor.ReturnValue);
-	}
+	}*/
 
 	_gfxRenderer->LoadGeometry("E1M1.map");
 
-	lookupdown = 0.0f;
+	xrot = 0.0f;
 	walkbias = 0.0f;
 	walkbiasangle = 0.0f;
 }
