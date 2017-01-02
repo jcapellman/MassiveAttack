@@ -5,6 +5,8 @@ void SDLWindow::Quit()
 {
 	_gfxRenderer->Shutdown();
 
+	SDL_ShowCursor(1);
+
 	SDL_Quit();
 
 	exit(0);
@@ -99,6 +101,7 @@ void SDLWindow::handle_mouse_motion(SDL_MouseMotionEvent* motion)
 
 		this->_mouseY = motion->y;
 	}
+
 }
 
 void SDLWindow::process_events(void)
@@ -168,9 +171,12 @@ void SDLWindow::Init()
 	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 	SDL_WM_SetCaption("Massive Attack", "Massive Attack");
 
+	SDL_ShowCursor(0);
+
 	info = SDL_GetVideoInfo();
 
 	videoFlags = SDL_OPENGL;
+	videoFlags |= SDL_SWSURFACE;
 	videoFlags |= SDL_GL_DOUBLEBUFFER;
 
 	surface = SDL_SetVideoMode(this->width, this->height, info->vfmt->BitsPerPixel, videoFlags);
@@ -181,7 +187,7 @@ void SDLWindow::Init()
 
 	_gfxRenderer->Init(width, height);
 
-	/*ReturnSet<SDL_Surface*> floor = textureManager.LoadTexture("floor.jpg");
+	/*ReturnSet<SDL_Surface*> floor = textureManager.LoadTexture("wall.bmp");
 
 	if (!floor.HasError()) {
 		_gfxRenderer->LoadTexture(floor.ReturnValue);
