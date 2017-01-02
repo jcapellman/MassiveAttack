@@ -161,6 +161,17 @@ void SDLWindow::Render()
 	}
 }
 
+void SDLWindow::writeLog(const char * logMessage)
+{
+	ofstream file;
+
+	file.open("output.log");
+
+	file << logMessage << endl;
+
+	file.close();
+}
+
 void SDLWindow::Init()
 {
 	const SDL_VideoInfo* info = nullptr;
@@ -187,11 +198,14 @@ void SDLWindow::Init()
 
 	_gfxRenderer->Init(width, height);
 
-	/*ReturnSet<SDL_Surface*> floor = textureManager.LoadTexture("wall.bmp");
+	ReturnSet<SDL_Surface*> floor = textureManager.LoadTexture("wall.bmp");
 
 	if (!floor.HasError()) {
 		_gfxRenderer->LoadTexture(floor.ReturnValue);
-	}*/
+	} else
+	{
+		writeLog(floor.ExceptionString().c_str());
+	}
 
 	_gfxRenderer->LoadGeometry("E1M1.map");
 

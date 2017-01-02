@@ -1,12 +1,16 @@
 #include "OGL11Renderer.h"
 
 ReturnSet<int> OGL11Renderer::LoadTexture(SDL_Surface * surface) {
-	GLuint textureID;
-
 	glGenTextures(1, &textureID);
 
 	glBindTexture(GL_TEXTURE_2D, textureID);
 
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
+		GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+		GL_NEAREST);
 	glTexImage2D(GL_TEXTURE_2D, 0, 3, surface->w, surface->h, 0, GL_RGB, GL_UNSIGNED_BYTE, surface->pixels);
 
 	SDL_FreeSurface(surface);
@@ -96,40 +100,64 @@ ReturnSet<bool> OGL11Renderer::LoadGeometry(char * fileName) {
 	glVertex3f(-1.0f, -1.0f, 1.0f);
 	glEnd();
 
-	glBegin(GL_QUADS);
-	glColor3f(0.1f, 0.1f, 0.1f);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
+	glBindTexture(GL_TEXTURE_2D, this->textureID);
 
-	glVertex3f(100.0f, -1.0f, 100.0f);
-	glVertex3f(100.0f, -1.0f, 0.0f);
-	glVertex3f(0.0f, -1.0f, 0.0f);
-	glVertex3f(0.0f, -1.0f, 100.0f);
+	// Ground
+	glBegin(GL_QUADS);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(100.0f, -1.0f, 100.0f);
+
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(100.0f, -1.0f, 0.0f);
+
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(0.0f, -1.0f, 0.0f);
+
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(0.0f, -1.0f, 100.0f);
 	glEnd();
 
 	glBegin(GL_QUADS);
-	glColor3f(0.4f, 0.4f, 0.4f);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(100.0f, 5.0f, 100.0f);
 
-	glVertex3f(100.0f, 5.0f, 100.0f);
-	glVertex3f(100.0f, 5.0f, 0.0f);
-	glVertex3f(0.0f, 5.0f, 0.0f);
-	glVertex3f(0.0f, 5.0f, 100.0f);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(100.0f, 5.0f, 0.0f);
+
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(0.0f, 5.0f, 0.0f);
+
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(0.0f, 5.0f, 100.0f);
 	glEnd();
 
 	glBegin(GL_QUADS);
-	glColor3f(1.0f, 0.6f, 0.6f);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(100.0f, 5.0f, 100.0f);
 
-	glVertex3f(100.0f, 5.0f, 100.0f);
-	glVertex3f(100.0f, -1.0f, 100.0f);
-	glVertex3f(0.0f, -1.0f, 100.0f);
-	glVertex3f(0.0f, 5.0f, 100.0f);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(100.0f, -1.0f, 100.0f);
+
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(0.0f, -1.0f, 100.0f);
+
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(0.0f, 5.0f, 100.0f);
 	glEnd();
 
 	glBegin(GL_QUADS);
-	glColor3f(0.6f, 1.0f, 0.6f);
+		glTexCoord2f(0.0, 0.0);
+		glVertex3f(100.0f, 5.0f, 0.0f);
 
-	glVertex3f(100.0f, 5.0f, 0.0f);
-	glVertex3f(100.0f, -1.0f, 0.0f);
-	glVertex3f(0.0f, -1.0f, 0.0f);
-	glVertex3f(0.0f, 5.0f, 0.0f);
+		glTexCoord2f(0.0, 1.0);
+		glVertex3f(100.0f, -1.0f, 0.0f);
+	
+		glTexCoord2f(1.0, 1.0);
+		glVertex3f(0.0f, -1.0f, 0.0f);
+	
+		glTexCoord2f(1.0, 0.0);
+		glVertex3f(0.0f, 5.0f, 0.0f);
 	glEnd();
 
 	glEndList();

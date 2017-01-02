@@ -53,6 +53,8 @@ private:
 
 	float _mouseX;
 	float _mouseY;
+
+	static void writeLog(const char * logMessage);
 };
 
 #endif

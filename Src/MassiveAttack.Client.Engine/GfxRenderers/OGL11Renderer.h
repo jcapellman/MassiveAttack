@@ -22,7 +22,7 @@ public:
 	ReturnSet<int> LoadTexture(SDL_Surface * surface);
 	ReturnSet<bool> Shutdown();
 private:
-	
+	GLuint textureID;
 
 	GLuint dlID;
 };

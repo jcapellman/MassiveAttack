@@ -10,6 +10,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <fstream>
 #include <malloc.h>
 #include <hash_set>
 
