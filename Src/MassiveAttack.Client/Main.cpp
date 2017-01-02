@@ -1,13 +1,13 @@
 #include "../MassiveAttack.Client.Engine/Main.h"
-#include "../MassiveAttack.Client.Engine/SDLWindow.h"
+#include "../MassiveAttack.Client.Engine/MainExport.h"
+
+#pragma comment(lib, "../Debug/MassiveAttack.Client.Engine.lib")
 
 int main(int argc, char *argv[])
 {
-	SDLWindow sdlWindow;
+	MassiveAttackClientEngine::MainEngine engine;
 
-	sdlWindow.Init();
-
-	sdlWindow.MainLoop();
+	engine.RunEngine();
 
 	return 0;
 }

@@ -92,7 +92,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>MassiveAttack.Client.Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -142,11 +142,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MassiveAttack.Client.Engine\MassiveAttack.Client.Engine.vcxproj">
-      <Project>{b22de888-87f2-47f8-92f5-46049062de76}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
