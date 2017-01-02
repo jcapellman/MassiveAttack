@@ -87,7 +87,7 @@ namespace MassiveAttack.Windows.Frontend.ViewModels
         }
 
         [DllImport("MassiveAttack.Client.Engine.dll")]
-        public static extern IntPtr GetAvailableGfxRenderers();
+        public static extern string GetAvailableGfxRenderers();
 
         public static List<string> intPtrToListString(IntPtr[] pointers)
         {

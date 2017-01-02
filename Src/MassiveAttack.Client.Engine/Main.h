@@ -1,3 +1,5 @@
+#pragma once
+
 #include "SDL/SDL.h"
 #include "SDL/SDL_Image.h"
 #include <windows.h>

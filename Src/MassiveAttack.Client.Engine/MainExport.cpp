@@ -3,7 +3,7 @@
 
 #include "GfxRenderers/OGL11Renderer.h"
 
-MASSIVEATTACKENGINE_API void MassiveAttackClientEngine::MainEngine::RunEngine()
+void RunEngine()
 {
 	SDLWindow sdlWindow;
 
@@ -12,7 +12,7 @@ MASSIVEATTACKENGINE_API void MassiveAttackClientEngine::MainEngine::RunEngine()
 	sdlWindow.MainLoop();
 }
 
-MASSIVEATTACKENGINE_API const char * MassiveAttackClientEngine::MainEngine::GetAvailableGfxRenderers()
+const char * GetAvailableGfxRenderers()
 {
 	OGL11Renderer ogl11_renderer;
 
