@@ -176,7 +176,7 @@ void SDLWindow::Init()
 	info = SDL_GetVideoInfo();
 
 	videoFlags = SDL_OPENGL;
-	videoFlags |= SDL_SWSURFACE;
+	videoFlags |= SDL_HWSURFACE;
 	videoFlags |= SDL_GL_DOUBLEBUFFER;
 
 	surface = SDL_SetVideoMode(this->width, this->height, info->vfmt->BitsPerPixel, videoFlags);
