@@ -37,7 +37,6 @@ private:
 	int width;
 	int height;
 
-	TextureManager textureManager;
 	int textureID;
 
 	const float piover180 = 0.0174532925f;

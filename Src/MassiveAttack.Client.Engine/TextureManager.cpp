@@ -7,8 +7,6 @@ ReturnSet<SDL_Surface*> TextureManager::LoadTexture(char * fileName)
 		SDL_Surface * texture = SDL_LoadBMP(fileName);
 
 		if (texture == NULL) {
-			cout << SDL_GetError() << endl;
-
 			return ReturnSet<SDL_Surface*>(exception(SDL_GetError()));
 		}
 		
