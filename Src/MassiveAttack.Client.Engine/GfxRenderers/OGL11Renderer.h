@@ -10,6 +10,28 @@
 #pragma comment(lib, "OpenGL32.lib")
 #pragma comment(lib, "GLu32.lib")
 
+typedef struct LEVELGEOMETRY
+{
+	char FileName[255];
+	int Scale;
+
+	float X1;
+	float Y1;
+	float Z1;
+
+	float X2;
+	float Y2;
+	float Z2;
+
+	float X3;
+	float Y3;
+	float Z3;
+
+	float X4;
+	float Y4;
+	float Z4;
+};
+
 class OGL11Renderer : public IGfxRenderer {
 public:
 	string GetName() {
@@ -19,9 +41,10 @@ public:
 	ReturnSet<bool> Init(int width, int height);
 	void Render(float xpos, float zpos, float walkbias, float yrot, float xrot);
 	ReturnSet<bool> LoadGeometry(char * fileName);
-	ReturnSet<int> LoadTexture(char * fileName);
 	ReturnSet<bool> Shutdown();
 private:
+	ReturnSet<int> LoadTexture(const char * fileName);
+
 	GLuint dlID;
 };
 

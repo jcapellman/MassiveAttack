@@ -1,10 +1,11 @@
 #include "OGL11Renderer.h"
 #include "../TextureManager.h"
+#include <unordered_map>
 
-ReturnSet<int> OGL11Renderer::LoadTexture(char * fileName) {
+ReturnSet<int> OGL11Renderer::LoadTexture(const char * fileName) {
 	TextureManager tm;
 
-	ReturnSet<SDL_Surface*> result = tm.LoadTexture(fileName);
+	ReturnSet<SDL_Surface*> result = tm.LoadTexture(const_cast<char*>(fileName));
 
 	if (result.HasError())
 	{
@@ -21,6 +22,7 @@ ReturnSet<int> OGL11Renderer::LoadTexture(char * fileName) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	
 	glTexImage2D(GL_TEXTURE_2D, 0, 3, result.ReturnValue->w, result.ReturnValue->h, 0, GL_RGB, GL_UNSIGNED_BYTE, result.ReturnValue->pixels);
 
 	SDL_FreeSurface(result.ReturnValue);
@@ -75,77 +77,62 @@ void OGL11Renderer::Render(float xpos, float zpos, float walkbias, float yrot, f
 }
 
 ReturnSet<bool> OGL11Renderer::LoadGeometry(char * fileName) {
-	ReturnSet<int> floorResult = LoadTexture("floor.bmp");
-	ReturnSet<int> ceilingResult = LoadTexture("ceiling.bmp");
+	unordered_map<string, int> textures;
 
 	dlID = glGenLists(1);
 
 	glNewList(dlID, GL_COMPILE);
 
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
-	glBindTexture(GL_TEXTURE_2D, floorResult.ReturnValue);
 
-	// Ground
-	glBegin(GL_QUADS);
-		glTexCoord2f(0.0, 0.0);
-		glVertex3f(100.0f, -1.0f, 100.0f);
+	ifstream input_file(fileName, ios::binary);
+	LEVELGEOMETRY * level;
 
-		glTexCoord2f(0.0, 20.0);
-		glVertex3f(100.0f, -1.0f, 0.0f);
+	int size = 0;
 
-		glTexCoord2f(20, 20);
-		glVertex3f(0.0f, -1.0f, 0.0f);
+	input_file.read((char*)&size, sizeof(size));
 
-		glTexCoord2f(20, 0.0);
-		glVertex3f(0.0f, -1.0f, 100.0f);
-	glEnd();
+	level = new LEVELGEOMETRY[size];
 
-	glBindTexture(GL_TEXTURE_2D, ceilingResult.ReturnValue);
+	input_file.read((char*)&level, sizeof(level) * size);
 
-	// Roof
-	glBegin(GL_QUADS);
-		glTexCoord2f(0.0, 0.0);
-		glVertex3f(100.0f, 5.0f, 100.0f);
+	int textureID;
+	ifstream map(fileName);
 
-		glTexCoord2f(0.0, 5.0);
-		glVertex3f(100.0f, 5.0f, 0.0f);
+	for (int x = 0; x < size; x++)
+	{
+		if (!textures.count(level[x].FileName))
+		{
+			ReturnSet<int> textureResult = LoadTexture(level[x].FileName);
 
-		glTexCoord2f(5.0, 5.0);
-		glVertex3f(0.0f, 5.0f, 0.0f);
-
-		glTexCoord2f(5.0, 0.0);
-		glVertex3f(0.0f, 5.0f, 100.0f);
-	glEnd();
-
-	// Front Wall
-	glBegin(GL_QUADS);
-		glTexCoord2f(0.0, 0.0);
-		glVertex3f(100.0f, 5.0f, 100.0f);
-
-		glTexCoord2f(0.0, 5.0);
-		glVertex3f(100.0f, -1.0f, 100.0f);
-
-		glTexCoord2f(5.0, 5.0);
-		glVertex3f(0.0f, -1.0f, 100.0f);
-
-		glTexCoord2f(.0, 0.0);
-		glVertex3f(0.0f, 5.0f, 100.0f);
-	glEnd();
-
-	// Back Wall
-	glBegin(GL_QUADS);
-		glTexCoord2f(0.0, 0.0);
-		glVertex3f(100.0f, 5.0f, 0.0f);
-
-		glTexCoord2f(0.0, 5.0);
-		glVertex3f(100.0f, -1.0f, 0.0f);
+			if (!textureResult.HasError())
+			{
+				textureID = textureResult.ReturnValue;
+				textures.emplace(level[x].FileName, textureID);
+			}
+		}
+		else
+		{
+			textureID = textures[level[x].FileName];
+		}
 	
-		glTexCoord2f(5.0, 5.0);
-		glVertex3f(0.0f, -1.0f, 0.0f);
-	
-		glTexCoord2f(5.0, 0.0);
-		glVertex3f(0.0f, 5.0f, 0.0f);
-	glEnd();
+		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
+		glBindTexture(GL_TEXTURE_2D, textureID);
+
+		glBegin(GL_QUADS);
+			glTexCoord2i(0, 0);
+			glVertex3f(level[x].X1, level[x].Y1, level[x].Z1);
+
+			glTexCoord2i(0, level[x].Scale);
+			glVertex3f(level[x].X2, level[x].Y2, level[x].Z2);
+
+			glTexCoord2i(level[x].Scale, level[x].Scale);
+			glVertex3f(level[x].X3, level[x].Y3, level[x].Z3);
+
+			glTexCoord2i(level[x].Scale, 0);
+			glVertex3f(level[x].X4, level[x].Y4, level[x].Z4);
+		glEnd();
+	}
 
 	glEndList();
 
