@@ -11,7 +11,7 @@ namespace MassiveAttack.Windows.Editor
     {
         struct LEVELGEOMETRY
         {
-            public string FileName { get; set; }
+            public int TextureID { get; set; }
 
             public int Scale { get; set; }
 
@@ -48,7 +48,7 @@ namespace MassiveAttack.Windows.Editor
 
             var tItem = new LEVELGEOMETRY
             {
-                FileName = "floor.bmp".PadRight(255, ' '),
+                TextureID = 1,
                 Scale = 20,
                 X1 = 100,
                 Y1 = -1,
@@ -68,7 +68,7 @@ namespace MassiveAttack.Windows.Editor
 
             tItem = new LEVELGEOMETRY
             {
-                FileName = "ceiling.bmp".PadRight(255, ' '),
+                TextureID = 2,
                 Scale = 5,
                 X1 = 100,
                 Y1 = 5,
@@ -88,7 +88,7 @@ namespace MassiveAttack.Windows.Editor
 
             tItem = new LEVELGEOMETRY
             {
-                FileName = "wall.bmp".PadRight(255, ' '),
+                TextureID = 3,
                 Scale = 5,
                 X1 = 100,
                 Y1 = 5,
@@ -108,7 +108,7 @@ namespace MassiveAttack.Windows.Editor
 
             tItem = new LEVELGEOMETRY
             {
-                FileName = "wall2.bmp".PadRight(255, ' '),
+                TextureID = 4,
                 Scale = 5,
                 X1 = 100,
                 Y1 = 5,
@@ -134,7 +134,7 @@ namespace MassiveAttack.Windows.Editor
 
                     foreach (var item in arrList)
                     {
-                        bw.Write(item.FileName);
+                        bw.Write(item.TextureID);
                         bw.Write(item.Scale);
 
                         bw.Write(item.X1);
