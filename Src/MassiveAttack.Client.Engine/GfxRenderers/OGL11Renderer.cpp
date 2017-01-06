@@ -30,6 +30,21 @@ ReturnSet<int> OGL11Renderer::LoadTexture(const char * fileName) {
 	return ReturnSet<int>(textureID);
 }
 
+void OGL11Renderer::LoadTextureDefinitions()
+{
+	ifstream textureDefFile("texture.db");
+
+	string fileName;
+	int id;
+
+	while (textureDefFile >> id >> fileName)
+	{
+		_textureDB.emplace(id, fileName);
+	}
+
+	textureDefFile.close();
+}
+
 ReturnSet<bool> OGL11Renderer::Shutdown() {
 	glDeleteLists(this->dlID, 1);
 
@@ -77,7 +92,9 @@ void OGL11Renderer::Render(float xpos, float zpos, float walkbias, float yrot, f
 }
 
 ReturnSet<bool> OGL11Renderer::LoadGeometry(char * fileName) {
-	unordered_map<string, int> textures;
+	LoadTextureDefinitions();
+
+	unordered_map<int, int> textures;
 
 	dlID = glGenLists(1);
 
@@ -101,19 +118,22 @@ ReturnSet<bool> OGL11Renderer::LoadGeometry(char * fileName) {
 
 	for (int x = 0; x < size; x++)
 	{
-		if (!textures.count(level[x].FileName))
+
+		if (!textures.count(level[x].textureID))
 		{
-			ReturnSet<int> textureResult = LoadTexture(level[x].FileName);
+			string fileName = _textureDB[level[x].textureID];
+
+			ReturnSet<int> textureResult = LoadTexture(fileName.c_str());
 
 			if (!textureResult.HasError())
 			{
 				textureID = textureResult.ReturnValue;
-				textures.emplace(level[x].FileName, textureID);
+				textures.emplace(level[x].textureID, textureID);
 			}
 		}
 		else
 		{
-			textureID = textures[level[x].FileName];
+			textureID = textures[level[x].textureID];
 		}
 	
 		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
