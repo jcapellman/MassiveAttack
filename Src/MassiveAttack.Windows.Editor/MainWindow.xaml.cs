@@ -128,33 +128,18 @@ namespace MassiveAttack.Windows.Editor
 
             using (var fs = File.Open("E1M1.map", FileMode.Create))
             {
-                using (var bw = new BinaryWriter(fs))
+                using (var sw = new StreamWriter(fs))
                 {
-                    bw.Write(arrList.Count);
+                    sw.WriteLine(arrList.Count);
 
                     foreach (var item in arrList)
                     {
-                        bw.Write(item.TextureID);
-                        bw.Write(item.Scale);
-
-                        bw.Write(item.X1);
-                        bw.Write(item.Y1);
-                        bw.Write(item.Z1);
-
-                        bw.Write(item.X2);
-                        bw.Write(item.Y2);
-                        bw.Write(item.Z2);
-
-                        bw.Write(item.X3);
-                        bw.Write(item.Y3);
-                        bw.Write(item.Z3);
-
-                        bw.Write(item.X4);
-                        bw.Write(item.Y4);
-                        bw.Write(item.Z4);
+                        sw.WriteLine($"{item.TextureID} {item.Scale} {item.X1} {item.Y1} {item.Z1} {item.X2} {item.Y2} {item.Z2} {item.X3} {item.Y3} {item.Z3} {item.X4} {item.Y4} {item.Z4}");
                     }
                 }
             }
+
+            Application.Current.Shutdown();
         }
     }
 }

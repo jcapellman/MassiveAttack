@@ -23,7 +23,7 @@ ReturnSet<int> OGL11Renderer::LoadTexture(const char * fileName) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, result.ReturnValue->w, result.ReturnValue->h, 0, GL_RGB, GL_UNSIGNED_BYTE, result.ReturnValue->pixels);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, result.ReturnValue->w, result.ReturnValue->h, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, result.ReturnValue->pixels);
 
 	SDL_FreeSurface(result.ReturnValue);
 
@@ -53,7 +53,7 @@ ReturnSet<bool> OGL11Renderer::Shutdown() {
 
 ReturnSet<bool> OGL11Renderer::Init(int width, int height) {
 	glShadeModel(GL_SMOOTH);
-	glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClearDepth(1.0f);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_DEPTH_TEST);
@@ -100,25 +100,31 @@ ReturnSet<bool> OGL11Renderer::LoadGeometry(char * fileName) {
 
 	glNewList(dlID, GL_COMPILE);
 
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
 
-	ifstream input_file(fileName, ios::binary);
+	ifstream input_file(fileName);
 	LEVELGEOMETRY * level;
+	string line;
 
-	int size = 0;
+	input_file >> line;
 
-	input_file.read((char*)&size, sizeof(size));
+	level = new LEVELGEOMETRY[atoi(line.c_str())];
+	int idx = 0;
 
-	level = new LEVELGEOMETRY[size];
+	while (!input_file.eof())
+	{
+		input_file >> level[idx].textureID >> level[idx].Scale >> level[idx].X1 >> level[idx].Y1 >> level[idx].Z1 >> level[idx].X2 >> level[idx].Y2 >> level[idx].Z2 >> level[idx].X3 >> level[idx].Y3 >> level[idx].Z3 >> level[idx].X4 >> level[idx].Y4 >> level[idx].Z4;
 
-	input_file.read((char*)&level, sizeof(level) * size);
-
+		idx++;
+	}
+	
 	int textureID;
 	ifstream map(fileName);
 
-	for (int x = 0; x < size; x++)
+	for (int x = 0; x < sizeof(level); x++)
 	{
-
 		if (!textures.count(level[x].textureID))
 		{
 			string fileName = _textureDB[level[x].textureID];
