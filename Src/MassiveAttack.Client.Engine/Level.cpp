@@ -2,7 +2,13 @@
 
 ReturnSet<LEVELGEOMETRY*> Level::LoadLevel(char* fileName)
 {
-	ifstream input_file(fileName);
+	char fullFileName[255];
+
+	strcpy(fullFileName, MAPS_ROOT_PATH.c_str());
+	strcat(fullFileName, fileName);
+
+	ifstream input_file(fullFileName);
+
 	LEVELGEOMETRY * level;
 	string line;
 

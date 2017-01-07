@@ -14,6 +14,7 @@
 #include <sstream>
 #include <malloc.h>
 #include <hash_set>
+#include <unordered_map>
 
 #pragma comment(lib, "SDL.lib")
 #pragma comment(lib, "SDLMain.lib")
@@ -21,3 +22,7 @@
 #pragma comment(lib, "SDL_image.lib")
 
 using namespace std;
+
+const string TEXTURES_ROOT_PATH = "base/textures/";
+const string MAPS_ROOT_PATH = "base/maps/";
+const string SOUNDS_ROOT_PATH = "base/sounds/";

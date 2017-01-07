@@ -6,7 +6,6 @@
 #include "IGfxRenderer.h"
 #include <gl\gl.h>
 #include <gl\glu.h>
-#include <unordered_map>
 
 #pragma comment(lib, "OpenGL32.lib")
 #pragma comment(lib, "GLu32.lib")
@@ -24,7 +23,7 @@ public:
 	ReturnSet<bool> LoadGeometry(LEVELGEOMETRY * level);
 	ReturnSet<bool> Shutdown();
 private:
-	ReturnSet<int> LoadTexture(const char * fileName);
+	ReturnSet<int> LoadTexture(string fileName);
 	void LoadTextureDefinitions();
 
 	GLuint dlID;

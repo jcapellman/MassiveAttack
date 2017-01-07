@@ -11,16 +11,19 @@ public:
 	}
 
 	bool HasError() {
-		return this->_exception.what() == NULL;
+		return _hasError;
 	}
 
 	ReturnSet(exception exception) {
 		_exception = exception;
+		_hasError = true;
 	}
 
 	ReturnSet(T objectValue) {
 		ReturnValue = objectValue;
+		_hasError = false;
 	}
 private:
 	exception _exception;
+	bool _hasError;
 };

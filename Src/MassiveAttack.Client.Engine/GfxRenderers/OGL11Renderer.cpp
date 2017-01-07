@@ -1,11 +1,12 @@
 #include "OGL11Renderer.h"
 #include "../TextureManager.h"
-#include <unordered_map>
 
-ReturnSet<int> OGL11Renderer::LoadTexture(const char * fileName) {
+ReturnSet<int> OGL11Renderer::LoadTexture(string fileName) {
 	TextureManager tm;
 
-	ReturnSet<SDL_Surface*> result = tm.LoadTexture(const_cast<char*>(fileName));
+	fileName = TEXTURES_ROOT_PATH + fileName;
+
+	ReturnSet<SDL_Surface*> result = tm.LoadTexture(const_cast<char*>(fileName.c_str()));
 
 	if (result.HasError())
 	{
@@ -32,7 +33,7 @@ ReturnSet<int> OGL11Renderer::LoadTexture(const char * fileName) {
 
 void OGL11Renderer::LoadTextureDefinitions()
 {
-	ifstream textureDefFile("texture.db");
+	ifstream textureDefFile("base/texture.db");
 
 	string fileName;
 	int id;
@@ -112,7 +113,7 @@ ReturnSet<bool> OGL11Renderer::LoadGeometry(LEVELGEOMETRY * level) {
 		{
 			string fileName = _textureDB[level[x].textureID];
 
-			ReturnSet<int> textureResult = LoadTexture(fileName.c_str());
+			ReturnSet<int> textureResult = LoadTexture(fileName);
 
 			if (!textureResult.HasError())
 			{
@@ -127,7 +128,7 @@ ReturnSet<bool> OGL11Renderer::LoadGeometry(LEVELGEOMETRY * level) {
 	
 		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
 		glBindTexture(GL_TEXTURE_2D, textureID);
-
+		glColor3f(1.0f, 1.0f, 1.0f);
 		glBegin(GL_QUADS);
 			glTexCoord2i(0, 0);
 			glVertex3f(level[x].X1, level[x].Y1, level[x].Z1);

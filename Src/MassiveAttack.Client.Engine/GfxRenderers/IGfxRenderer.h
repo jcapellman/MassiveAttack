@@ -16,7 +16,7 @@ public:
 	virtual ReturnSet<bool> LoadGeometry(LEVELGEOMETRY * level) = 0;
 	virtual void Render(float xpos, float zpos, float walkbias, float yrot, float xrot) = 0;
 private:
-	virtual ReturnSet<int> LoadTexture(const char * fileName) = 0;
+	virtual ReturnSet<int> LoadTexture(string fileName) = 0;
 };
 
 #endif
