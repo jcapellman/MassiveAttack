@@ -6,6 +6,8 @@
 #include "../Main.h"
 #include "../Common/ReturnSet.h"
 
+struct LEVELGEOMETRY;
+
 class IGfxRenderer {
 public:
 	virtual string GetName() = 0;

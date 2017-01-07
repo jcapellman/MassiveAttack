@@ -105,8 +105,7 @@ ReturnSet<bool> OGL11Renderer::LoadGeometry(LEVELGEOMETRY * level) {
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
 
 	int textureID;
-	ifstream map(fileName);
-
+	
 	for (int x = 0; x < sizeof(level); x++)
 	{
 		if (!textures.count(level[x].textureID))

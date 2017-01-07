@@ -75,6 +75,7 @@ void SDLWindow::handle_key_down(SDL_keysym* keysym)
 
 void SDLWindow::handle_mouse_motion(SDL_MouseMotionEvent* motion)
 {
+
 	if (motion->x != this->_mouseX)
 	{
 		if (this->_mouseX > motion->x)
@@ -84,8 +85,6 @@ void SDLWindow::handle_mouse_motion(SDL_MouseMotionEvent* motion)
 		{
 			yrot -= 0.5f;
 		}
-
-		this->_mouseX = motion->x;
 	}
 
 	if (motion->y != this->_mouseY)
@@ -99,7 +98,7 @@ void SDLWindow::handle_mouse_motion(SDL_MouseMotionEvent* motion)
 			xrot += 0.5f;
 		}
 
-		this->_mouseY = motion->y;
+		
 	}
 
 }
@@ -110,6 +109,7 @@ void SDLWindow::process_events(void)
 
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
+		case SDL_KEYUP:
 		case SDL_KEYDOWN:
 			handle_key_down(&event.key.keysym);
 			break;
@@ -125,6 +125,7 @@ void SDLWindow::process_events(void)
 
 void SDLWindow::MainLoop()
 {
+
 	while (1) {
 		process_events();
 
@@ -202,7 +203,7 @@ void SDLWindow::Init()
 
 	ReturnSet<LEVELGEOMETRY*> levelResult = level.LoadLevel("E1M1.map");
 
-	if (levelResult.HasError) {
+	if (levelResult.HasError()) {
 		return;
 	}
 
