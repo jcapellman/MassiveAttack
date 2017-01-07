@@ -198,7 +198,15 @@ void SDLWindow::Init()
 
 	_gfxRenderer->Init(width, height);
 
-	_gfxRenderer->LoadGeometry("E1M1.map");
+	Level level;
+
+	ReturnSet<LEVELGEOMETRY*> levelResult = level.LoadLevel("E1M1.map");
+
+	if (levelResult.HasError) {
+		return;
+	}
+
+	_gfxRenderer->LoadGeometry(levelResult.ReturnValue);
 
 	xrot = 0.0f;
 	walkbias = 0.0f;
