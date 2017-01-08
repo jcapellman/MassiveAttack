@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using MassiveAttack.Windows.Editor.ViewModels;
 
 namespace MassiveAttack.Windows.Editor
 {
@@ -9,44 +10,17 @@ namespace MassiveAttack.Windows.Editor
     /// </summary>
     public partial class MainWindow : Window
     {
-        struct LEVELGEOMETRY
-        {
-            public int TextureID { get; set; }
-
-            public int Scale { get; set; }
-
-            public float X1 { get; set; }
-
-            public float X2 { get; set; }
-
-            public float X3 { get; set; }
-
-            public float X4 { get; set; }
-
-            public float Y1 { get; set; }
-
-            public float Y2 { get; set; }
-
-            public float Y3 { get; set; }
-
-            public float Y4 { get; set; }
-
-            public float Z1 { get; set; }
-
-            public float Z2 { get; set; }
-
-            public float Z3 { get; set; }
-
-            public float Z4 { get; set; }
-        }
+        private MainViewModel viewModel => (MainViewModel) DataContext;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            var arrList = new List<LEVELGEOMETRY>();
+            DataContext = new MainViewModel();
+            /*
+            var arrList = new List<MainViewModel.LEVELGEOMETRY>();
 
-            var tItem = new LEVELGEOMETRY
+            var tItem = new MainViewModel.LEVELGEOMETRY
             {
                 TextureID = 1,
                 Scale = 20,
@@ -66,7 +40,7 @@ namespace MassiveAttack.Windows.Editor
 
             arrList.Add(tItem);
 
-            tItem = new LEVELGEOMETRY
+            tItem = new MainViewModel.LEVELGEOMETRY
             {
                 TextureID = 2,
                 Scale = 5,
@@ -86,7 +60,7 @@ namespace MassiveAttack.Windows.Editor
 
             arrList.Add(tItem);
 
-            tItem = new LEVELGEOMETRY
+            tItem = new MainViewModel.LEVELGEOMETRY
             {
                 TextureID = 3,
                 Scale = 5,
@@ -106,7 +80,7 @@ namespace MassiveAttack.Windows.Editor
 
             arrList.Add(tItem);
 
-            tItem = new LEVELGEOMETRY
+            tItem = new MainViewModel.LEVELGEOMETRY
             {
                 TextureID = 4,
                 Scale = 5,
@@ -139,7 +113,7 @@ namespace MassiveAttack.Windows.Editor
                 }
             }
 
-            Application.Current.Shutdown();
+            Application.Current.Shutdown();*/
         }
     }
 }

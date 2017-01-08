@@ -4,9 +4,37 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MassiveAttack.Windows.Editor"
+        xmlns:viewModels="clr-namespace:MassiveAttack.Windows.Editor.ViewModels"
         mc:Ignorable="d"
-        Title="Massive Attack Editor" Height="350" Width="525">
+        Background="#2e2e2e"
+        Foreground="White"
+        Title="Massive Attack Editor" Height="350" Width="1024">
+    <Window.DataContext>
+        <viewModels:MainViewModel />
+    </Window.DataContext>
+
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Margin="-93,370,93.4,-370.2"/>
+
+        <Grid Grid.Column="1">
+            <ListView ItemsSource="{Binding Textures}" Background="#1e1e1e">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding FileName}" MaxWidth="200" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </Grid>
 </Window>
