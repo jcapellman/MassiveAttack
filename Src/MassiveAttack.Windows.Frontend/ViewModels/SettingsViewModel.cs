@@ -84,10 +84,7 @@ namespace MassiveAttack.Windows.Frontend.ViewModels
                 ResolutionY = 768,
                 TextureDetail = TEXTURE_DETAIL.INSANE
             };
-        }
-
-        [DllImport("MassiveAttack.Client.Engine.dll")]
-        public static extern string GetAvailableGfxRenderers();
+        }        
 
         public static List<string> intPtrToListString(IntPtr[] pointers)
         {
@@ -112,9 +109,10 @@ namespace MassiveAttack.Windows.Frontend.ViewModels
                 Settings = result.ObjectValue.SettingItem;
             }
 
-                var temp = GetAvailableGfxRenderers();
-
-            Renderers = new ObservableCollection<string>();
+            Renderers = new ObservableCollection<string>
+            {
+                "OpenGL 1.1"
+            };
             
             if (SelectedRenderer == null)
             {
