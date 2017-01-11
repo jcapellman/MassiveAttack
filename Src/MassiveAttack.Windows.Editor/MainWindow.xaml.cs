@@ -3,14 +3,12 @@ using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls;
 using MassiveAttack.Windows.Editor.ViewModels;
 
 namespace MassiveAttack.Windows.Editor
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         private MainViewModel viewModel => (MainViewModel) DataContext;
 
