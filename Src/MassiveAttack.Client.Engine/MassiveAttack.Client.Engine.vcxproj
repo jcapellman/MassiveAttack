@@ -38,7 +38,6 @@
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Config\ConfigParser.cpp" />
     <None Include="Source.def" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

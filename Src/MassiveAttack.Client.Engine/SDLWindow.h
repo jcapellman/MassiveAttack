@@ -2,9 +2,11 @@
 #define _SDLWINDOW_
 
 #include "Main.h"
+#include "Common\ReturnSet.h"
 #include "TextureManager.h"
 #include "Level.h"
 #include "GfxRenderers/IGfxRenderer.h"
+#include "Config\ConfigParser.h"
 
 class SDLWindow
 {
@@ -14,15 +16,12 @@ public:
 	void MainLoop();
 
 	SDLWindow()
-	{
-		this->width = 1024;
-		this->height = 768;
-
+	{				
 		this->xpos = 1.5f;
 		this->zpos = 6.0f;
 		this->yrot = 0.0f;
 	}
-private:
+private:	
 	IGfxRenderer * _gfxRenderer;
 
 	void handle_key_down(SDL_keysym* keysym);

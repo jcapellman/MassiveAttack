@@ -191,6 +191,12 @@ void SDLWindow::Init()
 	videoFlags |= SDL_HWSURFACE;
 	videoFlags |= SDL_GL_DOUBLEBUFFER;
 
+	ConfigParser config("base/config.cfg");
+
+	this->width = config.GetInt("XRES");
+
+	this->height = config.GetInt("YRES");
+
 	surface = SDL_SetVideoMode(this->width, this->height, info->vfmt->BitsPerPixel, videoFlags);
 
 	SDL_WM_ToggleFullScreen(surface);

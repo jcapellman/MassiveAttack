@@ -147,6 +147,11 @@
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MassiveAttack.Client.Engine\MassiveAttack.Client.Engine.vcxproj">
+      <Project>{b22de888-87f2-47f8-92f5-46049062de76}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
