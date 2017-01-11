@@ -56,6 +56,14 @@ namespace MassiveAttack.Windows.Editor.ViewModels
             public float Z4 { get; set; }
         }
 
+        private TEXTURE_DB_ITEM _selectedTextureDbItem;
+
+        public TEXTURE_DB_ITEM SelectedTextureDBItem
+        {
+            get { return _selectedTextureDbItem; }
+            set { _selectedTextureDbItem = value; OnPropertyChanged(); }
+        }
+
         public MainViewModel()
         {
             LoadTextures();

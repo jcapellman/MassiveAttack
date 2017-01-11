@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using System.Windows.Input;
+using System.Windows.Shapes;
 using MassiveAttack.Windows.Editor.ViewModels;
 
 namespace MassiveAttack.Windows.Editor
@@ -114,6 +116,33 @@ namespace MassiveAttack.Windows.Editor
             }
 
             Application.Current.Shutdown();*/
+        }
+
+        private Point startPosition = default(Point);
+
+        private void CMain_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (startPosition == default(Point))
+            {
+                startPosition = e.GetPosition(cMain);
+            }
+            else
+            {
+                Line myLine = new Line();
+
+                myLine.Stroke = System.Windows.Media.Brushes.Black;
+
+                myLine.X1 = startPosition.X;
+                myLine.X2 = e.GetPosition(cMain).X;
+                myLine.Y1 = startPosition.Y;
+                myLine.Y2 = e.GetPosition(cMain).Y;
+
+                myLine.StrokeThickness = 1;
+
+                cMain.Children.Add(myLine);
+
+                startPosition = default(Point);
+            }
         }
     }
 }

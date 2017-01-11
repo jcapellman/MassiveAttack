@@ -19,10 +19,12 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" Margin="-93,370,93.4,-370.2"/>
+        <Canvas Grid.Column="0" x:Name="cMain" MouseLeftButtonDown="CMain_OnMouseLeftButtonDown">
+            
+        </Canvas>
 
         <Grid Grid.Column="1">
-            <ListView ItemsSource="{Binding Textures}" Background="#1e1e1e">
+            <ListView ItemsSource="{Binding Textures}" BorderThickness="0" SelectedItem="{Binding SelectedTextureDBItem, Mode=TwoWay}" Background="#1e1e1e">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
