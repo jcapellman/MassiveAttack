@@ -37,7 +37,7 @@
             </MenuItem>
         </Menu>
 
-        <Canvas Grid.Row="1" Grid.Column="0" x:Name="cMain" MouseLeftButtonDown="CMain_OnMouseLeftButtonDown">
+        <Canvas Grid.Row="1" Grid.Column="0" x:Name="cMain">
 
         </Canvas>
 

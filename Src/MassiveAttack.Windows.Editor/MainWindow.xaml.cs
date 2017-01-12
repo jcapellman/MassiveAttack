@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using MassiveAttack.Windows.Editor.ViewModels;
@@ -10,13 +11,17 @@ namespace MassiveAttack.Windows.Editor
 {
     public partial class MainWindow : MetroWindow
     {
-        private MainViewModel viewModel => (MainViewModel) DataContext;
+        private MainViewModel viewModel => (MainViewModel) DataContext;        
 
         public MainWindow()
         {
             InitializeComponent();
 
             DataContext = new MainViewModel();
+            MouseLeftButtonDown += MainWindow_MouseDown;
+            MouseLeftButtonUp += MainWindow_MouseUp;
+            MouseMove += MainWindow_MouseMove;
+            MouseRightButtonDown += MainWindow_MouseRightButtonDown;
             /*
             var arrList = new List<MainViewModel.LEVELGEOMETRY>();
 
@@ -116,31 +121,48 @@ namespace MassiveAttack.Windows.Editor
             Application.Current.Shutdown();*/
         }
 
-        private Point startPosition = default(Point);
+        private bool _clickUp = false;
 
-        private void CMain_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void MainWindow_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (startPosition == default(Point))
-            {
-                startPosition = e.GetPosition(cMain);
-            }
-            else
-            {
-                Line myLine = new Line();
-
-                myLine.Stroke = System.Windows.Media.Brushes.Black;
-
-                myLine.X1 = startPosition.X;
-                myLine.X2 = e.GetPosition(cMain).X;
-                myLine.Y1 = startPosition.Y;
-                myLine.Y2 = e.GetPosition(cMain).Y;
-
-                myLine.StrokeThickness = 1;
-
-                cMain.Children.Add(myLine);
-
-                startPosition = default(Point);
-            }
+            _clickUp = true;
         }
+
+        private void MainWindow_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_clickUp)
+            {
+                return;
+            }
+
+            line.X2 = e.GetPosition(cMain).X;
+            line.Y2 = e.GetPosition(cMain).Y;
+        }
+
+        private void MainWindow_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (_clickUp)
+            {
+                return;
+            }
+
+            cMain.Children.Add(line);
+        }
+
+        private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            _clickUp = false;
+
+            startPosition = e.GetPosition(cMain);
+            line = new Line();
+            line.StrokeThickness = 1;
+            line.Stroke = System.Windows.Media.Brushes.Black;
+            line.X1 = startPosition.X;
+            line.Y1 = startPosition.Y;
+        }
+
+        private Point startPosition = default(Point);
+        private Line line = new Line();
+
     }
 }
