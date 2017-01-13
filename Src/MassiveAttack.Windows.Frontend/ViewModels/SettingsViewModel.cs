@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
 
 using MassiveAttack.Common.Library.Enums;
@@ -85,18 +83,6 @@ namespace MassiveAttack.Windows.Frontend.ViewModels
                 TextureDetail = TEXTURE_DETAIL.INSANE
             };
         }        
-
-        public static List<string> intPtrToListString(IntPtr[] pointers)
-        {
-            var list = new List<string>();
-
-            foreach (var pointer in pointers)
-            {
-                list.Add(Marshal.PtrToStringAnsi(pointer));
-            }
-
-            return list;
-        }
 
         public async void InitializeSettings()
         {
