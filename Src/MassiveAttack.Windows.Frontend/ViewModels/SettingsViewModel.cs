@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,6 +9,8 @@ using MassiveAttack.Common.Library.Enums;
 using MassiveAttack.Common.Library.Objects.Common;
 using MassiveAttack.Common.Library.Objects.WebAPI.Settings;
 using MassiveAttack.Common.Library.WebAPIHandlers;
+using MassiveAttack.Windows.Frontend.Common;
+using Newtonsoft.Json;
 
 namespace MassiveAttack.Windows.Frontend.ViewModels
 {
@@ -118,6 +121,8 @@ namespace MassiveAttack.Windows.Frontend.ViewModels
             };
 
             var settingsHandler = new SettingsHandler(App.HandlerWrapper);
+
+            File.WriteAllText(Constants.ConfigName, JsonConvert.SerializeObject(Settings));
 
             return await settingsHandler.UpdateSettings(requestItem);
         }

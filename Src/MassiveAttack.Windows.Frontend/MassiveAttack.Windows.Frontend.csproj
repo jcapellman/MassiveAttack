@@ -87,6 +87,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BaseWindow.cs" />
+    <Compile Include="Common\Constants.cs" />
     <Compile Include="Converters\NetworkStatusConverter.cs" />
     <Compile Include="GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
