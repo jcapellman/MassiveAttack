@@ -25,6 +25,7 @@
     <ClInclude Include="GfxRenderers\OGL11Renderer.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="Network.h" />
     <ClInclude Include="SDLWindow.h" />
     <ClInclude Include="SfxRenderers\ISfxRenderer.h" />
     <ClInclude Include="SfxRenderers\SDLRenderer.h" />
@@ -33,6 +34,7 @@
   <ItemGroup>
     <ClCompile Include="GfxRenderers\OGL11Renderer.cpp" />
     <ClCompile Include="Level.cpp" />
+    <ClCompile Include="Network.cpp" />
     <ClCompile Include="SDLWindow.cpp" />
     <ClCompile Include="SfxRenderers\SDLRenderer.cpp" />
     <ClCompile Include="TextureManager.cpp" />
