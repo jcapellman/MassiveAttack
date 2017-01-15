@@ -81,8 +81,8 @@ namespace MassiveAttack.Windows.Frontend.ViewModels
             Settings = new SettingsItem
             {
                 BPP = 16,
-                ResolutionX = 1024,
-                ResolutionY = 768,
+                XRes = 1024,
+                YRes = 768,
                 TextureDetail = TEXTURE_DETAIL.INSANE
             };
         }        
@@ -122,7 +122,7 @@ namespace MassiveAttack.Windows.Frontend.ViewModels
 
             var settingsHandler = new SettingsHandler(App.HandlerWrapper);
 
-            File.WriteAllText(Constants.ConfigName, JsonConvert.SerializeObject(Settings));
+            File.WriteAllText(Constants.ConfigName, Settings.ToSettingFileFormat());
 
             return await settingsHandler.UpdateSettings(requestItem);
         }
