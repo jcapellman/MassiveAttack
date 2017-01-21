@@ -107,6 +107,6 @@
   },
 
   "tooling": {
-    "defaultNamespace": "WebApplication"
+    "defaultNamespace": "MassiveAttack.MasterServer"
   }
 }
