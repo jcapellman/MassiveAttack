@@ -14,7 +14,7 @@ What started out as a MonoGame using my 2k16 SOA turned into a return to using O
 
 ##Supported Client Platforms
 - Windows 7, 8, 8.1, 10, Server 2008/2008R2/2012/2016
-- IRIX 6.5.22
+- IRIX 6.5.22 (Machines with Texture Mapping support are recommended such as an O2, Octane MXE/Vpro, Fuel, Tezro)
 - Mac OS X (PPC)
 - OpenSuse (x86)
 
