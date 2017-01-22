@@ -4,6 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+using MassiveAttack.MasterServer.Abstractions;
+using MassiveAttack.MasterServer.Implementations.Redis;
+
 namespace MassiveAttack.MasterServer
 {
     public class Startup
@@ -23,6 +26,9 @@ namespace MassiveAttack.MasterServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            // TODO: As additional implementations are implemented such as SQL Server, MongoDB etc read from the settings file
+            services.AddTransient<IGameServerList, RedisGameServerList>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

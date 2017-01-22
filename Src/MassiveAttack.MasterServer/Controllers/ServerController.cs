@@ -1,18 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+
 using Microsoft.AspNetCore.Mvc;
 
+using MassiveAttack.Common.Library.Objects.WebAPI.GameServers;
+using MassiveAttack.MasterServer.Abstractions;
+using System.Threading.Tasks;
+
 namespace MassiveAttack.MasterServer.Controllers
-{
-    [Route("api/[controller]")]
-    public class ServerController : Controller
+{   
+    public class ServerController : BaseController
     {
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
+        private IGameServerList _gameServerList;
+
+        public ServerController(IGameServerList gameServerList) {
+            _gameServerList = gameServerList;
         }
+
+        [HttpGet]
+        public List<GameServerListResponseItem> GET() => _gameServerList.GetActiveList();
+
+        [HttpPost]
+        public async Task<string> POST(GameServerPingBackRequestItem requestItem) => await _gameServerList.UpdateList(requestItem);
     }
 }
