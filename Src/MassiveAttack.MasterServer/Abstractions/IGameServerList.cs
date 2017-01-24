@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using MassiveAttack.Common.Library.Objects.WebAPI.GameServers;
@@ -10,6 +9,6 @@ namespace MassiveAttack.MasterServer.Abstractions
     {
         List<GameServerListResponseItem> GetActiveList();
 
-        Task<string> UpdateList(GameServerPingBackRequestItem requestItem);
+        Task<string> UpdateListAsync(GameServerPingBackRequestItem requestItem);
     }
 }

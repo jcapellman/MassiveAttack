@@ -16,7 +16,7 @@ namespace MassiveAttack.MasterServer.Implementations.Redis
         private static ConnectionMultiplexer redis;
         private IDatabase db;
 
-        private void initRedis()
+        private void InitRedis()
         {
             if (redis == null)
             {
@@ -31,15 +31,15 @@ namespace MassiveAttack.MasterServer.Implementations.Redis
 
         public List<GameServerListResponseItem> GetActiveList()
         {
-            initRedis();
+            InitRedis();
 
             // TODO: Implement List functionality
             return new List<GameServerListResponseItem>();
         }
 
-        public async Task<string> UpdateList(GameServerPingBackRequestItem requestItem)
+        public async Task<string> UpdateListAsync(GameServerPingBackRequestItem requestItem)
         {
-            initRedis();    
+            InitRedis();    
 
             var gameServerItem = new GameServerItem
             {

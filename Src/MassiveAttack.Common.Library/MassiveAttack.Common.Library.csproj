@@ -48,6 +48,8 @@
     <Compile Include="Objects\WebAPI\BaseListingResponseItem.cs" />
     <Compile Include="Objects\WebAPI\GameMetrics\GameMetricListingResponseItem.cs" />
     <Compile Include="Objects\WebAPI\GameMetrics\GameMetricRequestItem.cs" />
+    <Compile Include="Objects\WebAPI\GameServers\GameServerListResponseItem.cs" />
+    <Compile Include="Objects\WebAPI\GameServers\GameServerPingBackRequestItem.cs" />
     <Compile Include="Objects\WebAPI\HighScore\HighScoreListingResponseItem.cs" />
     <Compile Include="Objects\WebAPI\HighScore\HighScoreRequestItem.cs" />
     <Compile Include="Objects\WebAPI\Internal\ControllerHandlerItem.cs" />

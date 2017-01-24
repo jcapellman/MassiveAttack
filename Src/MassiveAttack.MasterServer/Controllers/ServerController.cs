@@ -20,6 +20,6 @@ namespace MassiveAttack.MasterServer.Controllers
         public List<GameServerListResponseItem> GET() => _gameServerList.GetActiveList();
 
         [HttpPost]
-        public async Task<string> POST(GameServerPingBackRequestItem requestItem) => await _gameServerList.UpdateList(requestItem);
+        public async Task<string> AddPingBackAsync(GameServerPingBackRequestItem requestItem) => await _gameServerList.UpdateListAsync(requestItem);
     }
 }
