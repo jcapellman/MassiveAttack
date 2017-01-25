@@ -7,7 +7,7 @@ namespace MassiveAttack.MasterServer.Abstractions
 {
     public interface IGameServerList
     {
-        List<GameServerListResponseItem> GetActiveList();
+        Task<List<GameServerListResponseItem>> GetActiveListAsync();
 
         Task<string> UpdateListAsync(GameServerPingBackRequestItem requestItem);
     }

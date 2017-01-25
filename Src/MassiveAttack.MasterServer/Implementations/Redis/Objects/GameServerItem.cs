@@ -13,5 +13,7 @@ namespace MassiveAttack.MasterServer.Implementations.Redis.Objects
         public int MaxPlayers { get; set; }
 
         public DateTimeOffset LastPingBack { get; set; }
+
+        public string ServerID { get; set; }
     }
 }

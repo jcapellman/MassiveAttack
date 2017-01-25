@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Mvc;
 
 using MassiveAttack.Common.Library.Objects.WebAPI.GameServers;
 using MassiveAttack.MasterServer.Abstractions;
-using System.Threading.Tasks;
 
 namespace MassiveAttack.MasterServer.Controllers
 {   
@@ -17,7 +17,7 @@ namespace MassiveAttack.MasterServer.Controllers
         }
 
         [HttpGet]
-        public List<GameServerListResponseItem> GET() => _gameServerList.GetActiveList();
+        public async Task<List<GameServerListResponseItem>> GetServerListAsync() => await _gameServerList.GetActiveListAsync();
 
         [HttpPost]
         public async Task<string> AddPingBackAsync(GameServerPingBackRequestItem requestItem) => await _gameServerList.UpdateListAsync(requestItem);
