@@ -1,4 +1,4 @@
-﻿{
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
@@ -19,7 +19,7 @@
     "MassiveAttack.MasterServer": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/values",
+      "launchUrl": "api/Server",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
