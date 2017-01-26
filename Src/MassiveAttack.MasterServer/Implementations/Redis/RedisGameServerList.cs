@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text;
 
 using MassiveAttack.MasterServer.Abstractions;
 using MassiveAttack.Common.Library.Objects.WebAPI.GameServers;
@@ -9,7 +10,6 @@ using MassiveAttack.MasterServer.Implementations.Redis.Objects;
 
 using StackExchange.Redis;
 using Newtonsoft.Json;
-using System.Text;
 
 namespace MassiveAttack.MasterServer.Implementations.Redis
 {
@@ -18,11 +18,18 @@ namespace MassiveAttack.MasterServer.Implementations.Redis
         private static ConnectionMultiplexer redis;
         private IDatabase db;
 
+        private string _connectionString;
+
+        public RedisGameServerList(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
         private void InitRedis()
         {
             if (redis == null)
             {
-                redis = ConnectionMultiplexer.Connect("localhost");
+                redis = ConnectionMultiplexer.Connect(_connectionString);
             }
 
             if (db == null)

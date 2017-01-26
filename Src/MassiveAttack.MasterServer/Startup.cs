@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 
 using MassiveAttack.MasterServer.Abstractions;
 using MassiveAttack.MasterServer.Implementations.Redis;
+using MassiveAttack.MasterServer.Objects;
 
 namespace MassiveAttack.MasterServer
 {
@@ -16,7 +17,6 @@ namespace MassiveAttack.MasterServer
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -25,10 +25,15 @@ namespace MassiveAttack.MasterServer
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<GlobalSettings>(Configuration.GetSection("GlobalSettings"));
+
             services.AddMvc();
 
+            var globalSettings = new GlobalSettings();
+            Configuration.GetSection("Settings").Bind(globalSettings);
+
             // TODO: As additional implementations are implemented such as SQL Server, MongoDB etc read from the settings file
-            services.AddTransient<IGameServerList, RedisGameServerList>();
+            services.AddTransient<IGameServerList>(a => new RedisGameServerList(globalSettings.DBConnectionString));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

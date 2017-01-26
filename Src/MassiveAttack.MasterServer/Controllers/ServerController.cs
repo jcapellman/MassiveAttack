@@ -5,15 +5,17 @@ using Microsoft.AspNetCore.Mvc;
 
 using MassiveAttack.Common.Library.Objects.WebAPI.GameServers;
 using MassiveAttack.MasterServer.Abstractions;
+using MassiveAttack.MasterServer.Objects;
 
 namespace MassiveAttack.MasterServer.Controllers
 {   
     public class ServerController : BaseController
     {
         private IGameServerList _gameServerList;
-
-        public ServerController(IGameServerList gameServerList) {
+        
+        public ServerController(GlobalSettings settings, IGameServerList gameServerList) {
             _gameServerList = gameServerList;
+            gSettings = settings;
         }
 
         [HttpGet]

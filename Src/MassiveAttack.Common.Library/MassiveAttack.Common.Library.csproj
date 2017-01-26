@@ -67,6 +67,7 @@
     <Compile Include="WebAPIHandlers\HighScoreHandler.cs" />
     <Compile Include="WebAPIHandlers\PingBackHandler.cs" />
     <Compile Include="WebAPIHandlers\PlayerProfileHandler.cs" />
+    <Compile Include="WebAPIHandlers\ServerListHandler.cs" />
     <Compile Include="WebAPIHandlers\SettingsHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
