@@ -4,25 +4,26 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-using MassiveAttack.MasterServer.Abstractions;
-using MassiveAttack.MasterServer.Implementations.Redis;
-using MassiveAttack.MasterServer.Objects;
+using MassiveAttack.MasterServer.WebAPI.Abstractions;
+using MassiveAttack.MasterServer.WebAPI.Implementations.Redis;
+using MassiveAttack.MasterServer.WebAPI.Objects;
 
-namespace MassiveAttack.MasterServer
+namespace MassiveAttack.MasterServer.WebAPI
 {
     public class Startup
     {
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddEnvironmentVariables();
+               .SetBasePath(env.ContentRootPath)
+               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+               .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
 
         public IConfigurationRoot Configuration { get; }
 
+        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<GlobalSettings>(Configuration.GetSection("GlobalSettings"));
@@ -36,11 +37,9 @@ namespace MassiveAttack.MasterServer
             services.AddTransient<IGameServerList>(a => new RedisGameServerList(globalSettings.DBConnectionString));
         }
 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
             app.UseMvc();
         }
     }

@@ -1,8 +1,8 @@
-﻿using MassiveAttack.MasterServer.Objects;
+﻿using MassiveAttack.MasterServer.WebAPI.Objects;
 
 using Microsoft.AspNetCore.Mvc;
 
-namespace MassiveAttack.MasterServer.Controllers
+namespace MassiveAttack.MasterServer.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     public class BaseController : Controller

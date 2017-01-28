@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MassiveAttack.MasterServer.Implementations.Redis.Objects
+namespace MassiveAttack.MasterServer.WebAPI.Implementations.Redis.Objects
 {
     public class GameServerItem
     {

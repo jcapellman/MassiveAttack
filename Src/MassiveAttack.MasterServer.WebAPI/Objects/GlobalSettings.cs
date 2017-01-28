@@ -1,4 +1,4 @@
-﻿namespace MassiveAttack.MasterServer.Objects
+﻿namespace MassiveAttack.MasterServer.WebAPI.Objects
 {
     public class GlobalSettings
     {

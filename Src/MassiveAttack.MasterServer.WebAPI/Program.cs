@@ -1,9 +1,9 @@
 ﻿using System.IO;
 
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 
-namespace MassiveAttack.MasterServer
+namespace MassiveAttack.MasterServer.WebAPI
 {
     public class Program
     {
@@ -12,7 +12,6 @@ namespace MassiveAttack.MasterServer
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
 

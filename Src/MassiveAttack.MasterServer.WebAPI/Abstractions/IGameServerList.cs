@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 using MassiveAttack.Common.Library.Objects.WebAPI.GameServers;
 
-namespace MassiveAttack.MasterServer.Abstractions
+namespace MassiveAttack.MasterServer.WebAPI.Abstractions
 {
     public interface IGameServerList
     {

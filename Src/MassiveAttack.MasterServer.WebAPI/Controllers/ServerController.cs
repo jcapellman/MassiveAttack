@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using MassiveAttack.Common.Library.Objects.WebAPI.GameServers;
-using MassiveAttack.MasterServer.Abstractions;
-using MassiveAttack.MasterServer.Objects;
+using MassiveAttack.MasterServer.WebAPI.Abstractions;
+using MassiveAttack.MasterServer.WebAPI.Objects;
 
-namespace MassiveAttack.MasterServer.Controllers
+namespace MassiveAttack.MasterServer.WebAPI.Controllers
 {   
     public class ServerController : BaseController
     {

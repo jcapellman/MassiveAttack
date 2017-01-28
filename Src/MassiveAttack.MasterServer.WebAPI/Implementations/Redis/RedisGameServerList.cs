@@ -4,14 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Text;
 
-using MassiveAttack.MasterServer.Abstractions;
+using MassiveAttack.MasterServer.WebAPI.Abstractions;
 using MassiveAttack.Common.Library.Objects.WebAPI.GameServers;
-using MassiveAttack.MasterServer.Implementations.Redis.Objects;
+using MassiveAttack.MasterServer.WebAPI.Implementations.Redis.Objects;
 
 using StackExchange.Redis;
 using Newtonsoft.Json;
 
-namespace MassiveAttack.MasterServer.Implementations.Redis
+namespace MassiveAttack.MasterServer.WebAPI.Implementations.Redis
 {
     public class RedisGameServerList : IGameServerList
     {
