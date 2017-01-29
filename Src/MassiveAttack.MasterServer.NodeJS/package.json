@@ -1,0 +1,14 @@
+{
+  "name": "massive-attack.master-server.node-js",
+  "version": "0.0.0",
+  "description": "MassiveAttack.MasterServer.NodeJS",
+  "main": "app.js",
+  "author": {
+    "name": "jcape"
+  },
+  "dependencies": {
+    "express": "4.14.1",
+    "body-parser": "1.16.0",
+    "redis": "2.6.5"
+  }
+}

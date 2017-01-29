@@ -10,3 +10,7 @@ Debug/
 *.VC.opendb
 *.filters
 /Src/MassiveAttack.VC.db
+node_modules/
+*.js
+*.js.map
+typings/

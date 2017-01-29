@@ -1,0 +1,6 @@
+﻿module.exports = {
+    REDIS_DATABASE_HOSTNAME: '192.168.2.136',
+    REDIS_DATABASE_POST: 6379,
+    HTTP_SERVER_PORT: 1338,
+    API_PREFIX: '/api/v1/'
+};
