@@ -1,15 +1,18 @@
-﻿var config = require('./config');
-var express = require('express');
-var redisdb = require('./redisdb');
+﻿import br = require('./BaseRoute');
 
-var rootpath = config.API_PREFIX + 'server';
+export class ServerRoute extends br.BaseRoute {    
+    constructor() {
+        super('server');        
+    }
 
-var router = express.Router();
+    getServerList(req, res) {
+        super.getRedisFactory().get('ServerList', function (err, reply) {
+            return res.json({ message: reply });
+        });
+    }
 
-router.get(rootpath, function (req, res) {
-    redisdb.get('test', function (err, reply) {
-        return res.json({ message: reply });
-    });
-});
-
-module.exports = router;
+    buildRoutes() {
+        // Get Server List
+        super.addGetRoute('', this.getServerList);        
+    }
+}
