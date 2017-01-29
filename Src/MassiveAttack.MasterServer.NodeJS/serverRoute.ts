@@ -1,4 +1,5 @@
-﻿import br = require('./BaseRoute');
+﻿import { Router, Request, Response, NextFunction } from 'express';
+import br = require('./BaseRoute');
 
 export class ServerRoute extends br.BaseRoute {    
     constructor() {
@@ -11,8 +12,19 @@ export class ServerRoute extends br.BaseRoute {
         });
     }
 
+    addToServerList(req:Request, res:Response) {
+        var obj = req.body;
+        
+        super.getRedisFactory().set('ServerList', obj, function (err, reply) {
+            return res.json({ message: reply });
+        });
+    }
+
     buildRoutes() {
         // Get Server List
         super.addGetRoute('', this.getServerList);        
+
+        // Add to Server List
+        super.addPostRoute('', this.addToServerList);
     }
 }

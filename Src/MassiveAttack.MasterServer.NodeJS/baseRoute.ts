@@ -30,4 +30,8 @@ export abstract class BaseRoute {
         addGetRoute(routepath, method) {            
             this._router.get(this._rootpath + routepath, method);
         }
+
+        addPostRoute(routepath, method) {
+            this._router.post(this._rootpath + routepath, method);
+        }
     }
