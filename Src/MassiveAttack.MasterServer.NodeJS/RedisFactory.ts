@@ -2,6 +2,7 @@
 
 export class RedisFactory {
     private client: any;
+    private subscriber: any;
 
     constructor(redisHostName: string, redisPort: number) {               
         this.client = redis.createClient(redisPort, redisHostName);
@@ -12,9 +13,13 @@ export class RedisFactory {
 
         this.client.on("connect", function () {
             console.log('Successfully connected to Redis DB @ ' + redisHostName + ':' + redisPort);
-        });                
-    }
+        });           
 
+        this.subscriber.on("message", function (channel, message) {
+            console.log(message);
+        });
+    }
+    
     rClient() {
         return this.client;
     }
