@@ -1,5 +1,7 @@
 ﻿import { Router, Request, Response, NextFunction } from 'express';
 import br = require('./BaseRoute');
+import mq = require('./MessageQueue');
+import { Config } from './config';
 
 export class ServerRoute extends br.BaseRoute {    
     constructor() {
@@ -12,12 +14,13 @@ export class ServerRoute extends br.BaseRoute {
         });
     }
 
+    // Add Server List to processing list
     addToServerList(req:Request, res:Response) {
         var obj = req.body;
-        
-        super.getRedisFactory().set('ServerList', obj, function (err, reply) {
-            return res.json({ message: reply });
-        });
+
+        var messq = new mq.MessageQueue(Config.RABBITMQ_HOST);
+
+        messq.addMessage(obj);
     }
 
     buildRoutes() {
