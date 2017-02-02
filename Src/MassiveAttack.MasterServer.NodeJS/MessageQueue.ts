@@ -1,25 +1,25 @@
 ﻿export class MessageQueue {
-    private connection: any;
+    private readonly connection: any;
 
     constructor(amqpHost:string) {
-        var amqp = require('amqp');
+        const amqp = require("amqp");
 
         this.connection = amqp.createConnection({ host: amqpHost });
         
-        this.connection.on('error', function (e) {
+        this.connection.on("error", e => {
             console.log("Error from amqp: ", e);
         });
         
-        this.connection.on('ready', function () {
+        this.connection.on("ready", () => {
             console.log("Connected to RabbitMQ");
         });
     }
 
-    public addMessage(messege:string) {
-        this.connection.queue(messege, function (q) {
-            q.bind('#');
+    addMessage(messege:string) {
+        this.connection.queue(messege, q => {
+            q.bind("#");
 
-            q.subscribe(function (message) {
+            q.subscribe(message => {
                 console.log(message);
             });
         });

@@ -49,6 +49,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="BaseRoute.ts" />
     <TypeScriptCompile Include="config.ts" />
+    <TypeScriptCompile Include="MessageQueue.ts" />
     <TypeScriptCompile Include="RedisFactory.ts" />
     <TypeScriptCompile Include="ServerRoute.ts" />
     <TypeScriptCompile Include="Scripts\typings\node\node.d.ts" />

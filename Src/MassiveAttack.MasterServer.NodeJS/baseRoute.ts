@@ -2,23 +2,23 @@
 import { Config } from "./config";
 
 export abstract class BaseRoute {
-        _rootpath: string;
-        _router: any;
-        _redisFactory: RedisFactory;
+        private rootpath: string;
+        private router: any;
+        private redisFactory: RedisFactory;
 
         constructor(rootpath: string) {            
-            this._rootpath = Config.API_PREFIX + rootpath;
+            this.rootpath = Config.API_PREFIX + rootpath;
 
-            var express = require('express');
-            this._router = express.Router();            
+            const express = require('express');
+            this.router = express.Router();            
         }
 
         abstract buildRoutes(): void;
 
-        GetRoutes() {
+        getRoutes() {
             this.buildRoutes();
 
-            return this._router;
+            return this.router;
         }
 
         getRedisFactory() {
@@ -28,10 +28,10 @@ export abstract class BaseRoute {
         }
 
         addGetRoute(routepath, method) {            
-            this._router.get(this._rootpath + routepath, method);
+            this.router.get(this.rootpath + routepath, method);
         }
 
         addPostRoute(routepath, method) {
-            this._router.post(this._rootpath + routepath, method);
+            this.router.post(this.rootpath + routepath, method);
         }
     }

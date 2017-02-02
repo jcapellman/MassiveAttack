@@ -1,6 +1,6 @@
-﻿var bodyParser = require('body-parser');
+﻿var bodyParser = require("body-parser");
 
-var express = require('express');
+var express = require("express");
 var app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -11,8 +11,8 @@ import { Config } from "./config";
 // Add Server Routes
 import { ServerRoute } from "./ServerRoute";
 let serverRoute = new ServerRoute();
-app.use(serverRoute.GetRoutes());
+app.use(serverRoute.getRoutes());
 
 app.listen(Config.HTTP_SERVER_PORT);
 
-console.log('Master Game REST Server running on port ' + Config.HTTP_SERVER_PORT);
+console.log(`Master Game REST Server running on port ${Config.HTTP_SERVER_PORT}`);
