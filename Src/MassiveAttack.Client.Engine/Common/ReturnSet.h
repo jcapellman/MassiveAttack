@@ -6,11 +6,13 @@ class ReturnSet {
 public:
 	T ReturnValue;
 
-	string ExceptionString() {
+	string ExceptionString() const
+	{
 		return _exception.what();
 	}
 
-	bool HasError() {
+	bool HasError() const
+	{
 		return _hasError;
 	}
 

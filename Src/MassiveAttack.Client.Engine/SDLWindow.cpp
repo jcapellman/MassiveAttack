@@ -194,6 +194,9 @@ void SDLWindow::Init()
 
 	m_glcontext = SDL_GL_CreateContext(m_window);
 
+	auto flags = IMG_INIT_JPG | IMG_INIT_PNG;
+	IMG_Init(flags);
+
 	_gfxRenderer = new OGL11Renderer;
 
 	_gfxRenderer->Init(width, height);

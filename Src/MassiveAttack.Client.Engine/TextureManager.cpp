@@ -4,9 +4,9 @@
 ReturnSet<SDL_Surface*> TextureManager::LoadTexture(char * fileName)
 {
 	try {
-		SDL_Surface * texture = SDL_LoadBMP(fileName);
+		auto * texture = IMG_Load(fileName);
 
-		if (texture == NULL) {
+		if (texture == nullptr) {
 			return ReturnSet<SDL_Surface*>(exception(SDL_GetError()));
 		}
 		

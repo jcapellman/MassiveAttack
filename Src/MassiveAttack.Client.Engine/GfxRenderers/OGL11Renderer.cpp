@@ -24,7 +24,33 @@ ReturnSet<int> OGL11Renderer::LoadTexture(string fileName) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, result.ReturnValue->w, result.ReturnValue->h, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, result.ReturnValue->pixels);
+	GLenum textureFormat;
+
+	GLint bpp = result.ReturnValue->format->BytesPerPixel;
+
+	if (bpp == 4)
+	{
+		if (result.ReturnValue->format->Rmask == 0x000000ff) {
+			textureFormat = GL_RGBA;
+		}
+		else {
+			textureFormat = GL_BGRA_EXT;
+		}
+
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);
+	}
+	else if (bpp == 3)
+	{
+		if (result.ReturnValue->format->Rmask == 0x000000ff) {
+			textureFormat = GL_RGB;
+		}
+		else {
+			textureFormat = GL_BGR_EXT;
+		}
+	}
+
+	glTexImage2D(GL_TEXTURE_2D, 0, bpp, result.ReturnValue->w, result.ReturnValue->h, 0, textureFormat, GL_UNSIGNED_BYTE, result.ReturnValue->pixels);
 
 	SDL_FreeSurface(result.ReturnValue);
 
@@ -58,6 +84,8 @@ ReturnSet<bool> OGL11Renderer::Init(int width, int height) {
 	glClearDepth(1.0f);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glDepthFunc(GL_LEQUAL);
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
