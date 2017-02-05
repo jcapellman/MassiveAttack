@@ -5,6 +5,8 @@ void SDLWindow::Quit()
 {
 	_gfxRenderer->Shutdown();
 
+	SDL_GL_DeleteContext(m_glcontext);
+
 	SDL_ShowCursor(1);
 
 	SDL_Quit();
@@ -12,7 +14,7 @@ void SDLWindow::Quit()
 	exit(0);
 }
 
-void SDLWindow::handle_key_down(SDL_keysym* keysym)
+void SDLWindow::handle_key_down(SDL_Keysym* keysym)
 {
 	switch (keysym->sym) {
 		case SDLK_ESCAPE:
@@ -173,15 +175,11 @@ void SDLWindow::writeLog(const char * logMessage)
 
 void SDLWindow::Init()
 {
-	const SDL_VideoInfo* info = nullptr;
-
 	int videoFlags;
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 	
 	SDL_ShowCursor(0);
-
-	info = SDL_GetVideoInfo();
 
 	videoFlags = SDL_WINDOW_OPENGL;
 	videoFlags |= SDL_GL_DOUBLEBUFFER;
@@ -192,8 +190,9 @@ void SDLWindow::Init()
 
 	this->height = config.GetInt("YRES");
 
-	m_window = SDL_CreateWindow("Massive Attack", SDL_WINDOWNPOS_CENTERED, SDL_WINDOWNPOS_CENTERED,
-					best_size.x, best_size.y, videoFlags);
+	m_window = SDL_CreateWindow("Massive Attack", 0, 0, this->width, this->height, videoFlags);
+
+	m_glcontext = SDL_GL_CreateContext(m_window);
 
 	_gfxRenderer = new OGL11Renderer;
 
@@ -201,7 +200,7 @@ void SDLWindow::Init()
 
 	Level level;
 
-	ReturnSet<LEVELGEOMETRY*> levelResult = level.LoadLevel("E1M1.map");
+	auto levelResult = level.LoadLevel("E1M1.map");
 
 	if (levelResult.HasError()) {
 		return;

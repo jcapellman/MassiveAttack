@@ -24,8 +24,9 @@ public:
 private:	
 	IGfxRenderer * _gfxRenderer;
 	SDL_Window* m_window;
+	SDL_GLContext m_glcontext;
 
-	void handle_key_down(SDL_keysym* keysym);
+	void handle_key_down(SDL_Keysym* keysym);
 	void handle_mouse_motion(SDL_MouseMotionEvent* motion);
 	void process_events(void);
 
