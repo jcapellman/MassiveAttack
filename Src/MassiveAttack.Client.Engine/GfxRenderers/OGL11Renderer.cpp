@@ -6,7 +6,7 @@ ReturnSet<int> OGL11Renderer::LoadTexture(string fileName) {
 
 	fileName = TEXTURES_ROOT_PATH + fileName;
 
-	ReturnSet<SDL_Surface*> result = tm.LoadTexture(const_cast<char*>(fileName.c_str()));
+	auto result = tm.LoadTexture(const_cast<char*>(fileName.c_str()));
 
 	if (result.HasError())
 	{
@@ -111,9 +111,9 @@ ReturnSet<bool> OGL11Renderer::LoadGeometry(LEVELGEOMETRY * level) {
 	{
 		if (!textures.count(level[x].textureID))
 		{
-			string fileName = _textureDB[level[x].textureID];
+			auto fileName = _textureDB[level[x].textureID];
 
-			ReturnSet<int> textureResult = LoadTexture(fileName);
+			auto textureResult = LoadTexture(fileName);
 
 			if (!textureResult.HasError())
 			{

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26127.0
+VisualStudioVersion = 15.0.26127.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MassiveAttack.WebAPI", "MassiveAttack.WebAPI\MassiveAttack.WebAPI.xproj", "{632ED514-5737-44EC-A3DD-7C6CD12607F7}"
 EndProject
@@ -323,6 +323,7 @@ Global
 		{B22DE888-87F2-47F8-92F5-46049062DE76}.Debug|x64.ActiveCfg = Debug|x64
 		{B22DE888-87F2-47F8-92F5-46049062DE76}.Debug|x64.Build.0 = Debug|x64
 		{B22DE888-87F2-47F8-92F5-46049062DE76}.Debug|x86.ActiveCfg = Debug|Win32
+		{B22DE888-87F2-47F8-92F5-46049062DE76}.Debug|x86.Build.0 = Debug|Win32
 		{B22DE888-87F2-47F8-92F5-46049062DE76}.Release|Any CPU.ActiveCfg = Release|Win32
 		{B22DE888-87F2-47F8-92F5-46049062DE76}.Release|ARM.ActiveCfg = Release|Win32
 		{B22DE888-87F2-47F8-92F5-46049062DE76}.Release|iPhone.ActiveCfg = Release|Win32
@@ -363,6 +364,7 @@ Global
 		{0B94B700-D2FD-460A-BAB4-766888112727}.Debug|x64.ActiveCfg = Debug|x64
 		{0B94B700-D2FD-460A-BAB4-766888112727}.Debug|x64.Build.0 = Debug|x64
 		{0B94B700-D2FD-460A-BAB4-766888112727}.Debug|x86.ActiveCfg = Debug|Win32
+		{0B94B700-D2FD-460A-BAB4-766888112727}.Debug|x86.Build.0 = Debug|Win32
 		{0B94B700-D2FD-460A-BAB4-766888112727}.Release|Any CPU.ActiveCfg = Release|Win32
 		{0B94B700-D2FD-460A-BAB4-766888112727}.Release|ARM.ActiveCfg = Release|Win32
 		{0B94B700-D2FD-460A-BAB4-766888112727}.Release|iPhone.ActiveCfg = Release|Win32
@@ -441,6 +443,7 @@ Global
 		{053D99A6-2832-4A63-8F5A-B37CB81C0759}.Debug|x64.ActiveCfg = Debug|x64
 		{053D99A6-2832-4A63-8F5A-B37CB81C0759}.Debug|x64.Build.0 = Debug|x64
 		{053D99A6-2832-4A63-8F5A-B37CB81C0759}.Debug|x86.ActiveCfg = Debug|Win32
+		{053D99A6-2832-4A63-8F5A-B37CB81C0759}.Debug|x86.Build.0 = Debug|Win32
 		{053D99A6-2832-4A63-8F5A-B37CB81C0759}.Release|Any CPU.ActiveCfg = Release|Win32
 		{053D99A6-2832-4A63-8F5A-B37CB81C0759}.Release|ARM.ActiveCfg = Release|Win32
 		{053D99A6-2832-4A63-8F5A-B37CB81C0759}.Release|iPhone.ActiveCfg = Release|Win32
