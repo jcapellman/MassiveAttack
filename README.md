@@ -3,10 +3,11 @@
 What started out as a MonoGame using my 2k16 SOA turned into a return to using OpenGL with C++.  The version 1.0 goal is to provide a cross-platform online deathmatch akin to a 90s shooter.
 
 ##Components
-- Game Server using SDLnet and C++ coupled with Redis
-- Master Game Server REST Service NodeJS with Redis
-- OpenGL/SDL/C++ cross-platform client
-- WPF Level Editor
+- Game Server: C++ coupled with Kafka
+- Master Game Server: REST Service NodeJS (TypeScript) with Redis and RabbitMQ
+- User Server REST Service: NodeJS (TypeScript) with Redis and RabbitMQ
+- Game Client: OpenGL/SDL/C++ cross-platform client
+- Level Editor: WPF/C#
 
 ##Compile Instructions
 - Client requires SDL 1.2 and SDL Image 1.2.1 as of 12/31/2016. For those on Windows, the developer binaries on www.libsdl.org does not natively support VS 2015 so you will need to download the source of both and recompile the lib files
