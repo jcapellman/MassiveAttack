@@ -140,7 +140,7 @@ void SDLWindow::Render()
 
 	_gfxRenderer->Render(xpos, zpos, walkbias, yrot, xrot);
 
-	SDL_GL_SwapBuffers();
+	SDL_GL_SwapWindow(m_window);
 
 	Frames++;
 	{
@@ -153,8 +153,6 @@ void SDLWindow::Render()
 			string caption;
 
 			caption = "Massive Attack - " + to_string(round(fps)) + " fps";
-
-			SDL_WM_SetCaption(caption.c_str(), "Massive Attack");
 
 			T0 = t;
 			Frames = 0;
@@ -180,15 +178,12 @@ void SDLWindow::Init()
 	int videoFlags;
 
 	SDL_Init(SDL_INIT_EVERYTHING);
-	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
-	SDL_WM_SetCaption("Massive Attack", "Massive Attack");
-
+	
 	SDL_ShowCursor(0);
 
 	info = SDL_GetVideoInfo();
 
-	videoFlags = SDL_OPENGL;
-	videoFlags |= SDL_HWSURFACE;
+	videoFlags = SDL_WINDOW_OPENGL;
 	videoFlags |= SDL_GL_DOUBLEBUFFER;
 
 	ConfigParser config("base/config.cfg");
@@ -197,9 +192,8 @@ void SDLWindow::Init()
 
 	this->height = config.GetInt("YRES");
 
-	surface = SDL_SetVideoMode(this->width, this->height, info->vfmt->BitsPerPixel, videoFlags);
-
-	SDL_WM_ToggleFullScreen(surface);
+	m_window = SDL_CreateWindow("Massive Attack", SDL_WINDOWNPOS_CENTERED, SDL_WINDOWNPOS_CENTERED,
+					best_size.x, best_size.y, videoFlags);
 
 	_gfxRenderer = new OGL11Renderer;
 
