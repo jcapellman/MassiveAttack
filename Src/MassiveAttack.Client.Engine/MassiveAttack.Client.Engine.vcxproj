@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="Common\ReturnSet.h" />
     <ClInclude Include="Config\ConfigParser.h" />
+    <ClInclude Include="FontManager.h" />
     <ClInclude Include="GfxRenderers\IGfxRenderer.h" />
     <ClInclude Include="GfxRenderers\OGL11Renderer.h" />
     <ClInclude Include="Level.h" />
@@ -32,6 +33,7 @@
     <ClInclude Include="TextureManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="GfxRenderers\OGL11Renderer.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Network.cpp" />
