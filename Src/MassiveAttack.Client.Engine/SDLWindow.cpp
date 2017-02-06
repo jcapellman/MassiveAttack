@@ -196,6 +196,7 @@ void SDLWindow::Init()
 
 	auto flags = IMG_INIT_JPG | IMG_INIT_PNG;
 	IMG_Init(flags);
+	TTF_Init();
 
 	_gfxRenderer = new OGL11Renderer;
 

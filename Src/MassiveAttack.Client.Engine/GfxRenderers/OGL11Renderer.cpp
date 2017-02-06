@@ -24,11 +24,11 @@ ReturnSet<int> OGL11Renderer::LoadTexture(string fileName) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	
-	GLenum textureFormat;
+	GLenum textureFormat = GL_BGR_EXT;
 
 	GLint bpp = result.ReturnValue->format->BytesPerPixel;
 
-	if (bpp == 4)
+	if (bpp == 4)	// 32 bit
 	{
 		if (result.ReturnValue->format->Rmask == 0x000000ff) {
 			textureFormat = GL_RGBA;
@@ -40,7 +40,7 @@ ReturnSet<int> OGL11Renderer::LoadTexture(string fileName) {
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);
 	}
-	else if (bpp == 3)
+	else if (bpp == 3)	// 24 bit
 	{
 		if (result.ReturnValue->format->Rmask == 0x000000ff) {
 			textureFormat = GL_RGB;
