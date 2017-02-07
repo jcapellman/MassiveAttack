@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\MassiveAttack.Client\IGameStates.h" />
     <ClInclude Include="Common\ReturnSet.h" />
     <ClInclude Include="Config\ConfigParser.h" />
     <ClInclude Include="FontManager.h" />
