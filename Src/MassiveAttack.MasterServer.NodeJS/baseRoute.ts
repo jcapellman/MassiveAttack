@@ -6,7 +6,7 @@ export abstract class BaseRoute {
         private router: any;
         private redisFactory: RedisFactory;
 
-        constructor(rootpath: string) {            
+        protected constructor(rootpath: string) {            
             this.rootpath = Config.API_PREFIX + rootpath;
 
             const express = require('express');

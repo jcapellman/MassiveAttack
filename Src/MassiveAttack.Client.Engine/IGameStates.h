@@ -4,7 +4,8 @@
 class IGameStates {
 public:
 	virtual ~IGameStates() = default;
-	virtual void Render() = 0;
+	virtual LEVELGEOMETRY* GetGeometry() = 0;
+	virtual bool Init() = 0;
 };
 
 #endif

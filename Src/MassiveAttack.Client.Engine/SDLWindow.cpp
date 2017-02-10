@@ -127,8 +127,7 @@ void SDLWindow::process_events(void)
 
 void SDLWindow::MainLoop()
 {
-
-	while (1) {
+	while (true) {
 		process_events();
 
 		Render();
@@ -137,8 +136,8 @@ void SDLWindow::MainLoop()
 
 void SDLWindow::Render()
 {
-	static int T0 = 0;
-	static int Frames = 0;
+	static auto T0 = 0;
+	static auto Frames = 0;
 
 	_gfxRenderer->Render(xpos, zpos, walkbias, yrot, xrot);
 
@@ -149,8 +148,8 @@ void SDLWindow::Render()
 		int t = SDL_GetTicks();
 
 		if (t - T0 >= 300) {
-			double seconds = (t - T0) / 1000.0;
-			double fps = Frames / seconds;
+			auto seconds = (t - T0) / 1000.0;
+			auto fps = Frames / seconds;
 
 			string caption;
 
@@ -173,6 +172,13 @@ void SDLWindow::writeLog(const char * logMessage)
 	file.close();
 }
 
+void SDLWindow::SetGameState(IGameStates * gameState)
+{
+	this->m_currentGameState = gameState;
+
+	_gfxRenderer->LoadGeometry(this->m_currentGameState->GetGeometry());
+}
+
 void SDLWindow::Init()
 {
 	int videoFlags;
@@ -183,7 +189,7 @@ void SDLWindow::Init()
 
 	videoFlags = SDL_WINDOW_OPENGL;
 	videoFlags |= SDL_GL_DOUBLEBUFFER;
-
+	
 	ConfigParser config("base/config.cfg");
 
 	this->width = config.GetInt("XRES");
@@ -201,16 +207,6 @@ void SDLWindow::Init()
 	_gfxRenderer = new OGL11Renderer;
 
 	_gfxRenderer->Init(width, height);
-
-	Level level;
-
-	auto levelResult = level.LoadLevel("E1M1.map");
-
-	if (levelResult.HasError()) {
-		return;
-	}
-
-	_gfxRenderer->LoadGeometry(levelResult.ReturnValue);
 
 	xrot = 0.0f;
 	walkbias = 0.0f;
