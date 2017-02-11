@@ -1,7 +1,6 @@
 # MassiveAttack
 
-What started out as a MonoGame using my 2k16 SOA turned into a return to using OpenGL with C++.  The version 1.0 goal is to provide a cross-platform online only game.
-
+What started out as a MonoGame using my 2k16 SOA turned into a return to using OpenGL with C++.  The version 1.0 goal is to provide a cross-platform online only game.  The focus will be on over the top fun with friends or against other gamers.
 ##Components
 - Game Server: C++ coupled with Kafka
 - Master Game Server: REST Service NodeJS (TypeScript) with Redis and Kafka
