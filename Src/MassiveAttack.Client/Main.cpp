@@ -10,18 +10,18 @@ int main(int argc, char *argv[])
 	SDLWindow sdl_window;
 
 	sdl_window.Init();
-
-	MainGameState * main_game_state;
-
-	if (!main_game_state->Init())
+	
+	MainGameState * main_game_state = new MainGameState();
+	
+	if (!main_game_state->Init("E1M1.map"))
 	{
-		cout << "Failed to hit game state" << endl;
+		cout << "Failed to load level" << endl;
 
 		return 0;
 	}
-
+	
 	sdl_window.SetGameState(main_game_state);
-
+	
 	sdl_window.MainLoop();
 
 	return 0;

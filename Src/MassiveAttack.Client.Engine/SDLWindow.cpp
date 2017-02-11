@@ -176,7 +176,11 @@ void SDLWindow::SetGameState(IGameStates * gameState)
 {
 	this->m_currentGameState = gameState;
 
-	_gfxRenderer->LoadGeometry(this->m_currentGameState->GetGeometry());
+	auto result = _gfxRenderer->LoadGeometry(this->m_currentGameState->GetGeometry());
+
+	if (result.HasError()) {
+		this->writeLog("Failed to set state");
+	}
 }
 
 void SDLWindow::Init()

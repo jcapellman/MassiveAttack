@@ -9,7 +9,7 @@ class MainGameState : public IGameStates
 public:
 	LEVELGEOMETRY* GetGeometry();
 
-	bool Init();
+	bool Init(string argument);
 private:
 	LEVELGEOMETRY * m_level;
 };
