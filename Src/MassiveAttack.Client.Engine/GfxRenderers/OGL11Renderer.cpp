@@ -73,7 +73,9 @@ void OGL11Renderer::LoadTextureDefinitions()
 }
 
 ReturnSet<bool> OGL11Renderer::Shutdown() {
-	glDeleteLists(this->dlID, 1);
+	for (int x = 0; x < this->m_displayLists.size(); x++) {
+		glDeleteLists(this->m_displayLists[x], 1);
+	}
 
 	return ReturnSet<bool>(true);
 }
@@ -112,7 +114,9 @@ void OGL11Renderer::Render(RENDER_PARAMETERS rParams) {
 
 	glTranslatef(rParams.GetParamFloat(RPARAM_XPOS), 0.0f, rParams.GetParamFloat(RPARAM_ZPOS));
 
-	glCallList(dlID);
+	for (int x = 0; x < this->m_displayLists.size(); x++) {
+		glCallList(this->m_displayLists[x]);
+	}
 }
 
 ReturnSet<bool> OGL11Renderer::LoadGeometry(LEVELGEOMETRY * level) {
@@ -120,8 +124,10 @@ ReturnSet<bool> OGL11Renderer::LoadGeometry(LEVELGEOMETRY * level) {
 
 	unordered_map<int, int> textures;
 
-	dlID = glGenLists(1);
+	auto dlID = glGenLists(1);
 
+	this->m_displayLists.push_back(dlID);
+	
 	glNewList(dlID, GL_COMPILE);
 
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);

@@ -26,9 +26,8 @@ private:
 	ReturnSet<int> LoadTexture(string fileName);
 	void LoadTextureDefinitions();
 
-	GLuint dlID;
-
 	unordered_map<int, string> _textureDB;
+	vector<GLuint> m_displayLists;
 };
 
 #endif
