@@ -22,6 +22,7 @@ public:
 	void Render(RENDER_PARAMETERS rParams);
 	ReturnSet<bool> LoadGeometry(LEVELGEOMETRY * level);
 	ReturnSet<bool> Shutdown();
+	void ClearRenderQueue();
 private:
 	ReturnSet<int> LoadTexture(string fileName);
 	void LoadTextureDefinitions();

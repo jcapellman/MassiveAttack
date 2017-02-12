@@ -73,9 +73,7 @@ void OGL11Renderer::LoadTextureDefinitions()
 }
 
 ReturnSet<bool> OGL11Renderer::Shutdown() {
-	for (int x = 0; x < this->m_displayLists.size(); x++) {
-		glDeleteLists(this->m_displayLists[x], 1);
-	}
+	this->ClearRenderQueue();
 
 	return ReturnSet<bool>(true);
 }
@@ -116,6 +114,13 @@ void OGL11Renderer::Render(RENDER_PARAMETERS rParams) {
 
 	for (int x = 0; x < this->m_displayLists.size(); x++) {
 		glCallList(this->m_displayLists[x]);
+	}
+}
+
+void OGL11Renderer::ClearRenderQueue() {
+	// TODO Clear Textures
+	for (int x = 0; x < this->m_displayLists.size(); x++) {
+		glDeleteLists(this->m_displayLists[x], 1);
 	}
 }
 

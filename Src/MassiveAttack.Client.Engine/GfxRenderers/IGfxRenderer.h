@@ -16,6 +16,7 @@ public:
 	virtual ReturnSet<bool> Shutdown() = 0;
 	virtual ReturnSet<bool> LoadGeometry(LEVELGEOMETRY * level) = 0;
 	virtual void Render(RENDER_PARAMETERS rParams) = 0;
+	virtual void ClearRenderQueue() = 0;
 private:
 	virtual ReturnSet<int> LoadTexture(string fileName) = 0;
 };
