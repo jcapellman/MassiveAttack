@@ -9,7 +9,7 @@ export class ServerRoute extends br.BaseRoute {
     }
 
     getServerList(req, res) {
-        super.getRedisFactory().get("ServerList", (err, reply) => res.json({ message: reply }));
+        super.getRedisFactory().hget("ServerList", "name", (err, reply) => res.json({ message: reply }));
     }
 
     // Add Server List to processing list
