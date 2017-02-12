@@ -102,20 +102,15 @@ ReturnSet<bool> OGL11Renderer::Init(int width, int height) {
 	return ReturnSet<bool>(true);
 }
 
-void OGL11Renderer::Render(float xpos, float zpos, float walkbias, float yrot, float xrot) {
+void OGL11Renderer::Render(RENDER_PARAMETERS rParams) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glLoadIdentity();
 
-	GLfloat xtrans = -xpos;
-	GLfloat ztrans = -zpos;
-	GLfloat ytrans = -walkbias - 0.25f;
-	GLfloat sceneroty = 0 - yrot;
+	glRotatef(rParams.GetParamFloat(RPARAM_XPOS), 1.0f, 0, 0);
+	glRotatef(0 - rParams.GetParamFloat(RPARAM_YROT), 0, 1.0f, 0);
 
-	glRotatef(xrot, 1.0f, 0, 0);
-	glRotatef(sceneroty, 0, 1.0f, 0);
-
-	glTranslatef(xtrans, 0.0f, ztrans);
+	glTranslatef(rParams.GetParamFloat(RPARAM_XPOS), 0.0f, rParams.GetParamFloat(RPARAM_ZPOS));
 
 	glCallList(dlID);
 }

@@ -139,7 +139,7 @@ void SDLWindow::Render()
 	static auto T0 = 0;
 	static auto Frames = 0;
 
-	_gfxRenderer->Render(xpos, zpos, walkbias, yrot, xrot);
+	_gfxRenderer->Render(this->m_renderParameters);
 
 	SDL_GL_SwapWindow(m_window);
 
@@ -212,7 +212,8 @@ void SDLWindow::Init()
 
 	_gfxRenderer->Init(width, height);
 
-	xrot = 0.0f;
-	walkbias = 0.0f;
-	walkbiasangle = 0.0f;
+	this->m_renderParameters = RENDER_PARAMETERS();
+
+	this->m_renderParameters.SetParamString(RPARAM_XROT, "0.0f");
+	this->m_renderParameters.SetParamString(RPARAM_YROT, "0.0f");
 }

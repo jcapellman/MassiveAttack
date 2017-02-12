@@ -28,6 +28,7 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Network.h" />
+    <ClInclude Include="RenderParameters.h" />
     <ClInclude Include="SDLWindow.h" />
     <ClInclude Include="SfxRenderers\ISfxRenderer.h" />
     <ClInclude Include="SfxRenderers\SDLRenderer.h" />

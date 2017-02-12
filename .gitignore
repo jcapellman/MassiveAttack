@@ -14,3 +14,5 @@ node_modules/
 *.js
 *.js.map
 typings/
+/Game/MassiveAttack.Client.ilk
+/Game/MassiveAttack.Client.pdb

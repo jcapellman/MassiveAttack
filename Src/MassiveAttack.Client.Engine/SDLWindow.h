@@ -8,6 +8,7 @@
 #include "GfxRenderers/IGfxRenderer.h"
 #include "Config\ConfigParser.h"
 #include "IGameStates.h"
+#include "RenderParameters.h"
 
 class SDLWindow
 {
@@ -27,6 +28,7 @@ public:
 private:	
 	IGfxRenderer * _gfxRenderer;
 	IGameStates * m_currentGameState;
+	RENDER_PARAMETERS m_renderParameters;
 
 	SDL_Window* m_window;
 	SDL_GLContext m_glcontext;

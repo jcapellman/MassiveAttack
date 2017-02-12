@@ -19,7 +19,7 @@ public:
 	}
 
 	ReturnSet<bool> Init(int width, int height);
-	void Render(float xpos, float zpos, float walkbias, float yrot, float xrot);
+	void Render(RENDER_PARAMETERS rParams);
 	ReturnSet<bool> LoadGeometry(LEVELGEOMETRY * level);
 	ReturnSet<bool> Shutdown();
 private:
