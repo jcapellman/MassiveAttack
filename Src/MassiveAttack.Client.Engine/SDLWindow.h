@@ -9,6 +9,7 @@
 #include "Config\ConfigParser.h"
 #include "IGameStates.h"
 #include "RenderParameters.h"
+#include "ErrorLogger.h"
 
 class SDLWindow
 {
@@ -29,6 +30,7 @@ private:
 	IGfxRenderer * _gfxRenderer;
 	IGameStates * m_currentGameState;
 	RENDER_PARAMETERS m_renderParameters;
+	ErrorLogger m_errorLogger;
 
 	SDL_Window* m_window;
 	SDL_GLContext m_glcontext;
@@ -61,7 +63,7 @@ private:
 	float _mouseX;
 	float _mouseY;
 
-	static void writeLog(const char * logMessage);
+	void writeLog(const char * logMessage);
 };
 
 #endif

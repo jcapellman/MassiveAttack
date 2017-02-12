@@ -163,13 +163,7 @@ void SDLWindow::Render()
 
 void SDLWindow::writeLog(const char * logMessage)
 {
-	ofstream file;
-
-	file.open("output.log");
-
-	file << logMessage << endl;
-
-	file.close();
+	this->m_errorLogger.WriteError(logMessage);
 }
 
 void SDLWindow::SetGameState(IGameStates * gameState)
@@ -186,6 +180,8 @@ void SDLWindow::SetGameState(IGameStates * gameState)
 void SDLWindow::Init()
 {
 	int videoFlags;
+
+	this->m_errorLogger = ErrorLogger();
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 	

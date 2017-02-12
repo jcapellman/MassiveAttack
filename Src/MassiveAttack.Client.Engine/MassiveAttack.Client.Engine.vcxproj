@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="Common\ReturnSet.h" />
     <ClInclude Include="Config\ConfigParser.h" />
+    <ClInclude Include="ErrorLogger.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="GfxRenderers\IGfxRenderer.h" />
     <ClInclude Include="GfxRenderers\OGL11Renderer.h" />
