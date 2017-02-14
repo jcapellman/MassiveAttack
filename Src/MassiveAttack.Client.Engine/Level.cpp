@@ -15,7 +15,7 @@ ReturnSet<LEVELGEOMETRY*> Level::LoadLevel(char* fileName)
 	input_file >> line;
 
 	level = new LEVELGEOMETRY[atoi(line.c_str())];
-	int idx = 0;
+	auto idx = 0;
 
 	while (!input_file.eof())
 	{

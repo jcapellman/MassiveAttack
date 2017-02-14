@@ -7,9 +7,15 @@
 class MainGameState : public IGameStates
 {
 public:
-	LEVELGEOMETRY* GetGeometry();
+	virtual ~MainGameState() = default;
+	LEVELGEOMETRY* GetGeometry() override;
 
-	bool Init(string argument);
+	bool Init(string argument) override;
+
+	MainGameState()
+	{
+		m_level = nullptr;
+	}
 private:
 	LEVELGEOMETRY * m_level;
 };

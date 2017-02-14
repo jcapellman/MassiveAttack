@@ -1,10 +1,10 @@
 #ifndef __LEVEL__
 #define __LEVEL__
 
-#include "Main.h"
 #include "Common/ReturnSet.h"
+#include "GfxRenderers/IGfxRenderer.h"
 
-typedef struct LEVELGEOMETRY
+struct LEVELGEOMETRY
 {
 	int textureID;
 	int Scale;
@@ -28,7 +28,7 @@ typedef struct LEVELGEOMETRY
 
 class Level {
 	public:
-		ReturnSet<LEVELGEOMETRY*> LoadLevel(char * fileName);
+	static ReturnSet<LEVELGEOMETRY*> LoadLevel(char * fileName);
 };
 
 #endif

@@ -7,13 +7,15 @@ LEVELGEOMETRY* MainGameState::GetGeometry()
 
 bool MainGameState::Init(string argument)
 {
-	Level level;
+	auto level = Level();
 
-	auto levelResult = level.LoadLevel((char*)argument.c_str());
+	auto levelResult = level.LoadLevel(const_cast<char*>(argument.c_str()));
 
 	if (levelResult.HasError()) {
 		return false;
 	}
+
+	m_level = levelResult.ReturnValue;
 
 	return true;
 }

@@ -14,7 +14,16 @@ class RENDER_PARAMETERS
 public:
 	string GetParamString(string key)
 	{
-		return this->m_parameters.at(key);
+		std::unordered_map<std::string, std::string>::iterator iterator;
+
+		iterator = m_parameters.find(key);
+
+		if (iterator == m_parameters.end())
+		{
+			return nullptr;
+		}
+
+		return this->m_parameters[key];
 	}
 
 	int GetParamInt(string key)
@@ -28,21 +37,22 @@ public:
 	{
 		auto val = this->GetParamString(key);
 
-		return atof(val.c_str());
+		return stof(val.c_str());
 	}
 
 	void SetParamString(string key, string val)
 	{
-		this->m_parameters.insert_or_assign(key, val);
+		this->m_parameters[key] = val;
 	}
 
 	void SetParamInt(string key, int val)
 	{
+		this->SetParamString(key, to_string(val));
 	}
 
 	void SetParamFloat(string key, float val)
 	{
-		
+		this->SetParamString(key, to_string(val));
 	}
 private:
 	unordered_map<string, string> m_parameters;

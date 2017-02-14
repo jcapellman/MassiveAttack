@@ -2,7 +2,7 @@
 #include "../TextureManager.h"
 
 ReturnSet<int> OGL11Renderer::LoadTexture(string fileName) {
-	TextureManager tm;
+	TextureManager tm = TextureManager();
 
 	fileName = TEXTURES_ROOT_PATH + fileName;
 
@@ -94,7 +94,7 @@ ReturnSet<bool> OGL11Renderer::Init(int width, int height) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	gluPerspective(45.0f, (GLfloat)width / (GLfloat)height, 0.1f, 100.0f);
+	gluPerspective(45.0f, GLfloat(width) / GLfloat(height), 0.1f, 100.0f);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -112,14 +112,14 @@ void OGL11Renderer::Render(RENDER_PARAMETERS rParams) {
 
 	glTranslatef(rParams.GetParamFloat(RPARAM_XPOS), 0.0f, rParams.GetParamFloat(RPARAM_ZPOS));
 
-	for (int x = 0; x < this->m_displayLists.size(); x++) {
+	for (unsigned int x = 0; x < this->m_displayLists.size(); x++) {
 		glCallList(this->m_displayLists[x]);
 	}
 }
 
 void OGL11Renderer::ClearRenderQueue() {
 	// TODO Clear Textures
-	for (int x = 0; x < this->m_displayLists.size(); x++) {
+	for (unsigned int x = 0; x < this->m_displayLists.size(); x++) {
 		glDeleteLists(this->m_displayLists[x], 1);
 	}
 }
@@ -141,7 +141,7 @@ ReturnSet<bool> OGL11Renderer::LoadGeometry(LEVELGEOMETRY * level) {
 
 	int textureID;
 	
-	for (int x = 0; x < sizeof(level); x++)
+	for (auto x = 0; x < sizeof(level); x++)
 	{
 		if (!textures.count(level[x].textureID))
 		{

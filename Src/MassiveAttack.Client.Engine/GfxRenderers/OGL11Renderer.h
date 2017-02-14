@@ -14,17 +14,18 @@
 
 class OGL11Renderer : public IGfxRenderer {
 public:
-	string GetName() {
+	string GetName() override
+	{
 		return "OpenGL 1.1";
 	}
 
-	ReturnSet<bool> Init(int width, int height);
-	void Render(RENDER_PARAMETERS rParams);
-	ReturnSet<bool> LoadGeometry(LEVELGEOMETRY * level);
-	ReturnSet<bool> Shutdown();
-	void ClearRenderQueue();
+	ReturnSet<bool> Init(int width, int height) override;
+	void Render(RENDER_PARAMETERS rParams) override;
+	ReturnSet<bool> LoadGeometry(LEVELGEOMETRY * level) override;
+	ReturnSet<bool> Shutdown() override;
+	void ClearRenderQueue() override;
 private:
-	ReturnSet<int> LoadTexture(string fileName);
+	ReturnSet<int> LoadTexture(string fileName) override;
 	void LoadTextureDefinitions();
 
 	unordered_map<int, string> _textureDB;
