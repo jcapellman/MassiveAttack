@@ -3,5 +3,5 @@
     static readonly REDIS_DATABASE_PORT = 6379;
     static readonly HTTP_SERVER_PORT = 1338;
     static readonly API_PREFIX = "/api/v1/";
-    static readonly RABBITMQ_HOST = "127.0.0.1";
+    static readonly KAFKA_HOST = "127.0.0.1:2181";
 }

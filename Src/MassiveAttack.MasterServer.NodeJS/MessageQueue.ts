@@ -1,27 +1,22 @@
 ﻿export class MessageQueue {
-    private readonly connection: any;
+    private readonly producer: any;
 
-    constructor(amqpHost:string) {
-        const amqp = require("amqp");
+    constructor(kafkaHost:string) {
+        var kafka = require('kafka-node'),
+            Producer = kafka.Producer,
+            client = new kafka.Client(kafkaHost);
 
-        this.connection = amqp.createConnection({ host: amqpHost });
-        
-        this.connection.on("error", e => {
-            console.log("Error from amqp: ", e);
-        });
-        
-        this.connection.on("ready", () => {
-            console.log("Connected to RabbitMQ");
+        this.producer = new Producer(client);
+
+        this.producer.on('ready', () => {
+            console.log("Kafka Connected");
         });
     }
 
-    addMessage(messege:string) {
-        this.connection.queue(messege, q => {
-            q.bind("#");
-
-            q.subscribe(message => {
-                console.log(message);
+    addMessage(request: string) {
+        this.producer.send(request,
+            (err, data) => {
+                console.log(data);
             });
-        });
     }
 }

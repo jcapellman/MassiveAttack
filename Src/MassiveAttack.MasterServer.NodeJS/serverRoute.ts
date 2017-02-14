@@ -16,7 +16,7 @@ export class ServerRoute extends br.BaseRoute {
     addToServerList(req:Request, res:Response) {
         const obj = req.body;
 
-        const messq = new mq.MessageQueue(Config.RABBITMQ_HOST);
+        const messq = new mq.MessageQueue(Config.KAFKA_HOST);
 
         messq.addMessage(obj);
     }
