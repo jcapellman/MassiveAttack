@@ -2,27 +2,37 @@
 
 ReturnSet<LEVELGEOMETRY*> Level::LoadLevel(char* fileName)
 {
-	char fullFileName[255];
+	try {
+		char fullFileName[255];
 
-	strcpy(fullFileName, MAPS_ROOT_PATH.c_str());
-	strcat(fullFileName, fileName);
+		strcpy(fullFileName, MAPS_ROOT_PATH.c_str());
+		strcat(fullFileName, fileName);
 
-	ifstream input_file(fullFileName);
+		ifstream input_file(fullFileName);
 
-	LEVELGEOMETRY * level;
-	string line;
+		if (!input_file.good())
+		{
+			throw exception(fullFileName);
+		}
 
-	input_file >> line;
+		LEVELGEOMETRY * level;
+		string line;
 
-	level = new LEVELGEOMETRY[atoi(line.c_str())];
-	auto idx = 0;
+		input_file >> line;
 
-	while (!input_file.eof())
+		level = new LEVELGEOMETRY[atoi(line.c_str())];
+		auto idx = 0;
+
+		while (!input_file.eof())
+		{
+			input_file >> level[idx].textureID >> level[idx].Scale >> level[idx].X1 >> level[idx].Y1 >> level[idx].Z1 >> level[idx].X2 >> level[idx].Y2 >> level[idx].Z2 >> level[idx].X3 >> level[idx].Y3 >> level[idx].Z3 >> level[idx].X4 >> level[idx].Y4 >> level[idx].Z4;
+
+			idx++;
+		}
+
+		return ReturnSet<LEVELGEOMETRY*>(level);
+	} catch (exception ex)
 	{
-		input_file >> level[idx].textureID >> level[idx].Scale >> level[idx].X1 >> level[idx].Y1 >> level[idx].Z1 >> level[idx].X2 >> level[idx].Y2 >> level[idx].Z2 >> level[idx].X3 >> level[idx].Y3 >> level[idx].Z3 >> level[idx].X4 >> level[idx].Y4 >> level[idx].Z4;
-
-		idx++;
+		return ReturnSet<LEVELGEOMETRY*>(ex);
 	}
-
-	return ReturnSet<LEVELGEOMETRY*>(level);
 }
