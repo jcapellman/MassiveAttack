@@ -1,9 +1,9 @@
 #include "SDLWindow.h"
 #include "GfxRenderers/OGL11Renderer.h"
 
-void SDLWindow::Quit()
+void SDLWindow::Quit() const
 {
-	_gfxRenderer->Shutdown();
+	m_gfxRenderer->Shutdown();
 
 	SDL_GL_DeleteContext(m_glcontext);
 
@@ -99,8 +99,6 @@ void SDLWindow::handle_mouse_motion(SDL_MouseMotionEvent* motion)
 		{
 			xrot += 0.5f;
 		}
-
-		
 	}
 
 }
@@ -134,12 +132,12 @@ void SDLWindow::MainLoop()
 	}
 }
 
-void SDLWindow::Render()
+void SDLWindow::Render() const
 {
 	static auto T0 = 0;
 	static auto Frames = 0;
 
-	_gfxRenderer->Render(this->m_renderParameters);
+	m_gfxRenderer->Render(this->m_renderParameters);
 
 	SDL_GL_SwapWindow(m_window);
 
@@ -170,7 +168,7 @@ void SDLWindow::SetGameState(IGameStates * gameState)
 {
 	this->m_currentGameState = gameState;
 
-	auto result = _gfxRenderer->LoadGeometry(this->m_currentGameState->GetGeometry());
+	auto result = m_gfxRenderer->LoadGeometry(this->m_currentGameState->GetGeometry());
 
 	if (result.HasError()) {
 		this->writeLog("Failed to set state");
@@ -204,9 +202,9 @@ void SDLWindow::Init()
 	IMG_Init(flags);
 	TTF_Init();
 
-	_gfxRenderer = new OGL11Renderer;
+	m_gfxRenderer = new OGL11Renderer;
 
-	_gfxRenderer->Init(width, height);
+	m_gfxRenderer->Init(width, height);
 
 	this->m_renderParameters = RENDER_PARAMETERS();
 

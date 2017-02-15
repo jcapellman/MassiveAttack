@@ -2,7 +2,7 @@
 #include "../TextureManager.h"
 
 ReturnSet<int> OGL11Renderer::LoadTexture(string fileName) {
-	TextureManager tm = TextureManager();
+	auto tm = TextureManager();
 
 	fileName = TEXTURES_ROOT_PATH + fileName;
 
@@ -60,6 +60,11 @@ ReturnSet<int> OGL11Renderer::LoadTexture(string fileName) {
 void OGL11Renderer::LoadTextureDefinitions()
 {
 	ifstream textureDefFile("base/texture.db");
+
+	if (!textureDefFile.good())
+	{
+		return;
+	}
 
 	string fileName;
 	int id;

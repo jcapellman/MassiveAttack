@@ -25,9 +25,11 @@ public:
 		this->xpos = 1.5f;
 		this->zpos = 6.0f;
 		this->yrot = 0.0f;
+		this->m_glcontext = nullptr;
+		this->m_gfxRenderer = nullptr;
 	}
 private:	
-	IGfxRenderer * _gfxRenderer;
+	IGfxRenderer * m_gfxRenderer;
 	IGameStates * m_currentGameState;
 	RENDER_PARAMETERS m_renderParameters;
 	ErrorLogger m_errorLogger;
@@ -39,8 +41,8 @@ private:
 	void handle_mouse_motion(SDL_MouseMotionEvent* motion);
 	void process_events(void);
 
-	void Render();
-	void Quit();
+	void Render() const;
+	void Quit() const;
 
 	SDL_Surface *surface;
 

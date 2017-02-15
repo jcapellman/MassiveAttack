@@ -5,10 +5,15 @@
 class ConfigParser
 {
 public:
-	ConfigParser(char * fileName) {
+	explicit ConfigParser(char * fileName) {
 		m_configMap = unordered_map<string, string>();
 
 		ifstream configFile(fileName);
+
+		if (!configFile.good())
+		{
+			return;
+		}
 
 		string value;
 		string key;
