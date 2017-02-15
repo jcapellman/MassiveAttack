@@ -6,7 +6,7 @@ class ConfigParser
 {
 public:
 	ConfigParser(char * fileName) {
-		_configMap = unordered_map<string, string>();
+		m_configMap = unordered_map<string, string>();
 
 		ifstream configFile(fileName);
 
@@ -15,24 +15,31 @@ public:
 
 		while (configFile >> key >> value)
 		{
-			_configMap.emplace(key, value);
+			m_configMap.emplace(key, value);
 		}
 
 		configFile.close();
 	}
 
 	int GetInt(char * key) {
-		string stringValue = GetString(key);
+		auto stringValue = GetString(key);
 
-		int intValue = atoi(const_cast<char*>(stringValue.c_str()));
+		auto intValue = atoi(const_cast<char*>(stringValue.c_str()));
 
 		return intValue;
 	}
 
 	string GetString(char * key) {
-		return _configMap.at(key);
+		auto iterator = m_configMap.find(key);
+
+		if (iterator == m_configMap.end())
+		{
+			return "";
+		}
+
+		return m_configMap[key];
 	}
 private:	
-	unordered_map<string, string> _configMap;
+	unordered_map<string, string> m_configMap;
 };
 

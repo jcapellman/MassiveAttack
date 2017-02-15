@@ -14,13 +14,11 @@ class RENDER_PARAMETERS
 public:
 	string GetParamString(string key)
 	{
-		std::unordered_map<std::string, std::string>::iterator iterator;
-
-		iterator = m_parameters.find(key);
+		auto iterator = m_parameters.find(key);
 
 		if (iterator == m_parameters.end())
 		{
-			return nullptr;
+			return "";
 		}
 
 		return this->m_parameters[key];
