@@ -14,7 +14,7 @@
 class SDLWindow
 {
 public:
-	void Init();
+	void Init(string appName);
 
 	void MainLoop();
 
@@ -66,6 +66,8 @@ private:
 	float _mouseY;
 
 	void writeLog(const char * logMessage);
+
+	string m_appName;
 };
 
 #endif

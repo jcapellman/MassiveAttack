@@ -9,9 +9,9 @@ int main(int argc, char *argv[])
 {
 	SDLWindow sdl_window;
 
-	sdl_window.Init();
+	sdl_window.Init("Massive Attack");
 	
-	MainGameState * main_game_state = new MainGameState();
+	auto main_game_state = new MainGameState();
 	
 	if (!main_game_state->Init("E1M1.map"))
 	{

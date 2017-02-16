@@ -119,6 +119,7 @@ void SDLWindow::process_events(void)
 		case SDL_QUIT:
 			Quit();
 			break;
+		default: ;
 		}
 	}
 }
@@ -149,9 +150,7 @@ void SDLWindow::Render() const
 			auto seconds = (t - T0) / 1000.0;
 			auto fps = Frames / seconds;
 
-			string caption;
-
-			caption = "Massive Attack - " + to_string(round(fps)) + " fps";
+			auto caption = this->m_appName + to_string(round(fps)) + " fps";
 
 			T0 = t;
 			Frames = 0;
@@ -175,8 +174,10 @@ void SDLWindow::SetGameState(IGameStates * gameState)
 	}
 }
 
-void SDLWindow::Init()
+void SDLWindow::Init(string appName)
 {
+	this->m_appName = appName;
+
 	int videoFlags;
 
 	this->m_errorLogger = ErrorLogger();
@@ -190,11 +191,16 @@ void SDLWindow::Init()
 	
 	ConfigParser config("base/config.cfg");
 
-	this->width = config.GetInt("XRES");
+	this->width = config.GetInt(CONFIG_XRES);
 
-	this->height = config.GetInt("YRES");
+	this->height = config.GetInt(CONFIG_YRES);
 
-	m_window = SDL_CreateWindow("Massive Attack", 0, 0, this->width, this->height, videoFlags);
+	if (!config.GetBool(CONFIG_FULLSCREEN))
+	{
+		videoFlags |= SDL_WINDOW_SHOWN;
+	}
+
+	m_window = SDL_CreateWindow(this->m_appName.c_str(), 0, 0, this->width, this->height, videoFlags);
 
 	m_glcontext = SDL_GL_CreateContext(m_window);
 

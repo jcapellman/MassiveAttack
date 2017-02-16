@@ -2,6 +2,11 @@
 
 #include "../Main.h"
 
+#define CONFIG_XRES "XRES"
+#define CONFIG_YRES "YRES"
+#define CONFIG_BPP "BPP"
+#define CONFIG_FULLSCREEN "FULLSCREEN"
+
 class ConfigParser
 {
 public:
@@ -24,6 +29,11 @@ public:
 		}
 
 		configFile.close();
+	}
+
+	bool GetBool(char * key)
+	{
+		return GetString(key) == "1";
 	}
 
 	int GetInt(char * key) {
