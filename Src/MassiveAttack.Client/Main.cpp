@@ -8,14 +8,17 @@
 int main(int argc, char *argv[])
 {
 	SDLWindow sdl_window;
+	auto errLogger = ErrorLogger();
 
 	sdl_window.Init("Massive Attack");
 	
 	auto main_game_state = new MainGameState();
 	
-	if (!main_game_state->Init("E1M1.map"))
+	auto initresult = main_game_state->Init("E1M1.map");
+
+	if (initresult.HasError())
 	{
-		cout << "Failed to load level" << endl;
+		errLogger.WriteError("Failed to load level: " + initresult.ExceptionString());
 
 		return 0;
 	}

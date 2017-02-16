@@ -5,17 +5,22 @@ LEVELGEOMETRY* MainGameState::GetGeometry()
 	return m_level;
 }
 
-bool MainGameState::Init(string argument)
+ReturnSet<bool> MainGameState::Init(string argument)
 {
-	auto level = Level();
+	try {
+		auto level = Level();
 
-	auto levelResult = level.LoadLevel(const_cast<char*>(argument.c_str()));
+		auto levelResult = level.LoadLevel(const_cast<char*>(argument.c_str()));
 
-	if (levelResult.HasError()) {
-		return false;
+		if (levelResult.HasError()) {
+			return false;
+		}
+
+		m_level = levelResult.ReturnValue;
+
+		return ReturnSet<bool>(true);
+	} catch (exception ex)
+	{
+		return ReturnSet<bool>(ex);
 	}
-
-	m_level = levelResult.ReturnValue;
-
-	return true;
 }

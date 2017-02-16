@@ -10,7 +10,7 @@ public:
 	virtual ~MainGameState() = default;
 	LEVELGEOMETRY* GetGeometry() override;
 
-	bool Init(string argument) override;
+	ReturnSet<bool> Init(string argument) override;
 
 	MainGameState()
 	{
