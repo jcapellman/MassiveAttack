@@ -1,5 +1,5 @@
 #include "OGL11Renderer.h"
-#include "../TextureManager.h"
+#include "../Managers/TextureManager.h"
 
 ReturnSet<int> OGL11Renderer::LoadTexture(string fileName) {
 	auto tm = TextureManager();

@@ -1,8 +1,8 @@
 #ifndef __TEXTUREMANAGER__
 #define __TEXTUREMANAGER__
 
-#include "Main.h"
-#include "Common/ReturnSet.h"
+#include "../Main.h"
+#include "../Common/ReturnSet.h"
 
 class TextureManager
 {

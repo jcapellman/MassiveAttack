@@ -10,7 +10,7 @@
 #pragma comment(lib, "OpenGL32.lib")
 #pragma comment(lib, "GLu32.lib")
 
-#include "../Level.h"
+#include "../Helpers/Level.h"
 
 class OGL11Renderer : public IGfxRenderer {
 public:

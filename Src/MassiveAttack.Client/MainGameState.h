@@ -1,8 +1,8 @@
 #ifndef __MAINGAMESTATE__
 #define __MAINGAMESTATE__
 
-#include "../MassiveAttack.Client.Engine/IGameStates.h"
-#include "../MassiveAttack.Client.Engine/Level.h"
+#include "../MassiveAttack.Client.Engine/Helpers/Level.h"
+#include "../MassiveAttack.Client.Engine/Interfaces/IGameStates.h"
 
 class MainGameState : public IGameStates
 {

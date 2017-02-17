@@ -1,6 +1,7 @@
 #ifndef __SPLASHSTATE__
 #define __SPLASHSTATE__
-#include "../MassiveAttack.Client.Engine/IGameStates.h"
+
+#include "../MassiveAttack.Client.Engine/Interfaces/IGameStates.h"
 
 class SplashState : public IGameStates
 {

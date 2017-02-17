@@ -1,7 +1,7 @@
 #ifndef __RENDER_PARAMETERS__
 #define __RENDER_PARAMETERS__
 
-#include "Main.h"
+#include "../Main.h"
 
 #define RPARAM_XPOS "XPOS"
 #define RPARAM_YPOS "YPOS"

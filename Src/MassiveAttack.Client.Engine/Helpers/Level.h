@@ -1,8 +1,9 @@
 #ifndef __LEVEL__
 #define __LEVEL__
 
-#include "Common/ReturnSet.h"
-#include "GfxRenderers/IGfxRenderer.h"
+#include "../Common/ReturnSet.h"
+#include "../GfxRenderers/IGfxRenderer.h"
+#include "../Common/ReturnSet.h"
 
 struct LEVELGEOMETRY
 {

@@ -21,28 +21,26 @@
   <ItemGroup>
     <ClInclude Include="Common\ReturnSet.h" />
     <ClInclude Include="Config\ConfigParser.h" />
-    <ClInclude Include="ErrorLogger.h" />
-    <ClInclude Include="FontManager.h" />
     <ClInclude Include="GfxRenderers\IGfxRenderer.h" />
     <ClInclude Include="GfxRenderers\OGL11Renderer.h" />
-    <ClInclude Include="IGameStates.h" />
-    <ClInclude Include="Level.h" />
+    <ClInclude Include="Helpers\ErrorLogger.h" />
+    <ClInclude Include="Helpers\Level.h" />
+    <ClInclude Include="Helpers\RenderParameters.h" />
+    <ClInclude Include="Interfaces\IGameStates.h" />
     <ClInclude Include="Main.h" />
-    <ClInclude Include="Network.h" />
-    <ClInclude Include="RenderParameters.h" />
+    <ClInclude Include="Managers\FontManager.h" />
+    <ClInclude Include="Managers\TextureManager.h" />
     <ClInclude Include="SDLWindow.h" />
     <ClInclude Include="SfxRenderers\ISfxRenderer.h" />
     <ClInclude Include="SfxRenderers\SDLRenderer.h" />
-    <ClInclude Include="TextureManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="GfxRenderers\OGL11Renderer.cpp" />
-    <ClCompile Include="Level.cpp" />
-    <ClCompile Include="Network.cpp" />
+    <ClCompile Include="Helpers\Level.cpp" />
+    <ClCompile Include="Managers\FontManager.cpp" />
+    <ClCompile Include="Managers\TextureManager.cpp" />
     <ClCompile Include="SDLWindow.cpp" />
     <ClCompile Include="SfxRenderers\SDLRenderer.cpp" />
-    <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Source.def" />

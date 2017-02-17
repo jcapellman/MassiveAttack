@@ -5,7 +5,7 @@
 
 #include "../Main.h"
 #include "../Common/ReturnSet.h"
-#include "../RenderParameters.h"
+#include "../Helpers/RenderParameters.h"
 
 struct LEVELGEOMETRY;
 

@@ -1,4 +1,6 @@
 #include "FontManager.h"
+#include <SDL.h>
+#include "../Common/ReturnSet.h"
 
 ReturnSet<SDL_Surface*> FontManager::RenderText(string fontName, char * text, int size, SDL_Color foregroundColor, SDL_Color backgroundColor)
 {

@@ -1,8 +1,8 @@
 #ifndef __FONTMANAGER__
 #define __FONTMANAGER__
 
-#include "Main.h"
-#include "Common/ReturnSet.h"
+#include "../Main.h"
+#include "../Common/ReturnSet.h"
 
 class FontManager
 {

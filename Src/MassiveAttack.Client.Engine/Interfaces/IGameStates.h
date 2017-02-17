@@ -1,7 +1,7 @@
 #ifndef __IGAMESTATES__
 #define __IGAMESTATES__
 
-#include "Level.h"
+#include "../Helpers/Level.h"
 
 class IGameStates {
 protected:

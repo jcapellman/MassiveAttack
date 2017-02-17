@@ -3,13 +3,13 @@
 
 #include "Main.h"
 #include "Common\ReturnSet.h"
-#include "TextureManager.h"
-#include "Level.h"
+#include "Managers\TextureManager.h"
+#include "Helpers\Level.h"
 #include "GfxRenderers/IGfxRenderer.h"
 #include "Config\ConfigParser.h"
-#include "IGameStates.h"
-#include "RenderParameters.h"
-#include "ErrorLogger.h"
+#include "Interfaces\IGameStates.h"
+#include "Helpers\RenderParameters.h"
+#include "Helpers\ErrorLogger.h"
 
 class SDLWindow
 {
