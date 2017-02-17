@@ -8,14 +8,15 @@
 
 class SDLRenderer : public ISfxRenderer {
 public:
-	string GetName() {
-		return "SDL 1.2";
+	string GetName() override
+	{
+		return "SDL 2";
 	}
 
-	ReturnSet<bool> Init();
-	ReturnSet<int> LoadSound(char * fileName);
-	void PlaySound(int soundID);
-	ReturnSet<bool> Shutdown();
+	ReturnSet<bool> Init() override;
+	ReturnSet<int> LoadSound(char * fileName) override;
+	void PlaySound(int soundID) override;
+	ReturnSet<bool> Shutdown() override;
 private:
 	SDL_AudioSpec * _current;
 };
