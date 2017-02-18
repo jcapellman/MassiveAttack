@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __RETURN_SET__
+#define __RETURN_SET__
+
 #include "../Main.h"
 
 template <class T> 
@@ -8,24 +10,25 @@ public:
 
 	string ExceptionString() const
 	{
-		return _exception.what();
+		return m_exception.what();
 	}
 
 	bool HasError() const
 	{
-		return _hasError;
+		return m_hasError;
 	}
 
-	ReturnSet(exception exception) {
-		_exception = exception;
-		_hasError = true;
+	explicit ReturnSet(exception exception) {
+		m_exception = exception;
+		m_hasError = true;
 	}
 
-	ReturnSet(T objectValue) {
+	explicit ReturnSet(T objectValue) {
 		ReturnValue = objectValue;
-		_hasError = false;
+		m_hasError = false;
 	}
 private:
-	exception _exception;
-	bool _hasError;
+	exception m_exception;
+	bool m_hasError;
 };
+#endif
