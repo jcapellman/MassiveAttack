@@ -13,7 +13,7 @@ ReturnSet<bool> MainGameState::Init(string argument)
 		auto levelResult = level.LoadLevel(const_cast<char*>(argument.c_str()));
 
 		if (levelResult.HasError()) {
-			return ReturnSet<bool>(false);
+			throw exception(levelResult.ExceptionString().c_str());
 		}
 
 		m_level = levelResult.ReturnValue;
