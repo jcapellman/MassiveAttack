@@ -18,7 +18,7 @@ public:
 
 		if (iterator == m_parameters.end())
 		{
-			return "";
+			return getDefault(key);
 		}
 
 		return this->m_parameters[key];
@@ -53,6 +53,31 @@ public:
 		this->SetParamString(key, to_string(val));
 	}
 private:
+	static string getDefault(string key)
+	{
+		if (key == RPARAM_XPOS)
+		{
+			return "1.5f";
+		}
+
+		if (key == RPARAM_ZPOS)
+		{
+			return "6.0f";
+		}
+
+		if (key == RPARAM_YROT)
+		{
+			return "0.0f";
+		}
+
+		if (key == RPARAM_XROT || key == RPARAM_YPOS)
+		{
+			return "0.0";
+		}
+
+		return "";
+	}
+	
 	unordered_map<string, string> m_parameters;
 };
 #endif

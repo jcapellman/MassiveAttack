@@ -21,10 +21,10 @@ void SDLWindow::handle_key_down(SDL_Keysym* keysym)
 			Quit();
 			break;
 		case SDLK_RIGHT:
-			yrot -= 1.5f;
+			m_renderParameters.SetParamFloat(RPARAM_YROT, m_renderParameters.GetParamFloat(RPARAM_YROT) - 1.5f);			
 			break;
 		case SDLK_LEFT:
-			yrot += 1.5f;
+			m_renderParameters.SetParamFloat(RPARAM_YROT, m_renderParameters.GetParamFloat(RPARAM_YROT) + 1.5f);
 			break;
 		case SDLK_a:
 			xpos -= (float)sin(yrot * piover180) * 10.5f;
@@ -197,10 +197,10 @@ void SDLWindow::Init(string appName)
 
 	if (!config.GetBool(CONFIG_FULLSCREEN))
 	{
-		videoFlags |= SDL_WINDOW_SHOWN;
+		videoFlags |= SDL_WINDOW_RESIZABLE;
 	}
 
-	m_window = SDL_CreateWindow(this->m_appName.c_str(), 0, 0, this->width, this->height, videoFlags);
+	m_window = SDL_CreateWindow(this->m_appName.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, this->width, this->height, videoFlags);
 
 	m_glcontext = SDL_GL_CreateContext(m_window);
 
@@ -216,4 +216,6 @@ void SDLWindow::Init(string appName)
 
 	this->m_renderParameters.SetParamString(RPARAM_XROT, "0.0f");
 	this->m_renderParameters.SetParamString(RPARAM_YROT, "0.0f");
+	this->m_renderParameters.SetParamString(RPARAM_XPOS, "1.5f");
+	this->m_renderParameters.SetParamString(RPARAM_ZPOS, "6.0f");
 }

@@ -111,11 +111,15 @@ void OGL11Renderer::Render(RENDER_PARAMETERS rParams) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glLoadIdentity();
+	
+	auto xtrans = rParams.GetParamFloat(RPARAM_XPOS) * -1;
+	auto ztrans = rParams.GetParamFloat(RPARAM_ZPOS) * -1;	
+	auto sceneroty = 0 - rParams.GetParamFloat(RPARAM_YROT);
 
-	glRotatef(rParams.GetParamFloat(RPARAM_XPOS), 1.0f, 0, 0);
-	glRotatef(0 - rParams.GetParamFloat(RPARAM_YROT), 0, 1.0f, 0);
+	glRotatef(rParams.GetParamFloat(RPARAM_XROT), 1.0f, 0, 0);
+	glRotatef(sceneroty, 0, 1.0f, 0);
 
-	glTranslatef(rParams.GetParamFloat(RPARAM_XPOS), 0.0f, rParams.GetParamFloat(RPARAM_ZPOS));
+	glTranslatef(xtrans, 0.0f, ztrans);
 
 	for (unsigned int x = 0; x < this->m_displayLists.size(); x++) {
 		glCallList(this->m_displayLists[x]);
