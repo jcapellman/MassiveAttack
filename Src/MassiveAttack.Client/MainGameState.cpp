@@ -25,6 +25,39 @@ ReturnSet<bool> MainGameState::Init(string argument)
 	}
 }
 
+void MainGameState::PassMouseEvent(float mouseX, Sint32 motionX, float mouseY, Sint32 motionY, RENDER_PARAMETERS * render_parameters)
+{
+	if (mouseX != motionX) {
+		auto yrot = render_parameters->GetParamFloat(RPARAM_YROT);
+
+		if (mouseX > motionX)
+		{
+			yrot += 0.5f;
+		}
+		else
+		{
+			yrot -= 0.5f;
+		}
+
+		render_parameters->SetParamFloat(RPARAM_YROT, yrot);
+	}
+
+	if (mouseY != motionY) {
+		auto xrot = render_parameters->GetParamFloat(RPARAM_XROT);
+
+		if (mouseY > motionY && xrot > -100)
+		{
+			xrot -= 0.5f;
+		}
+		else if (mouseY < motionY && xrot < 100)
+		{
+			xrot += 0.5f;
+		}
+
+		render_parameters->SetParamFloat(RPARAM_XROT, xrot);
+	}
+}
+
 void MainGameState::PassKeyEvent(Sint32 sym, RENDER_PARAMETERS * render_parameters)
 {
 	auto yrot = render_parameters->GetParamFloat(RPARAM_YROT);

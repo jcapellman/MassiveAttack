@@ -13,6 +13,7 @@ public:
 	ReturnSet<bool> Init(string argument) override;
 
 	void PassKeyEvent(Sint32 sym, RENDER_PARAMETERS * render_parameters) override;
+	void PassMouseEvent(float mouseX, Sint32 motionX, float mouseY, Sint32 motionY, RENDER_PARAMETERS * render_parameters) override;
 
 	MainGameState()
 	{

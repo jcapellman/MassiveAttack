@@ -28,30 +28,7 @@ void SDLWindow::handle_key_down(SDL_Keysym* keysym)
 
 void SDLWindow::handle_mouse_motion(SDL_MouseMotionEvent* motion)
 {
-
-	if (motion->x != this->_mouseX)
-	{
-		if (this->_mouseX > motion->x)
-		{
-			yrot += 0.5f;
-		} else
-		{
-			yrot -= 0.5f;
-		}
-	}
-
-	if (motion->y != this->_mouseY)
-	{
-		if (this->_mouseY > motion->y && xrot > -100)
-		{
-			xrot -= 0.5f;
-		}
-		else if (this->_mouseY < motion->y && xrot < 100)
-		{
-			xrot += 0.5f;
-		}
-	}
-
+	m_currentGameState->PassMouseEvent(this->_mouseX, motion->x, this->_mouseY, motion->y, &m_renderParameters);
 }
 
 void SDLWindow::process_events(void)
