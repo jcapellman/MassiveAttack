@@ -12,6 +12,8 @@ public:
 
 	ReturnSet<bool> Init(string argument) override;
 
+	void PassKeyEvent(Sint32 sym, RENDER_PARAMETERS * render_parameters) override;
+
 	MainGameState()
 	{
 		m_level = nullptr;

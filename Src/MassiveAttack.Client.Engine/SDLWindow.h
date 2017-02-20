@@ -51,7 +51,6 @@ private:
 
 	int textureID;
 
-	const float piover180 = 0.0174532925f;
 	float heading;
 	float xpos;
 	float zpos;

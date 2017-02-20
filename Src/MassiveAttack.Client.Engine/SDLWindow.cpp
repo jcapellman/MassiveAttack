@@ -20,57 +20,8 @@ void SDLWindow::handle_key_down(SDL_Keysym* keysym)
 		case SDLK_ESCAPE:
 			Quit();
 			break;
-		case SDLK_RIGHT:
-			m_renderParameters.SetParamFloat(RPARAM_YROT, m_renderParameters.GetParamFloat(RPARAM_YROT) - 1.5f);			
-			break;
-		case SDLK_LEFT:
-			m_renderParameters.SetParamFloat(RPARAM_YROT, m_renderParameters.GetParamFloat(RPARAM_YROT) + 1.5f);
-			break;
-		case SDLK_a:
-			xpos -= (float)sin(yrot * piover180) * 10.5f;
-			zpos += (float)cos(yrot * piover180) * 0.5f;
-
-			if (walkbiasangle >= 359.0f)
-				walkbiasangle = 0.0f;
-			else
-				walkbiasangle += 10;
-
-			walkbias = (float)sin(walkbiasangle * piover180) / 20.0f;
-			break;
-		case SDLK_d:
-			xpos += (float)sin(yrot * piover180) * 10.5f;
-			zpos -= (float)cos(yrot * piover180) * 0.5f;
-
-			if (walkbiasangle >= 359.0f)
-				walkbiasangle = 0.0f;
-			else
-				walkbiasangle += 10;
-
-			walkbias = (float)sin(walkbiasangle * piover180) / 20.0f;
-			break;
-		case SDLK_w:
-			xpos -= (float)sin(yrot * piover180) * 0.5f;
-			zpos -= (float)cos(yrot * piover180) * 0.5f;
-
-			if (walkbiasangle >= 359.0f)
-				walkbiasangle = 0.0f;
-			else
-				walkbiasangle += 10;
-
-			walkbias = (float)sin(walkbiasangle * piover180) / 20.0f;
-			break;
-		case SDLK_s:
-			xpos += (float)sin(yrot * piover180) * 0.5f;
-			zpos += (float)cos(yrot * piover180) * 0.5f;
-
-			if (walkbiasangle <= 1.0f)
-				walkbiasangle = 359.0f;
-			else
-				walkbiasangle -= 10;
-
-			walkbias = (float)sin(walkbiasangle * piover180) / 20.0f;
-			break;
 		default:
+			m_currentGameState->PassKeyEvent(keysym->sym, &m_renderParameters);
 			break;
 	}
 }

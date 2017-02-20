@@ -23,6 +23,9 @@
 #pragma comment(lib, "SDL2_image.lib")
 #pragma comment(lib, "SDL2_ttf.lib")
 
+
+#define PIOVER180 0.0174532925f
+
 using namespace std;
 
 const string TEXTURES_ROOT_PATH = "base/textures/";
