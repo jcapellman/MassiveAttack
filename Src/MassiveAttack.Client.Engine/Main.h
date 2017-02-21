@@ -5,6 +5,7 @@
 #include <SDL.h>
 #include <SDL_Image.h>
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 #include <windows.h>
 
 #include <string>
@@ -22,7 +23,7 @@
 #pragma comment(lib, "legacy_stdio_definitions.lib")
 #pragma comment(lib, "SDL2_image.lib")
 #pragma comment(lib, "SDL2_ttf.lib")
-
+#pragma comment(lib, "SDL2_mixer.lib")
 
 #define PIOVER180 0.0174532925f
 

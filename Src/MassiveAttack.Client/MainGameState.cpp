@@ -35,7 +35,7 @@ void MainGameState::PassMouseEvent(float mouseX, Sint32 motionX, float mouseY, S
 			yrot += 0.5f;
 		}
 		else
-		{
+		{	
 			yrot -= 0.5f;
 		}
 

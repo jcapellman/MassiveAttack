@@ -3,6 +3,8 @@
 #ifndef __SDLRENDERER__
 #define __SDLRENDERER__
 
+#define SDL_MIXER_BUFFER 1024
+
 #include "ISfxRenderer.h"
 #include "../Main.h"
 
@@ -18,7 +20,7 @@ public:
 	void PlaySound(int soundID) override;
 	ReturnSet<bool> Shutdown() override;
 private:
-	SDL_AudioSpec * _current;
+	unordered_map<int, Mix_Music*> m_sounds;
 };
 
 #endif
