@@ -16,8 +16,8 @@ public:
 	}
 
 	ReturnSet<bool> Init() override;
-	ReturnSet<int> LoadSound(char * fileName) override;
-	void PlaySound(int soundID) override;
+	ReturnSet<int> Load(char * fileName) override;
+	void Play(int soundID, bool loop = false) override;
 	ReturnSet<bool> Shutdown() override;
 private:
 	unordered_map<int, Mix_Music*> m_sounds;

@@ -1,5 +1,6 @@
 #include "SDLWindow.h"
 #include "GfxRenderers/OGL11Renderer.h"
+#include "SfxRenderers/SDLRenderer.h"
 
 void SDLWindow::Quit() const
 {
@@ -146,4 +147,8 @@ void SDLWindow::Init(string appName)
 	this->m_renderParameters.SetParamString(RPARAM_YROT, "0.0f");
 	this->m_renderParameters.SetParamString(RPARAM_XPOS, "1.5f");
 	this->m_renderParameters.SetParamString(RPARAM_ZPOS, "6.0f");
+
+	m_sfxRenderer = new SDLRenderer;
+
+	m_sfxRenderer->Init();
 }

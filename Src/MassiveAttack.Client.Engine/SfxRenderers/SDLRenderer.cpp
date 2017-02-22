@@ -17,10 +17,15 @@ ReturnSet<bool> SDLRenderer::Init()
 	return ReturnSet<bool>(true);
 }
 
-ReturnSet<int> SDLRenderer::LoadSound(char* fileName)
+ReturnSet<int> SDLRenderer::Load(char* fileName)
 {
 	try {
 		auto sndFile = Mix_LoadMUS(fileName);
+
+		if (sndFile == nullptr)
+		{
+			throw exception(fileName);
+		}
 
 		auto index = m_sounds.size();
 
@@ -33,7 +38,7 @@ ReturnSet<int> SDLRenderer::LoadSound(char* fileName)
 	}
 }
 
-void SDLRenderer::PlaySoundW(int soundID)
+void SDLRenderer::Play(int soundID, bool loop)
 {
 	auto iterator = m_sounds.find(soundID);
 
@@ -44,12 +49,17 @@ void SDLRenderer::PlaySoundW(int soundID)
 
 	auto sound = this->m_sounds[soundID];
 
-	Mix_PlayMusic(sound, 0);
+	if (loop)
+	{
+		Mix_PlayMusic(sound, 1);
+	} else {
+		Mix_PlayMusic(sound, 0);
+	}
 }
 
 ReturnSet<bool> SDLRenderer::Shutdown()
 {
-	for (auto x = 0; x < m_sounds.size(); x++)
+	for (unsigned int x = 0; x < m_sounds.size(); x++)
 	{
 		Mix_FreeMusic(m_sounds[x]);
 	}

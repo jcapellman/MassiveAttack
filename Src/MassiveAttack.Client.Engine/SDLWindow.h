@@ -10,6 +10,7 @@
 #include "Interfaces\IGameStates.h"
 #include "Helpers\RenderParameters.h"
 #include "Helpers\ErrorLogger.h"
+#include "SfxRenderers/ISfxRenderer.h"
 
 class SDLWindow
 {
@@ -27,9 +28,12 @@ public:
 		this->yrot = 0.0f;
 		this->m_glcontext = nullptr;
 		this->m_gfxRenderer = nullptr;
+		this->m_sfxRenderer = nullptr;
 	}
 private:	
 	IGfxRenderer * m_gfxRenderer;
+	ISfxRenderer * m_sfxRenderer;
+
 	IGameStates * m_currentGameState;
 	RENDER_PARAMETERS m_renderParameters;
 	ErrorLogger m_errorLogger;
