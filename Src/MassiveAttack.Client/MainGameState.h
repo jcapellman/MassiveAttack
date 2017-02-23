@@ -3,6 +3,7 @@
 
 #include "../MassiveAttack.Client.Engine/Helpers/Level.h"
 #include "../MassiveAttack.Client.Engine/Interfaces/IGameStates.h"
+#include "../MassiveAttack.Client.Engine/Helpers/EventQueue.h"
 
 class MainGameState : public IGameStates
 {
@@ -12,7 +13,7 @@ public:
 
 	ReturnSet<bool> Init(string argument) override;
 
-	void PassKeyEvent(Sint32 sym, RENDER_PARAMETERS * render_parameters) override;
+	void PassKeyEvent(Sint32 sym, RENDER_PARAMETERS * render_parameters, EventQueue * eventQueue) override;
 	void PassMouseEvent(float mouseX, Sint32 motionX, float mouseY, Sint32 motionY, RENDER_PARAMETERS * render_parameters) override;
 
 	MainGameState()

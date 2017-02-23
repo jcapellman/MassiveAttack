@@ -11,6 +11,7 @@
 #include "Helpers\RenderParameters.h"
 #include "Helpers\ErrorLogger.h"
 #include "SfxRenderers/ISfxRenderer.h"
+#include "Helpers/EventQueue.h"
 
 class SDLWindow
 {
@@ -31,12 +32,15 @@ public:
 		this->m_sfxRenderer = nullptr;
 	}
 private:	
+	void processEventQueue();
+
 	IGfxRenderer * m_gfxRenderer;
 	ISfxRenderer * m_sfxRenderer;
 
 	IGameStates * m_currentGameState;
 	RENDER_PARAMETERS m_renderParameters;
 	ErrorLogger m_errorLogger;
+	EventQueue m_eventQueue;
 
 	SDL_Window* m_window;
 	SDL_GLContext m_glcontext;

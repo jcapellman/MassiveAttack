@@ -1,4 +1,5 @@
 #include "MainGameState.h"
+#include "../MassiveAttack.Client.Engine/Helpers/EventQueue.h"
 
 LEVELGEOMETRY* MainGameState::GetGeometry()
 {
@@ -58,7 +59,7 @@ void MainGameState::PassMouseEvent(float mouseX, Sint32 motionX, float mouseY, S
 	}
 }
 
-void MainGameState::PassKeyEvent(Sint32 sym, RENDER_PARAMETERS * render_parameters)
+void MainGameState::PassKeyEvent(Sint32 sym, RENDER_PARAMETERS * render_parameters, EventQueue * eventQueue)
 {
 	auto yrot = render_parameters->GetParamFloat(RPARAM_YROT);
 	auto xpos = render_parameters->GetParamFloat(RPARAM_XPOS);
@@ -94,6 +95,7 @@ void MainGameState::PassKeyEvent(Sint32 sym, RENDER_PARAMETERS * render_paramete
 			render_parameters->SetParamFloat(RPARAM_XPOS, xpos);
 			render_parameters->SetParamFloat(RPARAM_ZPOS, zpos);
 
+			eventQueue->AddEvent(AUDIO_PLAY_SOUND, "1");
 			break;
 		case SDLK_s:
 			xpos += static_cast<float>(sin(yrot * PIOVER180)) * 0.5f;

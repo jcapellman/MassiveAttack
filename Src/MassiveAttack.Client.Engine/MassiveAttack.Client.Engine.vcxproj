@@ -24,6 +24,7 @@
     <ClInclude Include="GfxRenderers\IGfxRenderer.h" />
     <ClInclude Include="GfxRenderers\OGL11Renderer.h" />
     <ClInclude Include="Helpers\ErrorLogger.h" />
+    <ClInclude Include="Helpers\EventQueue.h" />
     <ClInclude Include="Helpers\Level.h" />
     <ClInclude Include="Helpers\RenderParameters.h" />
     <ClInclude Include="Interfaces\IGameStates.h" />

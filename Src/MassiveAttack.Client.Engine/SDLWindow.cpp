@@ -22,9 +22,27 @@ void SDLWindow::handle_key_down(SDL_Keysym* keysym)
 			Quit();
 			break;
 		default:
-			m_currentGameState->PassKeyEvent(keysym->sym, &m_renderParameters);
+			m_currentGameState->PassKeyEvent(keysym->sym, &m_renderParameters, &m_eventQueue);
 			break;
 	}
+
+	processEventQueue();
+}
+
+void SDLWindow::processEventQueue()
+{
+	EVENT event;
+
+	do {
+		event = m_eventQueue.GetEvent();
+
+		switch (event.EventType)
+		{
+		case AUDIO_PLAY_SOUND:
+			m_sfxRenderer->Play(atoi(event.argument.c_str()));
+			break;
+		}
+	} while (!m_eventQueue.IsEmpty());
 }
 
 void SDLWindow::handle_mouse_motion(SDL_MouseMotionEvent* motion)
