@@ -1,6 +1,6 @@
 #include "SDLRenderer.h"
 
-ReturnSet<bool> SDLRenderer::Init()
+ReturnSet<bool> SDLRenderer::Init(int numChannels)
 {
 	int audio_rate, audio_channels;
 	Uint16 audio_format;
@@ -9,7 +9,7 @@ ReturnSet<bool> SDLRenderer::Init()
 
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, SDL_MIXER_BUFFER);
 	
-	Mix_AllocateChannels(0);
+	Mix_AllocateChannels(numChannels);
 	Mix_QuerySpec(&audio_rate, &audio_format, &audio_channels);
 
 	m_sounds = unordered_map<int, Mix_Music*>();

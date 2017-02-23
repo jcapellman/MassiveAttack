@@ -150,5 +150,5 @@ void SDLWindow::Init(string appName)
 
 	m_sfxRenderer = new SDLRenderer;
 
-	m_sfxRenderer->Init();
+	m_sfxRenderer->Init(config.GetInt(CONFIG_AUDIO_NUM_CHANNELS));
 }

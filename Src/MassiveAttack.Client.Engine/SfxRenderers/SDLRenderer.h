@@ -15,7 +15,7 @@ public:
 		return "SDL 2";
 	}
 
-	ReturnSet<bool> Init() override;
+	ReturnSet<bool> Init(int numChannels) override;
 	ReturnSet<int> Load(char * fileName) override;
 	void Play(int soundID, bool loop = false) override;
 	ReturnSet<bool> Shutdown() override;
