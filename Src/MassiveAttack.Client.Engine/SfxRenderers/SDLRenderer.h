@@ -16,11 +16,11 @@ public:
 	}
 
 	ReturnSet<bool> Init(int numChannels) override;
-	ReturnSet<int> Load(char * fileName) override;
-	void Play(int soundID, bool loop = false) override;
+	ReturnSet<bool> Load(string fileName) override;
+	void Play(string fileName, bool loop = false) override;
 	ReturnSet<bool> Shutdown() override;
 private:
-	unordered_map<int, Mix_Music*> m_sounds;
+	unordered_map<string, Mix_Music*> m_sounds;
 };
 
 #endif

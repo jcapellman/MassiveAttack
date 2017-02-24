@@ -39,8 +39,10 @@ void SDLWindow::processEventQueue()
 		switch (event.EventType)
 		{
 		case AUDIO_PLAY_SOUND:
-			m_sfxRenderer->Play(atoi(event.argument.c_str()));
+			m_sfxRenderer->Play(event.argument);
 			break;
+		case AUDIO_LOAD_SOUND:
+			m_sfxRenderer->Load(event.argument);
 		}
 	} while (!m_eventQueue.IsEmpty());
 }
