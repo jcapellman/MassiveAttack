@@ -2,6 +2,7 @@
 #include "../MassiveAttack.Client.Engine/SDLWindow.h"
 #include "MainGameState.h"
 #include <iostream>
+#include "InitializingState.h"
 
 #pragma comment(lib, "../Debug/MassiveAttack.Client.Engine.lib")
 
@@ -11,6 +12,7 @@ int main(int argc, char *argv[])
 	auto errLogger = ErrorLogger();
 
 	sdl_window.Init("Massive Attack");
+	
 	
 	auto main_game_state = new MainGameState();
 	
@@ -25,6 +27,21 @@ int main(int argc, char *argv[])
 	
 	sdl_window.SetGameState(main_game_state, initresult.ReturnValue);
 	
+	/*
+	auto initializing_state = new InitializingState();
+
+	auto initresult = initializing_state->Init("");
+
+	if (initresult.HasError())
+	{
+		errLogger.WriteError("Failed to load level: " + initresult.ExceptionString());
+
+		return 0;
+	}
+
+	sdl_window.SetGameState(initializing_state, initresult.ReturnValue);
+	*/
+
 	sdl_window.MainLoop();
 
 	return 0;

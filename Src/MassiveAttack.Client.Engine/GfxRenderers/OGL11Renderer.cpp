@@ -133,7 +133,7 @@ void OGL11Renderer::ClearRenderQueue() {
 	}
 }
 
-ReturnSet<bool> OGL11Renderer::LoadGeometry(LEVELGEOMETRY * level) {
+ReturnSet<bool> OGL11Renderer::LoadLevel(LEVELGEOMETRY * level) {
 	LoadTextureDefinitions();
 
 	unordered_map<int, int> textures;

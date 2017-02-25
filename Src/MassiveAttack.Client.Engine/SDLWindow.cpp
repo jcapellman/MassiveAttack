@@ -46,6 +46,19 @@ void SDLWindow::processEventQueue()
 			break;
 		case AUDIO_LOAD_SOUND:
 			m_sfxRenderer->LoadSound(result.ReturnValue.argument);
+			break;
+		case LEVEL_LOAD:
+			auto level = Level();
+
+			auto levelResult = level.LoadLevel(result.ReturnValue.argument);
+
+			if (levelResult.HasError()) {
+				throw exception(levelResult.ExceptionString().c_str());
+			}
+
+			m_gfxRenderer->LoadLevel(levelResult.ReturnValue);
+
+			break;
 		}
 	} while (!m_eventQueue.IsEmpty());
 }
@@ -121,11 +134,7 @@ void SDLWindow::SetGameState(IGameStates * gameState, EventQueue eventQueue)
 
 	m_eventQueue.AddEvents(eventQueue.GetEvents());
 
-	auto result = m_gfxRenderer->LoadGeometry(this->m_currentGameState->GetGeometry());
-
-	if (result.HasError()) {
-		this->writeLog("Failed to set state");
-	}
+	processEventQueue();
 }
 
 void SDLWindow::Init(string appName)

@@ -1,26 +1,12 @@
 #include "MainGameState.h"
 #include "../MassiveAttack.Client.Engine/Helpers/EventQueue.h"
 
-LEVELGEOMETRY* MainGameState::GetGeometry()
-{
-	return m_level;
-}
-
 ReturnSet<EventQueue> MainGameState::Init(string argument)
 {
 	try {
 		auto eventQueue = EventQueue();
 
-		auto level = Level();
-
-		auto levelResult = level.LoadLevel(const_cast<char*>(argument.c_str()));
-
-		if (levelResult.HasError()) {
-			throw exception(levelResult.ExceptionString().c_str());
-		}
-
-		m_level = levelResult.ReturnValue;
-
+		eventQueue.AddEvent(LEVEL_LOAD, argument);
 		eventQueue.AddEvent(AUDIO_LOAD_SOUND, "player/Footstep.wav");
 		eventQueue.AddEvent(AUDIO_LOAD_SOUND, "player/Backstep.wav");
 

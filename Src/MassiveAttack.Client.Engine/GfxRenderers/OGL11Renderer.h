@@ -21,7 +21,7 @@ public:
 
 	ReturnSet<bool> Init(int width, int height) override;
 	void Render(RENDER_PARAMETERS rParams) override;
-	ReturnSet<bool> LoadGeometry(LEVELGEOMETRY * level) override;
+	ReturnSet<bool> LoadLevel(LEVELGEOMETRY * level) override;
 	ReturnSet<bool> Shutdown() override;
 	void ClearRenderQueue() override;
 private:

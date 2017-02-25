@@ -1,18 +1,15 @@
 #include "Level.h"
 
-ReturnSet<LEVELGEOMETRY*> Level::LoadLevel(char* fileName)
+ReturnSet<LEVELGEOMETRY*> Level::LoadLevel(string fileName)
 {
 	try {
-		char fullFileName[255];
+		fileName = MAPS_ROOT_PATH + fileName;
 
-		strcpy_s(fullFileName, MAPS_ROOT_PATH.c_str());
-		strcat_s(fullFileName, fileName);
-
-		ifstream input_file(fullFileName);
+		ifstream input_file(fileName);
 
 		if (!input_file.good())
 		{
-			throw exception(fullFileName);
+			throw exception(fileName.c_str());
 		}
 
 		LEVELGEOMETRY * level;

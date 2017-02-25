@@ -29,7 +29,7 @@ struct LEVELGEOMETRY
 
 class Level {
 	public:
-	static ReturnSet<LEVELGEOMETRY*> LoadLevel(char * fileName);
+	static ReturnSet<LEVELGEOMETRY*> LoadLevel(string fileName);
 };
 
 #endif
