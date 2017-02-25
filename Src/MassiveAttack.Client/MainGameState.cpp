@@ -6,9 +6,11 @@ LEVELGEOMETRY* MainGameState::GetGeometry()
 	return m_level;
 }
 
-ReturnSet<bool> MainGameState::Init(string argument)
+ReturnSet<EventQueue> MainGameState::Init(string argument)
 {
 	try {
+		auto eventQueue = EventQueue();
+
 		auto level = Level();
 
 		auto levelResult = level.LoadLevel(const_cast<char*>(argument.c_str()));
@@ -19,10 +21,12 @@ ReturnSet<bool> MainGameState::Init(string argument)
 
 		m_level = levelResult.ReturnValue;
 
-		return ReturnSet<bool>(true);
+		eventQueue.AddEvent(AUDIO_LOAD_SOUND, "player/Footstep.wav");
+
+		return ReturnSet<EventQueue>(eventQueue);
 	} catch (exception ex)
 	{
-		return ReturnSet<bool>(ex);
+		return ReturnSet<EventQueue>(ex);
 	}
 }
 
@@ -95,7 +99,7 @@ void MainGameState::PassKeyEvent(Sint32 sym, RENDER_PARAMETERS * render_paramete
 			render_parameters->SetParamFloat(RPARAM_XPOS, xpos);
 			render_parameters->SetParamFloat(RPARAM_ZPOS, zpos);
 
-			eventQueue->AddEvent(AUDIO_PLAY_SOUND, "1");
+			eventQueue->AddEvent(AUDIO_PLAY_SOUND, "player/Footstep.wav");
 			break;
 		case SDLK_s:
 			xpos += static_cast<float>(sin(yrot * PIOVER180)) * 0.5f;

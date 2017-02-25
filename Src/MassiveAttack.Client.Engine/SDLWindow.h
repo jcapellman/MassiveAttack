@@ -20,7 +20,7 @@ public:
 
 	void MainLoop();
 
-	void SetGameState(IGameStates * gameState);
+	void SetGameState(IGameStates * gameState, EventQueue eventQueue);
 
 	SDLWindow()
 	{				

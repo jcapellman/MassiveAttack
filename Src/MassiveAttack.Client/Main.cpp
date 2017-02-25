@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 	
-	sdl_window.SetGameState(main_game_state);
+	sdl_window.SetGameState(main_game_state, initresult.ReturnValue);
 	
 	sdl_window.MainLoop();
 

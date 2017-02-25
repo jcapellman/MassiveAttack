@@ -34,6 +34,16 @@ class EventQueue
 			m_events.push(event);
 		}
 
+		void AddEvents(queue<EVENT> events)
+		{
+			while (!events.empty())
+			{
+				m_events.push(events.front());
+
+				events.pop();
+			}
+		}
+
 		EVENT GetEvent()
 		{
 			auto temp = m_events.front();
@@ -46,6 +56,11 @@ class EventQueue
 		bool IsEmpty() const
 		{
 			return m_events.empty();
+		}
+
+		queue<EVENT> GetEvents() const
+		{
+			return m_events;
 		}
 	private:
 		queue<EVENT> m_events;

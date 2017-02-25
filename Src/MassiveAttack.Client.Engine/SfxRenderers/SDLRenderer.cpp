@@ -20,6 +20,8 @@ ReturnSet<bool> SDLRenderer::Init(int numChannels)
 ReturnSet<bool> SDLRenderer::Load(string fileName)
 {
 	try {
+		fileName = SOUNDS_ROOT_PATH + fileName;
+
 		auto sndFile = Mix_LoadMUS(fileName.c_str());
 
 		if (sndFile == nullptr)

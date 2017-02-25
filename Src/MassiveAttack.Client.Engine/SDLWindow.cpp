@@ -112,9 +112,11 @@ void SDLWindow::writeLog(const char * logMessage)
 	this->m_errorLogger.WriteError(logMessage);
 }
 
-void SDLWindow::SetGameState(IGameStates * gameState)
+void SDLWindow::SetGameState(IGameStates * gameState, EventQueue eventQueue)
 {
 	this->m_currentGameState = gameState;
+
+	m_eventQueue.AddEvents(eventQueue.GetEvents());
 
 	auto result = m_gfxRenderer->LoadGeometry(this->m_currentGameState->GetGeometry());
 
