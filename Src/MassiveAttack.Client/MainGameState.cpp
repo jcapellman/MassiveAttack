@@ -22,6 +22,7 @@ ReturnSet<EventQueue> MainGameState::Init(string argument)
 		m_level = levelResult.ReturnValue;
 
 		eventQueue.AddEvent(AUDIO_LOAD_SOUND, "player/Footstep.wav");
+		eventQueue.AddEvent(AUDIO_LOAD_SOUND, "player/Backstep.wav");
 
 		return ReturnSet<EventQueue>(eventQueue);
 	} catch (exception ex)
@@ -107,6 +108,8 @@ void MainGameState::PassKeyEvent(Sint32 sym, RENDER_PARAMETERS * render_paramete
 
 			render_parameters->SetParamFloat(RPARAM_XPOS, xpos);
 			render_parameters->SetParamFloat(RPARAM_ZPOS, zpos);
+
+			eventQueue->AddEvent(AUDIO_PLAY_SOUND, "player/Backstep.wav");
 
 			break;
 		default:

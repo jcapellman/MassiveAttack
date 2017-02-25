@@ -40,14 +40,14 @@ ReturnSet<bool> SDLRenderer::Load(string fileName)
 
 void SDLRenderer::Play(string fileName, bool loop)
 {
-	auto iterator = m_sounds.find(fileName);
+	auto iterator = m_sounds.find(SOUNDS_ROOT_PATH + fileName);
 
 	if (iterator == m_sounds.end())
 	{
 		return;
 	}
 
-	auto sound = this->m_sounds[fileName];
+	auto sound = this->m_sounds[SOUNDS_ROOT_PATH + fileName];
 
 	if (loop)
 	{

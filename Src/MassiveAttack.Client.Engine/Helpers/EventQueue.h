@@ -44,13 +44,23 @@ class EventQueue
 			}
 		}
 
-		EVENT GetEvent()
+		ReturnSet<EVENT> GetEvent()
 		{
-			auto temp = m_events.front();
+			try {
+				if (m_events.empty())
+				{
+					throw exception("empty queue");
+				}
 
-			m_events.pop();
+				auto temp = m_events.front();
 
-			return temp;
+				m_events.pop();
+
+				return ReturnSet<EVENT>(temp);
+			}
+			catch (exception ex) {
+				return ReturnSet<EVENT>(ex);
+			}
 		}
 
 		bool IsEmpty() const

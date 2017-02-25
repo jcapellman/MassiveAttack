@@ -31,18 +31,21 @@ void SDLWindow::handle_key_down(SDL_Keysym* keysym)
 
 void SDLWindow::processEventQueue()
 {
-	EVENT event;
-
 	do {
-		event = m_eventQueue.GetEvent();
+		auto result = m_eventQueue.GetEvent();
 
-		switch (event.EventType)
+		if (result.HasError())
+		{
+			return;
+		}
+
+		switch (result.ReturnValue.EventType)
 		{
 		case AUDIO_PLAY_SOUND:
-			m_sfxRenderer->Play(event.argument);
+			m_sfxRenderer->Play(result.ReturnValue.argument);
 			break;
 		case AUDIO_LOAD_SOUND:
-			m_sfxRenderer->Load(event.argument);
+			m_sfxRenderer->Load(result.ReturnValue.argument);
 		}
 	} while (!m_eventQueue.IsEmpty());
 }
@@ -135,7 +138,7 @@ void SDLWindow::Init(string appName)
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 	
-	SDL_ShowCursor(0);
+	//SDL_ShowCursor(0);
 
 	videoFlags = SDL_WINDOW_OPENGL;
 	videoFlags |= SDL_GL_DOUBLEBUFFER;
