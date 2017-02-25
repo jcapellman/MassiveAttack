@@ -32,4 +32,5 @@ using namespace std;
 const string TEXTURES_ROOT_PATH = "base/textures/";
 const string MAPS_ROOT_PATH = "base/maps/";
 const string SOUNDS_ROOT_PATH = "base/sounds/";
+const string MUSIC_ROOT_PATH = "base/music/";
 const string FONTS_ROOT_PATH = "base/fonts/";

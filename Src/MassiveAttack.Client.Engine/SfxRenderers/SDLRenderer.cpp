@@ -12,17 +12,17 @@ ReturnSet<bool> SDLRenderer::Init(int numChannels)
 	Mix_AllocateChannels(numChannels);
 	Mix_QuerySpec(&audio_rate, &audio_format, &audio_channels);
 
-	m_sounds = unordered_map<string, Mix_Music*>();
+	m_sounds = unordered_map<string, Mix_Chunk*>();
 
 	return ReturnSet<bool>(true);
 }
 
-ReturnSet<bool> SDLRenderer::Load(string fileName)
+ReturnSet<bool> SDLRenderer::LoadSound(string fileName)
 {
 	try {
 		fileName = SOUNDS_ROOT_PATH + fileName;
 
-		auto sndFile = Mix_LoadMUS(fileName.c_str());
+		auto sndFile = Mix_LoadWAV(fileName.c_str());
 
 		if (sndFile == nullptr)
 		{
@@ -38,7 +38,44 @@ ReturnSet<bool> SDLRenderer::Load(string fileName)
 	}
 }
 
-void SDLRenderer::Play(string fileName, bool loop)
+ReturnSet<bool> SDLRenderer::LoadMusic(string fileName)
+{
+	try {
+		fileName = MUSIC_ROOT_PATH + fileName;
+
+		auto sndFile = Mix_LoadMUS(fileName.c_str());
+
+		if (sndFile == nullptr)
+		{
+			throw exception(fileName.c_str());
+		}
+
+		if (m_music != nullptr)
+		{
+			Mix_FreeMusic(m_music);
+		}
+
+		m_music = sndFile;
+
+		return ReturnSet<bool>(true);
+	}
+	catch (exception ex)
+	{
+		return ReturnSet<bool>(ex);
+	}
+}
+
+void SDLRenderer::PlayMusic()
+{
+	if (m_music == nullptr)
+	{
+		return;
+	}
+
+	Mix_PlayMusic(m_music, 1);
+}
+
+void SDLRenderer::PlaySound(string fileName, bool loop)
 {
 	auto iterator = m_sounds.find(SOUNDS_ROOT_PATH + fileName);
 
@@ -51,9 +88,9 @@ void SDLRenderer::Play(string fileName, bool loop)
 
 	if (loop)
 	{
-		Mix_PlayMusic(sound, 1);
+		Mix_PlayChannel(-1, sound, 1);
 	} else {
-		Mix_PlayMusic(sound, 0);
+		Mix_PlayChannel(-1, sound, 0);
 	}
 }
 
@@ -61,8 +98,10 @@ ReturnSet<bool> SDLRenderer::Shutdown()
 {
 	for (auto index : m_sounds)
 	{
-		Mix_FreeMusic(index.second);
+		Mix_FreeChunk(index.second);
 	}
+
+	Mix_FreeMusic(m_music);
 
 	Mix_CloseAudio();
 
