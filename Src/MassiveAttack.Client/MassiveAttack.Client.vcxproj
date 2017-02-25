@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="InitializingState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainGameState.cpp" />
     <ClCompile Include="SplashState.cpp" />
@@ -156,6 +157,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="InitializingState.h" />
     <ClInclude Include="MainGameState.h" />
     <ClInclude Include="SplashState.h" />
   </ItemGroup>
