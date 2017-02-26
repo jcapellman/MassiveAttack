@@ -11,7 +11,7 @@
 class ConfigParser
 {
 public:
-	explicit ConfigParser(char * fileName) {
+	explicit ConfigParser(string fileName) {
 		m_configMap = unordered_map<string, string>();
 
 		ifstream configFile(fileName);

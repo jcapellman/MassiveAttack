@@ -34,3 +34,5 @@ const string MAPS_ROOT_PATH = "base/maps/";
 const string SOUNDS_ROOT_PATH = "base/sounds/";
 const string MUSIC_ROOT_PATH = "base/music/";
 const string FONTS_ROOT_PATH = "base/fonts/";
+
+const string DEFAULT_CONFIG_FILE = "base/config.cfg";
