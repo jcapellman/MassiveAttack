@@ -73,7 +73,7 @@ void OGL11Renderer::AddUpdateText(string key, string content, string fontName, i
 
 	auto dlID = glGenLists(1);
 
-	this->m_displayLists.push_back(dlID);
+	this->m_2d_displayLists.push_back(dlID);
 
 	glNewList(dlID, GL_COMPILE);
 
@@ -81,17 +81,6 @@ void OGL11Renderer::AddUpdateText(string key, string content, string fontName, i
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-	glLoadIdentity();
-
-	gluOrtho2D(0, m_width, 0, m_height);
-	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	glLoadIdentity();
-
-	glDisable(GL_DEPTH_TEST);
-	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -109,12 +98,6 @@ void OGL11Renderer::AddUpdateText(string key, string content, string fontName, i
 	glEnd();
 
 	glDisable(GL_BLEND);
-	glEnable(GL_DEPTH_TEST);
-
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
 
 	glEndList();
 }
@@ -189,15 +172,38 @@ void OGL11Renderer::Render(RENDER_PARAMETERS rParams) {
 
 	glTranslatef(xtrans, 0.0f, ztrans);
 
-	for (unsigned int x = 0; x < this->m_displayLists.size(); x++) {
-		glCallList(this->m_displayLists[x]);
+	for (unsigned int x = 0; x < this->m_3d_displayLists.size(); x++) {
+		glCallList(this->m_3d_displayLists[x]);
 	}
+
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	glOrtho(0.0, m_width, m_height, 0.0, -1.0, 10.0);
+	glMatrixMode(GL_MODELVIEW);
+	
+	glLoadIdentity();
+	glDisable(GL_CULL_FACE);
+
+	glClear(GL_DEPTH_BUFFER_BIT);
+
+	for (unsigned int x = 0; x < this->m_2d_displayLists.size(); x++) {
+		glCallList(this->m_2d_displayLists[x]);
+	}
+
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
 }
 
 void OGL11Renderer::ClearRenderQueue() {
 	// TODO Clear Textures
-	for (unsigned int x = 0; x < this->m_displayLists.size(); x++) {
-		glDeleteLists(this->m_displayLists[x], 1);
+	for (unsigned int x = 0; x < this->m_2d_displayLists.size(); x++) {
+		glDeleteLists(this->m_2d_displayLists[x], 1);
+	}
+
+	for (unsigned int x = 0; x < this->m_3d_displayLists.size(); x++) {
+		glDeleteLists(this->m_3d_displayLists[x], 1);
 	}
 }
 
@@ -208,7 +214,7 @@ ReturnSet<bool> OGL11Renderer::LoadLevel(LEVELGEOMETRY * level) {
 
 	auto dlID = glGenLists(1);
 
-	this->m_displayLists.push_back(dlID);
+	this->m_3d_displayLists.push_back(dlID);
 	
 	glNewList(dlID, GL_COMPILE);
 

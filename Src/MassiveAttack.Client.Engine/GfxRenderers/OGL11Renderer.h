@@ -33,7 +33,8 @@ private:
 	void LoadTextureDefinitions();
 
 	unordered_map<int, string> _textureDB;
-	vector<GLuint> m_displayLists;
+	vector<GLuint> m_3d_displayLists;
+	vector<GLuint> m_2d_displayLists;
 
 	ModManager * m_modManager;
 

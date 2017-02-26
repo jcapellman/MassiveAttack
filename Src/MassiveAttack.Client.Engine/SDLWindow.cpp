@@ -70,12 +70,12 @@ void SDLWindow::processEventQueue()
 			case TEXT_ADD:
 				auto color = SDL_Color();
 
-				color.a = 0;
+				color.a = 255;
 				color.b = 0;
 				color.g = 0;
 				color.r = 255;
 			 
-				m_gfxRenderer->AddUpdateText(result.ReturnValue.argument, result.ReturnValue.argument, "game.ttf", 200, 300, 14.0f, color);
+				m_gfxRenderer->AddUpdateText(result.ReturnValue.argument, result.ReturnValue.argument, "game.ttf", 20, 20, 28.0f, color);
 				break;
 		}
 	} while (!m_eventQueue.IsEmpty());
