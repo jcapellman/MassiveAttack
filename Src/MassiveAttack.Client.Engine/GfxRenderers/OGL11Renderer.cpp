@@ -71,9 +71,16 @@ void OGL11Renderer::AddUpdateText(string key, string content, string fontName, i
 
 	auto textSurface = result.ReturnValue;
 
+	auto iterator = m_2d_displayLists.find(key);
+
+	if (iterator != m_2d_displayLists.end())
+	{
+		m_2d_displayLists.erase(iterator);
+	}
+
 	auto dlID = glGenLists(1);
 
-	this->m_2d_displayLists.push_back(dlID);
+	this->m_2d_displayLists[key] = dlID;
 
 	glNewList(dlID, GL_COMPILE);
 
@@ -86,7 +93,7 @@ void OGL11Renderer::AddUpdateText(string key, string content, string fontName, i
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexImage2D(GL_TEXTURE_2D, 0, textSurface->format->BytesPerPixel, textSurface->w, textSurface->h, 0, getTextureFormat(textSurface->format->BytesPerPixel, textSurface->format->Rmask), GL_UNSIGNED_BYTE, textSurface->pixels);
+	glTexImage2D(GL_TEXTURE_2D, 0, result.ReturnValue->format->BytesPerPixel, textSurface->w, textSurface->h, 0, getTextureFormat(result.ReturnValue->format->BytesPerPixel, result.ReturnValue->format->Rmask), GL_UNSIGNED_BYTE, textSurface->pixels);
 
 	glBegin(GL_QUADS);
 	{
@@ -172,7 +179,8 @@ void OGL11Renderer::Render(RENDER_PARAMETERS rParams) {
 
 	glTranslatef(xtrans, 0.0f, ztrans);
 
-	for (unsigned int x = 0; x < this->m_3d_displayLists.size(); x++) {
+	for (unsigned int x = 0; x < this->m_3d_displayLists.size(); x++) 
+	{
 		glCallList(this->m_3d_displayLists[x]);
 	}
 
@@ -187,8 +195,9 @@ void OGL11Renderer::Render(RENDER_PARAMETERS rParams) {
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 
-	for (unsigned int x = 0; x < this->m_2d_displayLists.size(); x++) {
-		glCallList(this->m_2d_displayLists[x]);
+	for (auto index : m_2d_displayLists)
+	{
+		glCallList(this->m_2d_displayLists[index.first]);
 	}
 
 	glMatrixMode(GL_PROJECTION);
@@ -198,8 +207,10 @@ void OGL11Renderer::Render(RENDER_PARAMETERS rParams) {
 
 void OGL11Renderer::ClearRenderQueue() {
 	// TODO Clear Textures
-	for (unsigned int x = 0; x < this->m_2d_displayLists.size(); x++) {
-		glDeleteLists(this->m_2d_displayLists[x], 1);
+
+	for (auto index : m_2d_displayLists)
+	{	
+		glDeleteLists(this->m_2d_displayLists[index.first], 1);
 	}
 
 	for (unsigned int x = 0; x < this->m_3d_displayLists.size(); x++) {

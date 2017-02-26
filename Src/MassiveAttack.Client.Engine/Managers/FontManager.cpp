@@ -9,6 +9,9 @@ ReturnSet<SDL_Surface*> FontManager::RenderText(string fontName, string text, in
 	auto font = TTF_OpenFont(fontName.c_str(), size);
 
 	auto textSurface = TTF_RenderText_Blended(font, text.c_str(), foregroundColor);
+	
+	SDL_SetSurfaceAlphaMod(textSurface, 0xFF);
+	SDL_SetColorKey(textSurface, SDL_TRUE, 0xFF);
 
 	return ReturnSet<SDL_Surface*>(textSurface);
 }

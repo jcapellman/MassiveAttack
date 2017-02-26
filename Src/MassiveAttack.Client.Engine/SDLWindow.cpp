@@ -133,7 +133,16 @@ void SDLWindow::Render() const
 			auto seconds = (t - T0) / 1000.0;
 			auto fps = Frames / seconds;
 
-			auto caption = this->m_appName + to_string(round(fps)) + " fps";
+			auto color = SDL_Color();
+
+			color.a = 255;
+			color.b = 0;
+			color.g = 0;
+			color.r = 255;
+
+			auto roundedFps = to_string(static_cast<int>(round(fps)));
+
+			m_gfxRenderer->AddUpdateText("FPS", roundedFps, "game.ttf", width - (roundedFps.length() * 10), 0, 20.0f, color);
 
 			T0 = t;
 			Frames = 0;
