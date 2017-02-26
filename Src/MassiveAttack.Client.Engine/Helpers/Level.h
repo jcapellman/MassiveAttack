@@ -4,6 +4,7 @@
 #include "../Common/ReturnSet.h"
 #include "../GfxRenderers/IGfxRenderer.h"
 #include "../Common/ReturnSet.h"
+#include "ModManager.h"
 
 struct LEVELGEOMETRY
 {
@@ -29,7 +30,14 @@ struct LEVELGEOMETRY
 
 class Level {
 	public:
-	static ReturnSet<LEVELGEOMETRY*> LoadLevel(string fileName);
+		explicit Level(ModManager * modManager)
+		{
+			m_modManager = modManager;
+		}
+
+		ReturnSet<LEVELGEOMETRY*> LoadLevel(string fileName);
+	private:
+		ModManager * m_modManager;
 };
 
 #endif

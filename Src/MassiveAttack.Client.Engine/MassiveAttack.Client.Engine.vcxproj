@@ -26,6 +26,7 @@
     <ClInclude Include="Helpers\ErrorLogger.h" />
     <ClInclude Include="Helpers\EventQueue.h" />
     <ClInclude Include="Helpers\Level.h" />
+    <ClInclude Include="Helpers\ModManager.h" />
     <ClInclude Include="Helpers\RenderParameters.h" />
     <ClInclude Include="Interfaces\IGameStates.h" />
     <ClInclude Include="Main.h" />

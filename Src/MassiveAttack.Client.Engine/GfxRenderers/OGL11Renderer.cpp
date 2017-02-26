@@ -4,7 +4,7 @@
 ReturnSet<int> OGL11Renderer::LoadTexture(string fileName) {
 	auto tm = TextureManager();
 
-	fileName = TEXTURES_ROOT_PATH + fileName;
+	fileName = m_modManager->GetPath(TEXTURES, fileName);
 
 	auto result = tm.LoadTexture(const_cast<char*>(fileName.c_str()));
 
@@ -83,7 +83,7 @@ ReturnSet<bool> OGL11Renderer::Shutdown() {
 	return ReturnSet<bool>(true);
 }
 
-ReturnSet<bool> OGL11Renderer::Init(int width, int height) {
+ReturnSet<bool> OGL11Renderer::Init(int width, int height, ModManager * modManager) {
 	glShadeModel(GL_SMOOTH);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClearDepth(1.0f);
@@ -103,6 +103,8 @@ ReturnSet<bool> OGL11Renderer::Init(int width, int height) {
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+
+	m_modManager = modManager;
 
 	return ReturnSet<bool>(true);
 }

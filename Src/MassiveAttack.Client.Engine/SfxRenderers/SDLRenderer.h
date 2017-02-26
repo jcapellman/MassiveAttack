@@ -8,6 +8,8 @@
 #include "ISfxRenderer.h"
 #include "../Main.h"
 
+class ModManager;
+
 class SDLRenderer : public ISfxRenderer {
 public:
 	string GetName() override
@@ -15,7 +17,7 @@ public:
 		return "SDL 2";
 	}
 
-	ReturnSet<bool> Init(int numChannels) override;
+	ReturnSet<bool> Init(int numChannels, ModManager * modManager) override;
 	ReturnSet<bool> LoadSound(string fileName) override;
 	ReturnSet<bool> LoadMusic(string fileName) override;
 	void PlaySound(string fileName, bool loop = false) override;
@@ -24,6 +26,8 @@ public:
 private:
 	unordered_map<string, Mix_Chunk*> m_sounds;
 	Mix_Music * m_music;
+
+	ModManager * m_modManager;
 };
 
 #endif

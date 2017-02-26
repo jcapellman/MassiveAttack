@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 	SDLWindow sdl_window;
 	auto errLogger = ErrorLogger();
 
-	sdl_window.Init("Massive Attack");
+	sdl_window.Init("Massive Attack", "base");
 	
 	
 	auto main_game_state = new MainGameState();

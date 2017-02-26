@@ -12,11 +12,12 @@
 #include "Helpers\ErrorLogger.h"
 #include "SfxRenderers/ISfxRenderer.h"
 #include "Helpers/EventQueue.h"
+#include "Helpers/ModManager.h"
 
 class SDLWindow
 {
 public:
-	void Init(string appName);
+	void Init(string appName, string modName);
 
 	void MainLoop();
 
@@ -30,9 +31,12 @@ public:
 		this->m_glcontext = nullptr;
 		this->m_gfxRenderer = nullptr;
 		this->m_sfxRenderer = nullptr;
+		this->m_modManager = nullptr;
 	}
 private:	
 	void processEventQueue();
+
+	ModManager * m_modManager;
 
 	IGfxRenderer * m_gfxRenderer;
 	ISfxRenderer * m_sfxRenderer;

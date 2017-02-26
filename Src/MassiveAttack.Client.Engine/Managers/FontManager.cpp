@@ -2,9 +2,9 @@
 #include <SDL.h>
 #include "../Common/ReturnSet.h"
 
-ReturnSet<SDL_Surface*> FontManager::RenderText(string fontName, char * text, int size, SDL_Color foregroundColor, SDL_Color backgroundColor)
+ReturnSet<SDL_Surface*> FontManager::RenderText(string fontName, char * text, int size, SDL_Color foregroundColor, SDL_Color backgroundColor) const
 {
-	fontName = FONTS_ROOT_PATH + fontName;
+	fontName = m_modManager->GetPath(FONTS, fontName);
 
 	auto font = TTF_OpenFont(fontName.c_str(), size);
 

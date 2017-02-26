@@ -3,7 +3,7 @@
 ReturnSet<LEVELGEOMETRY*> Level::LoadLevel(string fileName)
 {
 	try {
-		fileName = MAPS_ROOT_PATH + fileName;
+		fileName = m_modManager->GetPath(MAPS, fileName);
 
 		ifstream input_file(fileName);
 

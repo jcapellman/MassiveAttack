@@ -41,32 +41,32 @@ void SDLWindow::processEventQueue()
 
 		switch (result.ReturnValue.EventType)
 		{
-		case AUDIO_PLAY_SOUND:
-			m_sfxRenderer->PlaySound(result.ReturnValue.argument);
-			break;
-		case AUDIO_LOAD_SOUND:
-			m_sfxRenderer->LoadSound(result.ReturnValue.argument);
-			break;
-		case LEVEL_LOAD:
-		{
-			auto level = Level();
+			case AUDIO_PLAY_SOUND:
+				m_sfxRenderer->PlaySound(result.ReturnValue.argument);
+				break;
+			case AUDIO_LOAD_SOUND:
+				m_sfxRenderer->LoadSound(result.ReturnValue.argument);
+				break;
+			case LEVEL_LOAD:
+			{
+				auto level = Level(m_modManager);
 
-			auto levelResult = level.LoadLevel(result.ReturnValue.argument);
+				auto levelResult = level.LoadLevel(result.ReturnValue.argument);
 
-			if (levelResult.HasError()) {
-				throw exception(levelResult.ExceptionString().c_str());
+				if (levelResult.HasError()) {
+					throw exception(levelResult.ExceptionString().c_str());
+				}
+
+				m_gfxRenderer->LoadLevel(levelResult.ReturnValue);
+
+				break;
 			}
-
-			m_gfxRenderer->LoadLevel(levelResult.ReturnValue);
-
-			break;
-		}
-		case MUSIC_LOAD:
-			m_sfxRenderer->LoadMusic(result.ReturnValue.argument);
-			break;
-		case MUSIC_PLAY:
-			m_sfxRenderer->PlayMusic();
-			break;
+			case MUSIC_LOAD:
+				m_sfxRenderer->LoadMusic(result.ReturnValue.argument);
+				break;
+			case MUSIC_PLAY:
+				m_sfxRenderer->PlayMusic();
+				break;
 		}
 	} while (!m_eventQueue.IsEmpty());
 }
@@ -145,9 +145,11 @@ void SDLWindow::SetGameState(IGameStates * gameState, EventQueue eventQueue)
 	processEventQueue();
 }
 
-void SDLWindow::Init(string appName)
+void SDLWindow::Init(string appName, string modName)
 {
 	this->m_appName = appName;
+
+	this->m_modManager = new ModManager(modName);
 
 	int videoFlags;
 
@@ -160,7 +162,7 @@ void SDLWindow::Init(string appName)
 	videoFlags = SDL_WINDOW_OPENGL;
 	videoFlags |= SDL_GL_DOUBLEBUFFER;
 	
-	ConfigParser config(DEFAULT_CONFIG_FILE);
+	ConfigParser config(m_modManager->GetPath(ROOT, DEFAULT_CONFIG_FILE));
 
 	this->width = config.GetInt(CONFIG_XRES);
 
@@ -181,7 +183,7 @@ void SDLWindow::Init(string appName)
 
 	m_gfxRenderer = new OGL11Renderer;
 
-	m_gfxRenderer->Init(width, height);
+	m_gfxRenderer->Init(width, height, m_modManager);
 
 	this->m_renderParameters = RENDER_PARAMETERS();
 
@@ -192,5 +194,5 @@ void SDLWindow::Init(string appName)
 
 	m_sfxRenderer = new SDLRenderer;
 
-	m_sfxRenderer->Init(config.GetInt(CONFIG_AUDIO_NUM_CHANNELS));
+	m_sfxRenderer->Init(config.GetInt(CONFIG_AUDIO_NUM_CHANNELS), m_modManager);
 }

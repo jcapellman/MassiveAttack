@@ -1,6 +1,7 @@
 #include "SDLRenderer.h"
+#include "../Helpers/ModManager.h"
 
-ReturnSet<bool> SDLRenderer::Init(int numChannels)
+ReturnSet<bool> SDLRenderer::Init(int numChannels, ModManager * modManager)
 {
 	int audio_rate, audio_channels;
 	Uint16 audio_format;
@@ -13,6 +14,7 @@ ReturnSet<bool> SDLRenderer::Init(int numChannels)
 	Mix_QuerySpec(&audio_rate, &audio_format, &audio_channels);
 
 	m_sounds = unordered_map<string, Mix_Chunk*>();
+	m_modManager = modManager;
 
 	return ReturnSet<bool>(true);
 }
@@ -20,13 +22,13 @@ ReturnSet<bool> SDLRenderer::Init(int numChannels)
 ReturnSet<bool> SDLRenderer::LoadSound(string fileName)
 {
 	try {
-		fileName = SOUNDS_ROOT_PATH + fileName;
+		auto fullFileName = m_modManager->GetPath(SOUNDS, fileName);
 
-		auto sndFile = Mix_LoadWAV(fileName.c_str());
+		auto sndFile = Mix_LoadWAV(fullFileName.c_str());
 
 		if (sndFile == nullptr)
 		{
-			throw exception(fileName.c_str());
+			throw exception(fullFileName.c_str());
 		}
 
 		m_sounds[fileName] = sndFile;
@@ -41,13 +43,13 @@ ReturnSet<bool> SDLRenderer::LoadSound(string fileName)
 ReturnSet<bool> SDLRenderer::LoadMusic(string fileName)
 {
 	try {
-		fileName = MUSIC_ROOT_PATH + fileName;
+		auto fullFileName = m_modManager->GetPath(MUSIC, fileName);
 
-		auto sndFile = Mix_LoadMUS(fileName.c_str());
+		auto sndFile = Mix_LoadMUS(fullFileName.c_str());
 
 		if (sndFile == nullptr)
 		{
-			throw exception(fileName.c_str());
+			throw exception(fullFileName.c_str());
 		}
 
 		if (m_music != nullptr)
@@ -77,14 +79,16 @@ void SDLRenderer::PlayMusic()
 
 void SDLRenderer::PlaySound(string fileName, bool loop)
 {
-	auto iterator = m_sounds.find(SOUNDS_ROOT_PATH + fileName);
+	auto key = m_modManager->GetPath(SOUNDS, fileName);
+
+	auto iterator = m_sounds.find(key);
 
 	if (iterator == m_sounds.end())
 	{
 		return;
 	}
 
-	auto sound = this->m_sounds[SOUNDS_ROOT_PATH + fileName];
+	auto sound = this->m_sounds[key];
 
 	if (loop)
 	{
