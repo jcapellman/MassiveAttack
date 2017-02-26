@@ -147,12 +147,12 @@ void SDLWindow::Init(string appName)
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 	
-	//SDL_ShowCursor(0);
+	SDL_ShowCursor(0);
 
 	videoFlags = SDL_WINDOW_OPENGL;
 	videoFlags |= SDL_GL_DOUBLEBUFFER;
 	
-	ConfigParser config("base/config.cfg");
+	ConfigParser config(DEFAULT_CONFIG_FILE);
 
 	this->width = config.GetInt(CONFIG_XRES);
 
