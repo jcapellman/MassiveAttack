@@ -13,7 +13,7 @@ public:
 		m_modManager = modManager;
 	}
 
-	ReturnSet<SDL_Surface*> RenderText(string fontName, char * text, int size, SDL_Color foregroundColor, SDL_Color backgroundColor) const;
+	ReturnSet<SDL_Surface*> RenderText(string fontName, string text, int size, SDL_Color foregroundColor) const;
 private:
 	ModManager * m_modManager;
 };

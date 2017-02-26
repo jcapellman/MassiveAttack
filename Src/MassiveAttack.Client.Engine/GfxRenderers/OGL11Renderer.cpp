@@ -1,6 +1,35 @@
 #include "OGL11Renderer.h"
 #include "../Managers/TextureManager.h"
 
+GLenum OGL11Renderer::getTextureFormat(Uint8 bpp, Uint32 rmask)
+{
+	GLenum textureFormat = GL_BGR_EXT;
+
+	if (bpp == 4)	// 32 bit
+	{
+		if (rmask == 0x000000ff) {
+			textureFormat = GL_RGBA;
+		}
+		else {
+			textureFormat = GL_BGRA_EXT;
+		}
+
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);
+	}
+	else if (bpp == 3)	// 24 bit
+	{
+		if (rmask == 0x000000ff) {
+			textureFormat = GL_RGB;
+		}
+		else {
+			textureFormat = GL_BGR_EXT;
+		}
+	}
+
+	return textureFormat;
+}
+
 ReturnSet<int> OGL11Renderer::LoadTexture(string fileName) {
 	auto tm = TextureManager();
 
@@ -24,37 +53,70 @@ ReturnSet<int> OGL11Renderer::LoadTexture(string fileName) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	
-	GLenum textureFormat = GL_BGR_EXT;
-
-	GLint bpp = result.ReturnValue->format->BytesPerPixel;
-
-	if (bpp == 4)	// 32 bit
-	{
-		if (result.ReturnValue->format->Rmask == 0x000000ff) {
-			textureFormat = GL_RGBA;
-		}
-		else {
-			textureFormat = GL_BGRA_EXT;
-		}
-
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_BLEND);
-	}
-	else if (bpp == 3)	// 24 bit
-	{
-		if (result.ReturnValue->format->Rmask == 0x000000ff) {
-			textureFormat = GL_RGB;
-		}
-		else {
-			textureFormat = GL_BGR_EXT;
-		}
-	}
-
-	glTexImage2D(GL_TEXTURE_2D, 0, bpp, result.ReturnValue->w, result.ReturnValue->h, 0, textureFormat, GL_UNSIGNED_BYTE, result.ReturnValue->pixels);
+	glTexImage2D(GL_TEXTURE_2D, 0, result.ReturnValue->format->BytesPerPixel, result.ReturnValue->w, result.ReturnValue->h, 0, getTextureFormat(result.ReturnValue->format->BytesPerPixel, result.ReturnValue->format->Rmask), GL_UNSIGNED_BYTE, result.ReturnValue->pixels);
 
 	SDL_FreeSurface(result.ReturnValue);
 
 	return ReturnSet<int>(textureID);
+}
+
+void OGL11Renderer::AddUpdateText(string key, string content, string fontName, int x, int y, float size, SDL_Color foregroundColor)
+{
+	auto result = m_fontManager->RenderText(fontName, content, size, foregroundColor);
+
+	if (result.HasError())
+	{
+		return;
+	}
+
+	auto textSurface = result.ReturnValue;
+
+	auto dlID = glGenLists(1);
+
+	this->m_displayLists.push_back(dlID);
+
+	glNewList(dlID, GL_COMPILE);
+
+	GLuint texture;
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+
+	gluOrtho2D(0, m_width, 0, m_height);
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+
+	glDisable(GL_DEPTH_TEST);
+	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexImage2D(GL_TEXTURE_2D, 0, textSurface->format->BytesPerPixel, textSurface->w, textSurface->h, 0, getTextureFormat(textSurface->format->BytesPerPixel, textSurface->format->Rmask), GL_UNSIGNED_BYTE, textSurface->pixels);
+
+	glBegin(GL_QUADS);
+	{
+		glTexCoord2f(0, 0); glVertex2f(x, y);
+		glTexCoord2f(1, 0); glVertex2f(x + textSurface->w, y);
+		glTexCoord2f(1, 1); glVertex2f(x + textSurface->w, y + textSurface->h);
+		glTexCoord2f(0, 1); glVertex2f(x, y + textSurface->h);
+	}
+	glEnd();
+
+	glDisable(GL_BLEND);
+	glEnable(GL_DEPTH_TEST);
+
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+
+	glEndList();
 }
 
 void OGL11Renderer::LoadTextureDefinitions()
@@ -105,6 +167,10 @@ ReturnSet<bool> OGL11Renderer::Init(int width, int height, ModManager * modManag
 	glLoadIdentity();
 
 	m_modManager = modManager;
+	IGfxRenderer::m_fontManager = new FontManager(modManager);
+
+	m_width = width;
+	m_height = height;
 
 	return ReturnSet<bool>(true);
 }

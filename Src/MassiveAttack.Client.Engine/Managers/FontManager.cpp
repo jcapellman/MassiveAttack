@@ -2,13 +2,13 @@
 #include <SDL.h>
 #include "../Common/ReturnSet.h"
 
-ReturnSet<SDL_Surface*> FontManager::RenderText(string fontName, char * text, int size, SDL_Color foregroundColor, SDL_Color backgroundColor) const
+ReturnSet<SDL_Surface*> FontManager::RenderText(string fontName, string text, int size, SDL_Color foregroundColor) const
 {
 	fontName = m_modManager->GetPath(FONTS, fontName);
 
 	auto font = TTF_OpenFont(fontName.c_str(), size);
 
-	auto textSurface = TTF_RenderText_Shaded(font, text, foregroundColor, backgroundColor);
+	auto textSurface = TTF_RenderText_Blended(font, text.c_str(), foregroundColor);
 
 	return ReturnSet<SDL_Surface*>(textSurface);
 }

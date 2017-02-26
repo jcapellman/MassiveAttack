@@ -9,6 +9,7 @@ ReturnSet<EventQueue> MainGameState::Init(string argument)
 		eventQueue.AddEvent(LEVEL_LOAD, argument);
 		eventQueue.AddEvent(AUDIO_LOAD_SOUND, "player/Footstep.wav");
 		eventQueue.AddEvent(AUDIO_LOAD_SOUND, "player/Backstep.wav");
+		//eventQueue.AddEvent(TEXT_ADD, "Testing");
 
 		return ReturnSet<EventQueue>(eventQueue);
 	} catch (exception ex)

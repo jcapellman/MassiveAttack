@@ -23,9 +23,12 @@ public:
 	ReturnSet<bool> Init(int width, int height, ModManager * modManager) override;
 	void Render(RENDER_PARAMETERS rParams) override;
 	ReturnSet<bool> LoadLevel(LEVELGEOMETRY * level) override;
+	void AddUpdateText(string key, string content, string fontName, int x, int y, float size, SDL_Color foregroundColor) override;
 	ReturnSet<bool> Shutdown() override;
 	void ClearRenderQueue() override;
 private:
+	static GLenum getTextureFormat(Uint8 bpp, Uint32 rmask);
+
 	ReturnSet<int> LoadTexture(string fileName) override;
 	void LoadTextureDefinitions();
 
@@ -33,6 +36,9 @@ private:
 	vector<GLuint> m_displayLists;
 
 	ModManager * m_modManager;
+
+	int m_width;
+	int m_height;
 };
 
 #endif
