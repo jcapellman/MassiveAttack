@@ -20,85 +20,29 @@ ReturnSet<EventQueue> MainGameState::Init(string argument)
 
 void MainGameState::PassMouseEvent(float mouseX, Sint32 motionX, float mouseY, Sint32 motionY, RENDER_PARAMETERS * render_parameters)
 {
-	if (mouseX != motionX) {
-		auto yrot = render_parameters->GetParamFloat(RPARAM_YROT);
-
-		if (mouseX > motionX)
-		{
-			yrot += 0.5f;
-		}
-		else
-		{	
-			yrot -= 0.5f;
-		}
-
-		render_parameters->SetParamFloat(RPARAM_YROT, yrot);
-	}
-
-	if (mouseY != motionY) {
-		auto xrot = render_parameters->GetParamFloat(RPARAM_XROT);
-
-		if (mouseY > motionY && xrot > -100)
-		{
-			xrot -= 0.5f;
-		}
-		else if (mouseY < motionY && xrot < 100)
-		{
-			xrot += 0.5f;
-		}
-
-		render_parameters->SetParamFloat(RPARAM_XROT, xrot);
-	}
+	// TODO Add Gun Aiming
 }
 
 void MainGameState::PassKeyEvent(Sint32 sym, RENDER_PARAMETERS * render_parameters, EventQueue * eventQueue)
 {
-	auto yrot = render_parameters->GetParamFloat(RPARAM_YROT);
 	auto xpos = render_parameters->GetParamFloat(RPARAM_XPOS);
-	auto zpos = render_parameters->GetParamFloat(RPARAM_ZPOS);
 
 	switch (sym) {
-		case SDLK_RIGHT:
-			render_parameters->SetParamFloat(RPARAM_YROT, yrot - 1.5f);
-			break;
-		case SDLK_LEFT:
-			render_parameters->SetParamFloat(RPARAM_YROT, yrot + 1.5f);
-			break;
 		case SDLK_a:
-			xpos -= static_cast<float>(sin(yrot * PIOVER180)) * 10.5f;
-			zpos += static_cast<float>(cos(yrot * PIOVER180)) * 0.5f;
+			xpos -= 0.5f;
 
 			render_parameters->SetParamFloat(RPARAM_XPOS, xpos);
-			render_parameters->SetParamFloat(RPARAM_ZPOS, zpos);
-
-			break;
-		case SDLK_d:
-			xpos += static_cast<float>(sin(yrot * PIOVER180)) * 10.5f;
-			zpos -= static_cast<float>(cos(yrot * PIOVER180)) * 0.5f;
-
-			render_parameters->SetParamFloat(RPARAM_XPOS, xpos);
-			render_parameters->SetParamFloat(RPARAM_ZPOS, zpos);
-
-			break;
-		case SDLK_w:
-			xpos -= static_cast<float>(sin(yrot * PIOVER180)) * 0.5f;
-			zpos -= static_cast<float>(cos(yrot * PIOVER180)) * 0.5f;
-
-			render_parameters->SetParamFloat(RPARAM_XPOS, xpos);
-			render_parameters->SetParamFloat(RPARAM_ZPOS, zpos);
-
-			eventQueue->AddEvent(AUDIO_PLAY_SOUND, "player/Footstep.wav");
-			break;
-		case SDLK_s:
-			xpos += static_cast<float>(sin(yrot * PIOVER180)) * 0.5f;
-			zpos += static_cast<float>(cos(yrot * PIOVER180)) * 0.5f;
-
-			render_parameters->SetParamFloat(RPARAM_XPOS, xpos);
-			render_parameters->SetParamFloat(RPARAM_ZPOS, zpos);
-
+		
 			eventQueue->AddEvent(AUDIO_PLAY_SOUND, "player/Backstep.wav");
 
 			break;
+		case SDLK_d:
+			xpos += 0.5f;
+
+			render_parameters->SetParamFloat(RPARAM_XPOS, xpos);
+			eventQueue->AddEvent(AUDIO_PLAY_SOUND, "player/Footstep.wav");
+
+			break;		
 		default:
 			break;
 	}
