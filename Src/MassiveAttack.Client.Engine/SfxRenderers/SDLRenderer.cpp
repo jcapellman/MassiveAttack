@@ -79,16 +79,14 @@ void SDLRenderer::PlayMusic()
 
 void SDLRenderer::PlaySound(string fileName, bool loop)
 {
-	auto key = m_modManager->GetPath(SOUNDS, fileName);
-
-	auto iterator = m_sounds.find(key);
+	auto iterator = m_sounds.find(fileName);
 
 	if (iterator == m_sounds.end())
 	{
 		return;
 	}
 
-	auto sound = this->m_sounds[key];
+	auto sound = this->m_sounds[fileName];
 
 	if (loop)
 	{
