@@ -86,7 +86,7 @@ class ModManager
 
 			fullFileName = m_modName + "/" + assetPath + "/" + fileName;
 
-			if (!exists(fullFileName))
+			if (!exists(fullFileName) && m_modName != DEFAULT_MOD)
 			{
 				return GetPath(assetType, fileName);
 			}
