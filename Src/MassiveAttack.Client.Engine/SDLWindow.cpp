@@ -48,6 +48,7 @@ void SDLWindow::processEventQueue()
 			m_sfxRenderer->LoadSound(result.ReturnValue.argument);
 			break;
 		case LEVEL_LOAD:
+		{
 			auto level = Level();
 
 			auto levelResult = level.LoadLevel(result.ReturnValue.argument);
@@ -58,6 +59,13 @@ void SDLWindow::processEventQueue()
 
 			m_gfxRenderer->LoadLevel(levelResult.ReturnValue);
 
+			break;
+		}
+		case MUSIC_LOAD:
+			m_sfxRenderer->LoadMusic(result.ReturnValue.argument);
+			break;
+		case MUSIC_PLAY:
+			m_sfxRenderer->PlayMusic();
 			break;
 		}
 	} while (!m_eventQueue.IsEmpty());
