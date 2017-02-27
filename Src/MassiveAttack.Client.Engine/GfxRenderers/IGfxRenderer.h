@@ -19,6 +19,7 @@ public:
 	virtual ReturnSet<bool> LoadLevel(LEVELGEOMETRY * level) = 0;
 	virtual void Render(RENDER_PARAMETERS rParams) = 0;
 	virtual void ClearRenderQueue() = 0;
+	virtual ReturnSet<int> LoadSkybox(string fileName) = 0;
 	virtual void AddUpdateText(string key, string content, string fontName, int x, int y, float size, SDL_Color foregroundColor) = 0;
 private:
 	virtual ReturnSet<int> LoadTexture(string fileName) = 0;

@@ -23,13 +23,14 @@ public:
 	ReturnSet<bool> Init(int width, int height, ModManager * modManager) override;
 	void Render(RENDER_PARAMETERS rParams) override;
 	ReturnSet<bool> LoadLevel(LEVELGEOMETRY * level) override;
+	ReturnSet<int> LoadSkybox(string fileName) override;
 	void AddUpdateText(string key, string content, string fontName, int x, int y, float size, SDL_Color foregroundColor) override;
 	ReturnSet<bool> Shutdown() override;
 	void ClearRenderQueue() override;
 private:
 	static GLenum getTextureFormat(Uint8 bpp, Uint32 rmask);
-
 	ReturnSet<int> LoadTexture(string fileName) override;
+	int LoadSkyboxTexture(string fileName);
 	void LoadTextureDefinitions();
 
 	unordered_map<int, string> _textureDB;

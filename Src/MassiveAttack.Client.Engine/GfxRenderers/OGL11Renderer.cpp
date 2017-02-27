@@ -60,6 +60,70 @@ ReturnSet<int> OGL11Renderer::LoadTexture(string fileName) {
 	return ReturnSet<int>(textureID);
 }
 
+int OGL11Renderer::LoadSkyboxTexture(string fileName)
+{
+	auto tm = TextureManager();
+
+	fileName = m_modManager->GetPath(SKYBOXES, fileName);
+
+	auto result = tm.LoadTexture(const_cast<char*>(fileName.c_str()));
+
+	if (result.HasError())
+	{
+		return -1;
+	}
+
+	GLuint textureID;
+
+	glGenTextures(1, &textureID);
+
+	glBindTexture(GL_TEXTURE_2D, textureID);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, result.ReturnValue->format->BytesPerPixel, result.ReturnValue->w, result.ReturnValue->h, 0, getTextureFormat(result.ReturnValue->format->BytesPerPixel, result.ReturnValue->format->Rmask), GL_UNSIGNED_BYTE, result.ReturnValue->pixels);
+
+	SDL_FreeSurface(result.ReturnValue);
+
+	return textureID;
+}
+
+ReturnSet<int> OGL11Renderer::LoadSkybox(string fileName) {
+	auto textureID = LoadSkyboxTexture(fileName);
+
+	auto dlID = glGenLists(1);
+
+	this->m_3d_displayLists.push_back(dlID);
+
+	glNewList(dlID, GL_COMPILE);
+
+	glPushAttrib(GL_ENABLE_BIT);
+	glEnable(GL_TEXTURE_2D);
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_LIGHTING);
+	glDisable(GL_BLEND);
+
+	glColor4f(1, 1, 1, 1);
+
+	glBindTexture(GL_TEXTURE_2D, textureID);
+	glBegin(GL_QUADS);
+		glTexCoord2f(1, 0); glVertex3f(100.0f, 0, 0);
+		glTexCoord2f(0, 0); glVertex3f(0, 0, 0);
+		glTexCoord2f(0, 1); glVertex3f(0, 6.0f, 0);
+		glTexCoord2f(1, 1); glVertex3f(100.0f, 6.0f, 0);
+	glEnd();
+
+	glPopAttrib();
+	glPopMatrix();
+
+	glEndList();
+
+	return ReturnSet<int>(textureID);
+}
+
 void OGL11Renderer::AddUpdateText(string key, string content, string fontName, int x, int y, float size, SDL_Color foregroundColor)
 {
 	auto result = m_fontManager->RenderText(fontName, content, size, foregroundColor);
@@ -85,15 +149,19 @@ void OGL11Renderer::AddUpdateText(string key, string content, string fontName, i
 	glNewList(dlID, GL_COMPILE);
 
 	GLuint texture;
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
 	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glBlendFunc(GL_SRC_ALPHA, GL_ZERO);
+
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexImage2D(GL_TEXTURE_2D, 0, result.ReturnValue->format->BytesPerPixel, textSurface->w, textSurface->h, 0, getTextureFormat(result.ReturnValue->format->BytesPerPixel, result.ReturnValue->format->Rmask), GL_UNSIGNED_BYTE, textSurface->pixels);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA , textSurface->w, textSurface->h, 0, getTextureFormat(textSurface->format->BytesPerPixel, textSurface->format->Rmask), GL_UNSIGNED_BYTE, textSurface->pixels);
 
 	glBegin(GL_QUADS);
 	{

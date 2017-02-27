@@ -10,7 +10,8 @@ enum ASSET_TYPE
 	SOUNDS,
 	MUSIC,
 	FONTS,
-	ROOT
+	ROOT,
+	SKYBOXES
 };
 
 const string ROOT_PATH_TEXTURES = "textures";
@@ -18,6 +19,7 @@ const string ROOT_PATH_MAPS = "maps";
 const string ROOT_PATH_SOUNDS = "sounds";
 const string ROOT_PATH_MUSIC = "music";
 const string ROOT_PATH_FONTS = "fonts";
+const string ROOT_PATH_SKYBOXES = "skyboxes";
 
 #define DEFAULT_MOD "base"
 
@@ -40,6 +42,9 @@ class ModManager
 		
 			switch (assetType)
 			{
+				case SKYBOXES:
+					assetPath = ROOT_PATH_SKYBOXES;
+					break;
 				case SOUNDS:
 					assetPath = ROOT_PATH_SOUNDS;
 					break;

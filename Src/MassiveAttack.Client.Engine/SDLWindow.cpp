@@ -57,6 +57,7 @@ void SDLWindow::processEventQueue()
 					throw exception(levelResult.ExceptionString().c_str());
 				}
 
+				m_gfxRenderer->LoadSkybox(level.GetSkyBoxTexture());
 				m_gfxRenderer->LoadLevel(levelResult.ReturnValue);
 
 				break;

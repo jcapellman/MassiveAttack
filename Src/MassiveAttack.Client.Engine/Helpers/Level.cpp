@@ -17,6 +17,10 @@ ReturnSet<LEVELGEOMETRY*> Level::LoadLevel(string fileName)
 
 		input_file >> line;
 
+		m_skybox_name = line;
+
+		input_file >> line;
+
 		level = new LEVELGEOMETRY[atoi(line.c_str())];
 		auto idx = 0;
 

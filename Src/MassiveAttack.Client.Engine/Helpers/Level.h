@@ -36,8 +36,15 @@ class Level {
 		}
 
 		ReturnSet<LEVELGEOMETRY*> LoadLevel(string fileName);
+
+		string GetSkyBoxTexture() const
+		{
+			return m_skybox_name;
+		}
 	private:
 		ModManager * m_modManager;
+
+		string m_skybox_name;
 };
 
 #endif
